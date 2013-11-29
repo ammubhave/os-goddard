@@ -6,6 +6,9 @@ class KConsoleOut
 public:
     KConsoleOut& operator<<(char);
     KConsoleOut& operator<<(char*);
+    
+    void put(char);
+    void putint(long);
 };
 
 static KConsoleOut kout;

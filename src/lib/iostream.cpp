@@ -1,10 +1,20 @@
 #include <stdint.h>
 #include <console.h>
 #include <iostream.h>
+#include <stdlib.h>
+
+void KConsoleOut::put(char c)
+{
+    console_putchar(c);
+}
+void KConsoleOut::putint(long n)
+{
+    //*this << itoa(n);
+}
 
 KConsoleOut& KConsoleOut::operator<<(char c)
 {
-    console_putchar(c);
+    this->put(c);
     return *this;
 }
 
