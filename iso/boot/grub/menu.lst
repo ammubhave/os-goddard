@@ -1,3 +1,0 @@
-timeout 3
-title "OS Goddard"
-kernel /boot/kernel.sys
