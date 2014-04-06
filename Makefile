@@ -16,13 +16,13 @@ CPPFLAGS=-ffreestanding -nostartfiles -m64 -mcmodel=kernel -mno-red-zone -std=c+
 LDFLAGS=-Tsrc/link.ld
 ASFLAGS=-felf64
 
-CRTI_OBJ=src/init/crti.o
-CRTBEGIN_OBJ:=$(shell x86_64-elf-g++ $(CPPFLAGS) -print-file-name=crtbegin.o)
-CRTEND_OBJ:=$(shell x86_64-elf-g++ $(CPPFLAGS) -print-file-name=crtend.o)
-CRTN_OBJ=src/init/crtn.o
+;CRTI_OBJ=src/init/crti.o
+;CRTBEGIN_OBJ:=$(shell x86_64-elf-g++ $(CPPFLAGS) -print-file-name=crtbegin.o)
+;CRTEND_OBJ:=$(shell x86_64-elf-g++ $(CPPFLAGS) -print-file-name=crtend.o)
+;CRTN_OBJ=src/init/crtn.o
 
-OBJ_LINK_LIST:=$(CRTI_OBJ) $(CRTBEGIN_OBJ) $(SOURCES) $(CRTEND_OBJ) $(CRTN_OBJ)
-INTERNAL_OBJS:=$(CRTI_OBJ) $(CRTN_OBJ)
+;OBJ_LINK_LIST:=$(CRTI_OBJ) $(CRTBEGIN_OBJ) $(SOURCES) $(CRTEND_OBJ) $(CRTN_OBJ)
+;INTERNAL_OBJS:=$(CRTI_OBJ) $(CRTN_OBJ)
 
 all: $(ISO)
 	
@@ -40,13 +40,13 @@ $(ISO): $(OUTPUT)
 #;cp $(OUTPUT) iso/boot 
 #	grub-mkrescue -o $(ISO) iso
 		 
-$(OUTPUT): $(OBJ_LINK_LIST) link
+$(OUTPUT): $(SOURCES) link
 
 clean:
-	@rm -f $(SOURCES) $(INTERNAL_OBJS) $(OUTPUT)
+	@rm -f $(SOURCES) $(OUTPUT)
 
 link:
-	ld -nodefaultlibs $(LDFLAGS) -o $(OUTPUT) $(OBJ_LINK_LIST)
+	ld -nodefaultlibs $(LDFLAGS) -o $(OUTPUT) $(SOURCES)
 
 .cpp.o:
 	x86_64-elf-g++ $(CPPFLAGS) -c $< -o $@

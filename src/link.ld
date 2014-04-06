@@ -9,7 +9,7 @@ SECTIONS
 	.boot :
 	{
     
-		*(.mbhdr)
+		*(.MultibootHeader)
 		_loadStart = .;
 		*(.boot)
 		. = ALIGN(4096);

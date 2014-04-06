@@ -1,48 +1,25 @@
+; =========================================================================== ;
+; ============================= MULTIBOOT HEADER ============================ ;
+; =========================================================================== ;
 [BITS 32]
-[SECTION .mbhdr]
-[EXTERN _loadStart]
-[EXTERN _loadEnd]
-[EXTERN _bssEnd]
- 
+[SECTION .MultibootHeader]
 ALIGN 8
-MbHdr:
-	; Magic
-	DD	0xE85250D6
-	; Architecture
-	DD	0
-	; Length
-	DD	HdrEnd - MbHdr
-	; Checksum
-	DD	-(0xE85250D6 + 0 + (HdrEnd - MbHdr))
- 
-	;
-	; Tags
-	;
- 
-	; Sections override
-	;DW	2, 0
-	;DD	24
-	;DD	MbHdr
-	;DD	_loadStart
-	;DD	_loadEnd
-	;DD	_bssEnd
- 
-	; Entry point override
-	;DW	3, 0
-	;DD	12
-	;DD	EntryPoint
- 
-	; End Of Tags
-	;DW	0, 0
-	;DD	8
- 
-	; Hdr End Mark
-HdrEnd:
+MultibootHeaderStart:	
+	DD	0xE85250D6														; Magic
+	DD	0																; Architecture
+	DD	MultibootHeaderEnd - MultibootHeaderStart						; Length
+	DD	-(0xE85250D6 + 0 + (MultibootHeaderEnd - MultibootHeaderStart))	; Checksum
+MultibootHeaderEnd:
 
-
+; =========================================================================== ;
+; ===================== BOOT SECTION - KERNEL ENTRY POINT =================== ;
+; =========================================================================== ;
 [SECTION .boot]
-[GLOBAL EntryPoint]
+
 [EXTERN Stack]
+
+; This is the kernel entry point
+[GLOBAL EntryPoint]
 EntryPoint:
 	mov eax, Gdtr1
 	lgdt [eax]
@@ -50,7 +27,7 @@ EntryPoint:
 	push 0x08
 	push .GdtReady
 	retf
- 
+
 .GdtReady:
 	mov eax, 0x10
 	mov ds, ax
@@ -76,7 +53,8 @@ EntryPoint:
  
 	mov rsp, Stack + 0xFFFFFFFF80000000
  
-	; If you later decide to unmap the lower zone, you will have an invalid Gdt if you''re still using Gdtr2
+	; If you later decide to unmap the lower zone, you will have an invalid Gdt
+	; if you''re still using Gdtr2
 	mov rax, Gdtr3
 	lgdt [rax]
  
@@ -127,7 +105,7 @@ SetupPagingAndLongMode:
 	mov cr0, eax
  
 	ret
-    
+
 TmpGdt:
 	DQ	0x0000000000000000
 	DQ	0x00CF9A000000FFFF
