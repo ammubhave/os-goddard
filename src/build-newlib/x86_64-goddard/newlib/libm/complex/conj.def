@@ -1,0 +1,27 @@
+@node conj
+@section @code{conj}, @code{conjf}---complex conjugate
+@findex conj
+@findex conjf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex conj(double complex @var{z});
+float complex conjf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex conjugate of @var{z}, 
+by reversing the sign of its imaginary part.
+
+@code{conjf} is identical to @code{conj}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+The conj functions return the complex conjugate value.
+
+@*
+@strong{Portability}@*
+@code{conj} and @code{conjf} are ISO C99
+
+@*

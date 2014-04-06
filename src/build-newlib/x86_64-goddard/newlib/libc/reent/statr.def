@@ -1,0 +1,16 @@
+@node _stat_r
+@section @code{_stat_r}---Reentrant version of stat
+@findex _stat_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _stat_r(struct _reent *@var{ptr},
+    const char *@var{file}, struct stat *@var{pstat});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{stat}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

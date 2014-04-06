@@ -1,0 +1,53 @@
+@node atanh
+@section @code{atanh}, @code{atanhf}---inverse hyperbolic tangent 
+@findex atanh
+@findex atanhf
+@strong{Synopsis}
+@example
+#include <math.h>
+double atanh(double @var{x});
+float atanhf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{atanh} calculates the inverse hyperbolic tangent of @var{x}.
+
+@code{atanhf} is identical, other than taking and returning
+@code{float} values.
+
+@*
+@strong{Returns}@*
+@code{atanh} and @code{atanhf} return the calculated value.
+
+If 
+@ifnottex
+@smallexample
+@var{x}|
+@end smallexample
+@end ifnottex
+@tex
+$|x|$
+@end tex
+is greater than 1, the global @code{errno} is set to @code{EDOM} and
+the result is a NaN.  A @code{DOMAIN error} is reported.
+
+If 
+@ifnottex
+@smallexample
+@var{x}|
+@end smallexample
+@end ifnottex
+@tex
+$|x|$
+@end tex
+is 1, the global @code{errno} is set to @code{EDOM}; and the result is 
+infinity with the same sign as @code{x}.  A @code{SING error} is reported.
+
+You can modify the error handling for these routines using
+@code{matherr}.
+
+@*
+@strong{Portability}@*
+Neither @code{atanh} nor @code{atanhf} are ANSI C.
+
+@*

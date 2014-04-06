@@ -1,0 +1,54 @@
+@node fputwc
+@section @code{fputwc}, @code{putwc}---write a wide character on a stream or file
+@findex fputwc
+@findex _fputwc_r
+@findex putwc
+@findex _putwc_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+#include <wchar.h>
+wint_t fputwc(wchar_t @var{wc}, FILE *@var{fp});
+
+#include <stdio.h>
+#include <wchar.h>
+wint_t _fputwc_r(struct _reent *@var{ptr}, wchar_t @var{wc}, FILE *@var{fp});
+
+#include <stdio.h>
+#include <wchar.h>
+wint_t putwc(wchar_t @var{wc}, FILE *@var{fp});
+
+#include <stdio.h>
+#include <wchar.h>
+wint_t _putwc_r(struct _reent *@var{ptr}, wchar_t @var{wc}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{fputwc} writes the wide character argument @var{wc} to the file or
+stream identified by @var{fp}.
+
+If the file was opened with append mode (or if the stream cannot
+support positioning), then the new wide character goes at the end of the
+file or stream.  Otherwise, the new wide character is written at the
+current value of the position indicator, and the position indicator
+oadvances by one.
+
+The @code{putwc} function or macro functions identically to @code{fputwc}.  It
+may be implemented as a macro, and may evaluate its argument more than
+once. There is no reason ever to use it.
+
+The @code{_fputwc_r} and @code{_putwc_r} functions are simply reentrant versions
+of @code{fputwc} and @code{putwc} that take an additional reentrant structure
+argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+If successful, @code{fputwc} and @code{putwc} return their argument @var{wc}.
+If an error intervenes, the result is @code{EOF}.  You can use
+`@code{ferror(@var{fp})}' to query for errors.
+
+@*
+@strong{Portability}@*
+C99, POSIX.1-2001
+
+@*

@@ -1,0 +1,43 @@
+@node fputc
+@section @code{fputc}---write a character on a stream or file
+@findex fputc
+@findex _fputc_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fputc(int @var{ch}, FILE *@var{fp});
+
+#include <stdio.h>
+int _fputc_r(struct _rent *@var{ptr}, int @var{ch}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{fputc} converts the argument @var{ch} from an @code{int} to an
+@code{unsigned char}, then writes it to the file or stream identified by
+@var{fp}.
+
+If the file was opened with append mode (or if the stream cannot
+support positioning), then the new character goes at the end of the
+file or stream.  Otherwise, the new character is written at the
+current value of the position indicator, and the position indicator
+oadvances by one.
+
+For a macro version of this function, see @code{putc}.
+
+The @code{_fputc_r} function is simply a reentrant version of @code{fputc}
+that takes an additional reentrant structure argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+If successful, @code{fputc} returns its argument @var{ch}.  If an error
+intervenes, the result is @code{EOF}.  You can use `@code{ferror(@var{fp})}' to
+query for errors.
+
+@*
+@strong{Portability}@*
+@code{fputc} is required by ANSI C.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

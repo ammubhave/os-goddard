@@ -1,0 +1,27 @@
+@node time
+@section @code{time}---get current calendar time (as single number)
+@findex time
+@strong{Synopsis}
+@example
+#include <time.h>
+time_t time(time_t *@var{t});
+
+@end example
+@strong{Description}@*
+@code{time} looks up the best available representation of the current
+time and returns it, encoded as a @code{time_t}.  It stores the same
+value at @var{t} unless the argument is @code{NULL}.
+
+@*
+@strong{Returns}@*
+A @code{-1} result means the current time is not available; otherwise the
+result represents the current time.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{time}.
+
+Supporting OS subroutine required: Some implementations require
+@code{gettimeofday}.
+
+@*

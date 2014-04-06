@@ -1,0 +1,29 @@
+@node getenv
+@section @code{getenv}---look up environment variable
+@findex getenv
+@findex environ
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+char *getenv(const char *@var{name});
+
+@end example
+@strong{Description}@*
+@code{getenv} searches the list of environment variable names and values
+(using the global pointer ``@code{char **environ}'') for a variable whose
+name matches the string at @var{name}.  If a variable name matches,
+@code{getenv} returns a pointer to the associated value.
+
+@*
+@strong{Returns}@*
+A pointer to the (string) value of the environment variable, or
+@code{NULL} if there is no such environment variable.
+
+@*
+@strong{Portability}@*
+@code{getenv} is ANSI, but the rules for properly forming names of environment
+variables vary from one system to another.
+
+@code{getenv} requires a global pointer @code{environ}.
+
+@*

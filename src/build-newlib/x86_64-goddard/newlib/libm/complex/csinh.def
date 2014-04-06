@@ -1,0 +1,26 @@
+@node csinh
+@section @code{csinh}, @code{csinhf}---complex hyperbolic sine
+@findex csinh
+@findex csinhf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex csinh(double complex @var{z});
+float complex csinhf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex hyperbolic sine of @var{z}.
+
+@code{ccoshf} is identical to @code{ccosh}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+These functions return the complex hyperbolic sine value.
+
+@*
+@strong{Portability}@*
+@code{csinh} and @code{csinhf} are ISO C99
+
+@*

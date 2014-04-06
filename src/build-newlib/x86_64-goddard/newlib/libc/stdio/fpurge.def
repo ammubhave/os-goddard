@@ -1,0 +1,43 @@
+@node fpurge
+@section @code{fpurge}---discard pending file I/O
+@findex fpurge
+@findex _fpurge_r
+@findex __fpurge
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fpurge(FILE *@var{fp});
+
+int _fpurge_r(struct _reent *@var{reent}, FILE *@var{fp});
+
+#include <stdio.h>
+#include <stdio_ext.h>
+void  __fpurge(FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+Use @code{fpurge} to clear all buffers of the given stream.  For output
+streams, this discards data not yet written to disk.  For input streams,
+this discards any data from @code{ungetc} and any data retrieved from disk
+but not yet read via @code{getc}.  This is more severe than @code{fflush},
+and generally is only needed when manually altering the underlying file
+descriptor of a stream.
+
+@code{__fpurge} behaves exactly like @code{fpurge} but does not return a value.
+
+The alternate function @code{_fpurge_r} is a reentrant version, where the
+extra argument @var{reent} is a pointer to a reentrancy structure, and
+@var{fp} must not be NULL.
+
+@*
+@strong{Returns}@*
+@code{fpurge} returns @code{0} unless @var{fp} is not valid, in which case it
+returns @code{EOF} and sets @code{errno}.
+
+@*
+@strong{Portability}@*
+These functions are not portable to any standard.
+
+No supporting OS subroutines are required.
+
+@*

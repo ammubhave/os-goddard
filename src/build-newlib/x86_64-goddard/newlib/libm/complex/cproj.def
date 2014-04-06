@@ -1,0 +1,33 @@
+@node cproj
+@section @code{cproj}, @code{cprojf}--- Riemann sphere projection
+@findex cproj
+@findex cprojf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex cproj(double complex @var{z});
+float complex cprojf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute a projection of @var{z} onto the Riemann 
+sphere: @var{z} projects to @var{z} except that all complex infinities 
+(even those with one infinite part and one NaN part) project 
+to positive infinity on the real axis. If @var{z} has an infinite part,
+then @code{cproj}(@var{z}) is equivalent to
+
+INFINITY + I * copysign(0.0, cimag(z))
+
+@code{cprojf} is identical to @code{cproj}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+The cproj functions return the value of the projection onto 
+the Riemann sphere.
+
+@*
+@strong{Portability}@*
+@code{cproj} and @code{cprojf} are ISO C99
+
+@*

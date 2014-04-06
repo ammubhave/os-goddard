@@ -1,0 +1,44 @@
+@node catan
+@section @code{catan}, @code{catanf}---complex arc tangent
+@findex catan
+@findex catanf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex catan(double complex @var{z});
+float complex catanf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+@ifnottex
+These functions compute the complex arc tangent of @var{z},
+with branch cuts outside the interval [-i, +i] along the 
+imaginary axis.
+@end ifnottex
+@tex
+These functions compute the complex arc tangent of @var{z},
+with branch cuts outside the interval [$-i$, $+i$] along the 
+imaginary axis.
+@end tex
+
+@code{catanf} is identical to @code{catan}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+@ifnottex
+These functions return the complex arc tangent value, in the range
+of a strip mathematically  unbounded  along the imaginary axis
+and in the interval [-pi/2, +pi/2] along the real axis.
+@end ifnottex
+@tex
+These functions return the complex arc tangent, in the range
+of a strip mathematically  unbounded  along the imaginary axis
+and in the interval [$-\pi/2$, $+\pi/2$] along the real axis.
+@end tex
+
+@*
+@strong{Portability}@*
+@code{catan} and @code{catanf} are ISO C99
+
+@*

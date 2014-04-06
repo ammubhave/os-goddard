@@ -1,0 +1,26 @@
+@node tan
+@section @code{tan}, @code{tanf}---tangent
+@findex tan
+@findex tanf
+@strong{Synopsis}
+@example
+#include <math.h>
+double tan(double @var{x});
+float tanf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{tan} computes the tangent of the argument @var{x}.  
+Angles are specified in radians.  
+
+@code{tanf} is identical, save that it takes and returns @code{float} values.
+
+@*
+@strong{Returns}@*
+The tangent of @var{x} is returned. 
+
+@*
+@strong{Portability}@*
+@code{tan} is ANSI. @code{tanf} is an extension.
+
+@*

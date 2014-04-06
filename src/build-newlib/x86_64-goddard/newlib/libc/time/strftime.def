@@ -1,0 +1,240 @@
+@node strftime
+@section @code{strftime}---convert date and time to a formatted string
+@findex strftime
+@strong{Synopsis}
+@example
+#include <time.h>
+size_t strftime(char *restrict @var{s}, size_t @var{maxsize},
+    const char *restrict @var{format},
+    const struct tm *restrict @var{timp});
+
+@end example
+@strong{Description}@*
+@code{strftime} converts a @code{struct tm} representation of the time (at
+@var{timp}) into a null-terminated string, starting at @var{s} and occupying
+no more than @var{maxsize} characters.
+
+You control the format of the output using the string at @var{format}.
+@code{*@var{format}} can contain two kinds of specifications: text to be
+copied literally into the formatted string, and time conversion
+specifications.  Time conversion specifications are two- and
+three-character sequences beginning with `@code{%}' (use `@code{%%}' to
+include a percent sign in the output).  Each defined conversion
+specification selects only the specified field(s) of calendar time
+data from @code{*@var{timp}}, and converts it to a string in one of the
+following ways:
+
+@table @code
+
+@item %a
+The abbreviated weekday name according to the current locale. [tm_wday]
+
+@item %A
+The full weekday name according to the current locale.
+In the default "C" locale, one of `@code{Sunday}', `@code{Monday}', `@code{Tuesday}',
+`@code{Wednesday}', `@code{Thursday}', `@code{Friday}', `@code{Saturday}'. [tm_wday]
+
+@item %b
+The abbreviated month name according to the current locale. [tm_mon]
+
+@item %B
+The full month name according to the current locale.
+In the default "C" locale, one of `@code{January}', `@code{February}',
+`@code{March}', `@code{April}', `@code{May}', `@code{June}', `@code{July}',
+`@code{August}', `@code{September}', `@code{October}', `@code{November}',
+`@code{December}'. [tm_mon]
+
+@item %c
+The preferred date and time representation for the current locale.
+[tm_sec, tm_min, tm_hour, tm_mday, tm_mon, tm_year, tm_wday]
+
+@item %C
+The century, that is, the year divided by 100 then truncated.  For
+4-digit years, the result is zero-padded and exactly two characters;
+but for other years, there may a negative sign or more digits.  In
+this way, `@code{%C%y}' is equivalent to `@code{%Y}'. [tm_year]
+@item %d
+The day of the month, formatted with two digits (from `@code{01}' to
+`@code{31}'). [tm_mday]
+
+@item %D
+A string representing the date, in the form `@code{"%m/%d/%y"}'.
+[tm_mday, tm_mon, tm_year]
+
+@item %e
+The day of the month, formatted with leading space if single digit
+(from `@code{1}' to `@code{31}'). [tm_mday]
+
+@item %E@code{x}
+In some locales, the E modifier selects alternative representations of
+certain modifiers @code{x}.  In newlib, it is ignored, and treated as %@code{x}.
+
+@item %F
+A string representing the ISO 8601:2000 date format, in the form
+`@code{"%Y-%m-%d"}'. [tm_mday, tm_mon, tm_year]
+
+@item %g
+The last two digits of the week-based year, see specifier %G (from
+`@code{00}' to `@code{99}'). [tm_year, tm_wday, tm_yday]
+
+@item %G
+The week-based year. In the ISO 8601:2000 calendar, week 1 of the year
+includes January 4th, and begin on Mondays. Therefore, if January 1st,
+2nd, or 3rd falls on a Sunday, that day and earlier belong to the last
+week of the previous year; and if December 29th, 30th, or 31st falls
+on Monday, that day and later belong to week 1 of the next year.  For
+consistency with %Y, it always has at least four characters. 
+Example: "%G" for Saturday 2nd January 1999 gives "1998", and for
+Tuesday 30th December 1997 gives "1998". [tm_year, tm_wday, tm_yday]
+
+@item %h
+Synonym for "%b". [tm_mon]
+
+@item %H
+The hour (on a 24-hour clock), formatted with two digits (from
+`@code{00}' to `@code{23}'). [tm_hour]
+
+@item %I
+The hour (on a 12-hour clock), formatted with two digits (from
+`@code{01}' to `@code{12}'). [tm_hour]
+
+@item %j
+The count of days in the year, formatted with three digits
+(from `@code{001}' to `@code{366}'). [tm_yday]
+
+@item %k
+The hour (on a 24-hour clock), formatted with leading space if single
+digit (from `@code{0}' to `@code{23}'). Non-POSIX extension (c.p. %I). [tm_hour]
+
+@item %l
+The hour (on a 12-hour clock), formatted with leading space if single
+digit (from `@code{1}' to `@code{12}'). Non-POSIX extension (c.p. %H). [tm_hour]
+
+@item %m
+The month number, formatted with two digits (from `@code{01}' to `@code{12}').
+[tm_mon]
+
+@item %M
+The minute, formatted with two digits (from `@code{00}' to `@code{59}'). [tm_min]
+
+@item %n
+A newline character (`@code{\n}').
+
+@item %O@code{x}
+In some locales, the O modifier selects alternative digit characters
+for certain modifiers @code{x}.  In newlib, it is ignored, and treated as %@code{x}.
+
+@item %p
+Either `@code{AM}' or `@code{PM}' as appropriate, or the corresponding strings for
+the current locale. [tm_hour]
+
+@item %P
+Same as '@code{%p}', but in lowercase.  This is a GNU extension. [tm_hour]
+
+@item %r
+Replaced by the time in a.m. and p.m. notation.  In the "C" locale this
+is equivalent to "%I:%M:%S %p".  In locales which don't define a.m./p.m.
+notations, the result is an empty string. [tm_sec, tm_min, tm_hour]
+
+@item %R
+The 24-hour time, to the minute.  Equivalent to "%H:%M". [tm_min, tm_hour]
+
+@item %S
+The second, formatted with two digits (from `@code{00}' to `@code{60}').  The
+value 60 accounts for the occasional leap second. [tm_sec]
+
+@item %t
+A tab character (`@code{\t}').
+
+@item %T
+The 24-hour time, to the second.  Equivalent to "%H:%M:%S". [tm_sec,
+tm_min, tm_hour]
+
+@item %u
+The weekday as a number, 1-based from Monday (from `@code{1}' to
+`@code{7}'). [tm_wday]
+
+@item %U
+The week number, where weeks start on Sunday, week 1 contains the first
+Sunday in a year, and earlier days are in week 0.  Formatted with two
+digits (from `@code{00}' to `@code{53}').  See also @code{%W}. [tm_wday, tm_yday]
+
+@item %V
+The week number, where weeks start on Monday, week 1 contains January 4th,
+and earlier days are in the previous year.  Formatted with two digits
+(from `@code{01}' to `@code{53}').  See also @code{%G}. [tm_year, tm_wday, tm_yday]
+
+@item %w
+The weekday as a number, 0-based from Sunday (from `@code{0}' to `@code{6}').
+[tm_wday]
+
+@item %W
+The week number, where weeks start on Monday, week 1 contains the first
+Monday in a year, and earlier days are in week 0.  Formatted with two
+digits (from `@code{00}' to `@code{53}'). [tm_wday, tm_yday]
+
+@item %x
+Replaced by the preferred date representation in the current locale.
+In the "C" locale this is equivalent to "%m/%d/%y".
+[tm_mon, tm_mday, tm_year]
+
+@item %X
+Replaced by the preferred time representation in the current locale.
+In the "C" locale this is equivalent to "%H:%M:%S". [tm_sec, tm_min, tm_hour]
+
+@item %y
+The last two digits of the year (from `@code{00}' to `@code{99}'). [tm_year]
+(Implementation interpretation:  always positive, even for negative years.)
+
+@item %Y
+The full year, equivalent to @code{%C%y}.  It will always have at least four
+characters, but may have more.  The year is accurate even when tm_year
+added to the offset of 1900 overflows an int. [tm_year]
+
+@item %z
+The offset from UTC.  The format consists of a sign (negative is west of
+Greewich), two characters for hour, then two characters for minutes
+(-hhmm or +hhmm).  If tm_isdst is negative, the offset is unknown and no
+output is generated; if it is zero, the offset is the standard offset for
+the current time zone; and if it is positive, the offset is the daylight
+savings offset for the current timezone. The offset is determined from
+the TZ environment variable, as if by calling tzset(). [tm_isdst]
+
+@item %Z
+The time zone name.  If tm_isdst is negative, no output is generated.
+Otherwise, the time zone name is based on the TZ environment variable,
+as if by calling tzset(). [tm_isdst]
+
+@item %%
+A single character, `@code{%}'.
+@end table
+
+
+@*
+@strong{Returns}@*
+When the formatted time takes up no more than @var{maxsize} characters,
+the result is the length of the formatted string.  Otherwise, if the
+formatting operation was abandoned due to lack of room, the result is
+@code{0}, and the string starting at @var{s} corresponds to just those
+parts of @code{*@var{format}} that could be completely filled in within the
+@var{maxsize} limit.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{strftime}, but does not specify the contents of
+@code{*@var{s}} when the formatted string would require more than
+@var{maxsize} characters.  Unrecognized specifiers and fields of
+@code{timp} that are out of range cause undefined results.  Since some
+formats expand to 0 bytes, it is wise to set @code{*@var{s}} to a nonzero
+value beforehand to distinguish between failure and an empty string.
+This implementation does not support @code{s} being NULL, nor overlapping
+@code{s} and @code{format}.
+
+@code{strftime} requires no supporting OS subroutines.
+
+@*
+@strong{Bugs}@*
+@code{strftime} ignores the LC_TIME category of the current locale, hard-coding
+the "C" locale settings.
+
+@*

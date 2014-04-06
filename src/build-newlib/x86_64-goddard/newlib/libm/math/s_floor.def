@@ -1,0 +1,39 @@
+@node floor
+@section @code{floor}, @code{floorf}, @code{ceil}, @code{ceilf}---floor and ceiling
+@findex floor
+@findex floorf
+@findex ceil
+@findex ceilf
+@strong{Synopsis}
+@example
+#include <math.h>
+double floor(double @var{x});
+float floorf(float @var{x});
+double ceil(double @var{x});
+float ceilf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{floor} and @code{floorf} find 
+@tex
+$\lfloor x \rfloor$, 
+@end tex
+the nearest integer less than or equal to @var{x}.
+@code{ceil} and @code{ceilf} find 
+@tex
+$\lceil x\rceil$,
+@end tex
+the nearest integer greater than or equal to @var{x}.
+
+@*
+@strong{Returns}@*
+@code{floor} and @code{ceil} return the integer result as a double.
+@code{floorf} and @code{ceilf} return the integer result as a float.
+
+@*
+@strong{Portability}@*
+@code{floor} and @code{ceil} are ANSI.
+@code{floorf} and @code{ceilf} are extensions.
+
+
+@*

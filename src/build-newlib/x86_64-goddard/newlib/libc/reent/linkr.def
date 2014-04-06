@@ -1,0 +1,16 @@
+@node _link_r
+@section @code{_link_r}---Reentrant version of link
+@findex _link_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _link_r(struct _reent *@var{ptr},
+    const char *@var{old}, const char *@var{new});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{link}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

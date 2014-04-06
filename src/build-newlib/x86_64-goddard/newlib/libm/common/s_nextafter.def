@@ -1,0 +1,29 @@
+@node nextafter
+@section @code{nextafter}, @code{nextafterf}---get next number
+@findex nextafter
+@findex nextafterf
+@strong{Synopsis}
+@example
+#include <math.h>
+double nextafter(double @var{val}, double @var{dir});
+float nextafterf(float @var{val}, float @var{dir});
+
+@end example
+@strong{Description}@*
+@code{nextafter} returns the double-precision floating-point number
+closest to @var{val} in the direction toward @var{dir}.  @code{nextafterf}
+performs the same operation in single precision.  For example,
+@code{nextafter(0.0,1.0)} returns the smallest positive number which is
+representable in double precision.
+
+@*
+@strong{Returns}@*
+Returns the next closest number to @var{val} in the direction toward
+@var{dir}.
+
+@*
+@strong{Portability}@*
+Neither @code{nextafter} nor @code{nextafterf} is required by ANSI C
+or by the System V Interface Definition (Issue 2).
+
+@*

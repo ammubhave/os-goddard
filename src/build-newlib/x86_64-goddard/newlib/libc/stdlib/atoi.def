@@ -1,0 +1,37 @@
+@node atoi
+@section @code{atoi}, @code{atol}---string to integer
+@findex atoi
+@findex atol
+@findex _atoi_r
+@findex _atol_r
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+int atoi(const char *@var{s});
+long atol(const char *@var{s});
+int _atoi_r(struct _reent *@var{ptr}, const char *@var{s});
+long _atol_r(struct _reent *@var{ptr}, const char *@var{s});
+
+@end example
+@strong{Description}@*
+@code{atoi} converts the initial portion of a string to an @code{int}.
+@code{atol} converts the initial portion of a string to a @code{long}.
+
+@code{atoi(s)} is implemented as @code{(int)strtol(s, NULL, 10).}
+@code{atol(s)} is implemented as @code{strtol(s, NULL, 10).}
+
+@code{_atoi_r} and @code{_atol_r} are reentrant versions of @code{atoi} and
+@code{atol} respectively, passing the reentrancy struct pointer.
+
+@*
+@strong{Returns}@*
+The functions return the converted value, if any. If no conversion was
+made, @code{0} is returned.
+
+@*
+@strong{Portability}@*
+@code{atoi}, @code{atol} are ANSI.
+
+No supporting OS subroutines are required.
+
+@*

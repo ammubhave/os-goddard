@@ -1,0 +1,56 @@
+@node fseek
+@section @code{fseek}, @code{fseeko}---set file position
+@findex fseek
+@findex fseeko
+@findex _fseek_r
+@findex _fseeko_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fseek(FILE *@var{fp}, long @var{offset}, int @var{whence})
+int fseeko(FILE *@var{fp}, off_t @var{offset}, int @var{whence})
+int _fseek_r(struct _reent *@var{ptr}, FILE *@var{fp},
+    long @var{offset}, int @var{whence})
+int _fseeko_r(struct _reent *@var{ptr}, FILE *@var{fp},
+    off_t @var{offset}, int @var{whence})
+
+@end example
+@strong{Description}@*
+Objects of type @code{FILE} can have a ``position'' that records how much
+of the file your program has already read.  Many of the @code{stdio} functions
+depend on this position, and many change it as a side effect.
+
+You can use @code{fseek}/@code{fseeko} to set the position for the file identified by
+@var{fp}.  The value of @var{offset} determines the new position, in one
+of three ways selected by the value of @var{whence} (defined as macros
+in `@code{stdio.h}'):
+
+@code{SEEK_SET}---@var{offset} is the absolute file position (an offset
+from the beginning of the file) desired.  @var{offset} must be positive.
+
+@code{SEEK_CUR}---@var{offset} is relative to the current file position.
+@var{offset} can meaningfully be either positive or negative.
+
+@code{SEEK_END}---@var{offset} is relative to the current end of file.
+@var{offset} can meaningfully be either positive (to increase the size
+of the file) or negative.
+
+See @code{ftell}/@code{ftello} to determine the current file position.
+
+@*
+@strong{Returns}@*
+@code{fseek}/@code{fseeko} return @code{0} when successful.  On failure, the
+result is @code{EOF}.  The reason for failure is indicated in @code{errno}:
+either @code{ESPIPE} (the stream identified by @var{fp} doesn't support
+repositioning) or @code{EINVAL} (invalid file position).
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{fseek}.
+
+@code{fseeko} is defined by the Single Unix specification.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

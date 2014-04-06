@@ -1,0 +1,58 @@
+@node strtok
+@section @code{strtok}, @code{strtok_r}, @code{strsep}---get next token from a string
+@findex strtok
+@findex strtok_r
+@findex strsep
+@strong{Synopsis}
+@example
+#include <string.h>
+char *strtok(char *restrict @var{source},
+    const char *restrict @var{delimiters})
+char *strtok_r(char *restrict @var{source},
+    const char *restrict @var{delimiters},
+    char **@var{lasts})
+char *strsep(char **@var{source_ptr}, const char *@var{delimiters})
+
+@end example
+@strong{Description}@*
+The @code{strtok} function is used to isolate sequential tokens in a 
+null-terminated string, @code{*@var{source}}. These tokens are delimited 
+in the string by at least one of the characters in @code{*@var{delimiters}}.
+The first time that @code{strtok} is called, @code{*@var{source}} should be
+specified; subsequent calls, wishing to obtain further tokens from
+the same string, should pass a null pointer instead.  The separator
+string, @code{*@var{delimiters}}, must be supplied each time and may 
+change between calls.
+
+The @code{strtok} function returns a pointer to the beginning of each 
+subsequent token in the string, after replacing the separator 
+character itself with a null character.  When no more tokens remain, 
+a null pointer is returned.
+
+The @code{strtok_r} function has the same behavior as @code{strtok}, except
+a pointer to placeholder @code{*@var{lasts}} must be supplied by the caller.
+
+The @code{strsep} function is similar in behavior to @code{strtok}, except
+a pointer to the string pointer must be supplied @code{@var{source_ptr}} and
+the function does not skip leading delimiters.  When the string starts
+with a delimiter, the delimiter is changed to the null character and
+the empty string is returned.  Like @code{strtok_r} and @code{strtok}, the
+@code{*@var{source_ptr}} is updated to the next character following the
+last delimiter found or NULL if the end of string is reached with
+no more delimiters.
+
+@*
+@strong{Returns}@*
+@code{strtok}, @code{strtok_r}, and @code{strsep} all return a pointer to the 
+next token, or @code{NULL} if no more tokens can be found.  For
+@code{strsep}, a token may be the empty string.
+
+@*
+@strong{Portability}@*
+@code{strtok} is ANSI C.
+@code{strtok_r} is POSIX.
+@code{strsep} is a BSD extension.
+
+@code{strtok}, @code{strtok_r}, and @code{strsep} require no supporting OS subroutines.
+
+@*

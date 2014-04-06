@@ -1,0 +1,30 @@
+@node memmem
+@section @code{memmem}---find memory segment
+@findex memmem
+@strong{Synopsis}
+@example
+#include <string.h>
+char *memmem(const void *@var{s1}, size_t @var{l1}, const void *@var{s2},
+    size_t @var{l2});
+
+@end example
+@strong{Description}@*
+
+Locates the first occurrence in the memory region pointed to
+by @var{s1} with length @var{l1} of the sequence of bytes pointed
+to by @var{s2} of length @var{l2}.  If you already know the
+lengths of your haystack and needle, @code{memmem} can be much
+faster than @code{strstr}.
+
+@*
+@strong{Returns}@*
+Returns a pointer to the located segment, or a null pointer if
+@var{s2} is not found. If @var{l2} is 0, @var{s1} is returned.
+
+@*
+@strong{Portability}@*
+@code{memmem} is a newlib extension.
+
+@code{memmem} requires no supporting OS subroutines.
+
+@*

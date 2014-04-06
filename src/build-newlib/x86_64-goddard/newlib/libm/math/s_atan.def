@@ -1,0 +1,32 @@
+@node atan
+@section @code{atan}, @code{atanf}---arc tangent
+@findex atan
+@findex atanf
+@strong{Synopsis}
+@example
+#include <math.h>
+double atan(double @var{x});
+float atanf(float @var{x});
+
+@end example
+@strong{Description}@*
+
+@code{atan} computes the inverse tangent (arc tangent) of the input value.
+
+@code{atanf} is identical to @code{atan}, save that it operates on @code{floats}.
+
+@*
+@strong{Returns}@*
+@ifnottex
+@code{atan} returns a value in radians, in the range of -pi/2 to pi/2.
+@end ifnottex
+@tex
+@code{atan} returns a value in radians, in the range of $-\pi/2$ to $\pi/2$.
+@end tex
+
+@*
+@strong{Portability}@*
+@code{atan} is ANSI C.  @code{atanf} is an extension.
+
+
+@*

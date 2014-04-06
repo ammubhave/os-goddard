@@ -1,0 +1,32 @@
+@node wmemcmp
+@section @code{wmemcmp}---compare wide characters in memory 
+@strong{Synopsis}
+@example
+#include <wchar.h>
+int wmemcmp(const wchar_t *@var{s1}, const wchar_t *@var{s2}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+The @code{wmemcmp} function compares the first @var{n} wide characters of the
+object pointed to by @var{s1} to the first @var{n} wide characters of the
+object pointed to by @var{s2}. This function is not affected by locale
+and all wchar_t values are treated identically. The null wide character
+and wchar_t values not corresponding to valid characters are not treated
+specially.
+
+If @var{n} is zero, @var{s1} and @var{s2} must be a valid pointers and the
+function behaves as if the two objects compare equal. 
+
+@*
+@strong{Returns}@*
+The @code{wmemcmp} function returns an integer greater than, equal to,
+or less than zero, accordingly as the object pointed to by @var{s1} is
+greater than, equal to, or less than the object pointed to by @var{s2}.
+
+@*
+@strong{Portability}@*
+@code{wmemcmp} is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+No supporting OS subroutines are required.
+
+@*

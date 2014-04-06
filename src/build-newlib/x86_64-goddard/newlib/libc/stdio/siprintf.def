@@ -1,0 +1,65 @@
+@node siprintf
+@section @code{siprintf}, @code{fiprintf}, @code{iprintf}, @code{sniprintf}, @code{asiprintf}, @code{asniprintf}---format output (integer only)
+@findex fiprintf
+@findex _fiprintf_r
+@findex iprintf
+@findex _iprintf_r
+@findex siprintf
+@findex _siprintf_r
+@findex sniprintf
+@findex _sniprintf_r
+@findex asiprintf
+@findex _asiprintf_r
+@findex asniprintf
+@findex _asniprintf_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+
+int iprintf(const char *@var{format}, ...);
+int fiprintf(FILE *@var{fd}, const char *@var{format} , ...);
+int siprintf(char *@var{str}, const char *@var{format}, ...);
+int sniprintf(char *@var{str}, size_t @var{size}, const char *@var{format}, 
+    ...);
+int asiprintf(char **@var{strp}, const char *@var{format}, ...);
+char *asniprintf(char *@var{str}, size_t *@var{size}, 
+    const char *@var{format}, ...);
+
+int _iprintf_r(struct _reent *@var{ptr}, const char *@var{format}, ...);
+int _fiprintf_r(struct _reent *@var{ptr}, FILE *@var{fd},
+    const char *@var{format}, ...);
+int _siprintf_r(struct _reent *@var{ptr}, char *@var{str},
+    const char *@var{format}, ...);
+int _sniprintf_r(struct _reent *@var{ptr}, char *@var{str}, size_t @var{size},
+    const char *@var{format}, ...);
+int _asiprintf_r(struct _reent *@var{ptr}, char **@var{strp},
+    const char *@var{format}, ...);
+char *_asniprintf_r(struct _reent *@var{ptr}, char *@var{str},
+    size_t *@var{size}, const char *@var{format}, ...);
+
+@end example
+@strong{Description}@*
+@code{iprintf}, @code{fiprintf}, @code{siprintf}, @code{sniprintf},
+@code{asiprintf}, and @code{asniprintf} are the same as @code{printf},
+@code{fprintf}, @code{sprintf}, @code{snprintf}, @code{asprintf}, and
+@code{asnprintf}, respectively, except that they restrict usage
+to non-floating-point format specifiers.
+
+@code{_iprintf_r}, @code{_fiprintf_r}, @code{_asiprintf_r},
+@code{_siprintf_r}, @code{_sniprintf_r}, @code{_asniprintf_r} are
+simply reentrant versions of the functions above.
+
+@*
+@strong{Returns}@*
+Similar to @code{printf}, @code{fprintf}, @code{sprintf}, @code{snprintf}, @code{asprintf},
+and @code{asnprintf}.
+
+@*
+@strong{Portability}@*
+@code{iprintf}, @code{fiprintf}, @code{siprintf}, @code{sniprintf}, @code{asiprintf},
+and @code{asniprintf} are newlib extensions.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

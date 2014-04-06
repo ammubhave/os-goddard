@@ -1,0 +1,33 @@
+@node _kill_r
+@section @code{_kill_r}---Reentrant version of kill
+@findex _kill_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _kill_r(struct _reent *@var{ptr}, int @var{pid}, int @var{sig});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{kill}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*
+@node _getpid_r
+@section @code{_getpid_r}---Reentrant version of getpid
+@findex _getpid_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _getpid_r(struct _reent *@var{ptr});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{getpid}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+We never need @code{errno}, of course, but for consistency we
+still must have the reentrant pointer argument.
+
+@*

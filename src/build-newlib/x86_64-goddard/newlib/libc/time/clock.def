@@ -1,0 +1,27 @@
+@node clock
+@section @code{clock}---cumulative processor time
+@findex clock
+@strong{Synopsis}
+@example
+#include <time.h>
+clock_t clock(void);
+
+@end example
+@strong{Description}@*
+Calculates the best available approximation of the cumulative amount
+of time used by your program since it started.  To convert the result
+into seconds, divide by the macro @code{CLOCKS_PER_SEC}.
+
+@*
+@strong{Returns}@*
+The amount of processor time used so far by your program, in units
+defined by the machine-dependent macro @code{CLOCKS_PER_SEC}.  If no
+measurement is available, the result is (clock_t)@code{-1}.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{clock} and @code{CLOCKS_PER_SEC}.
+
+Supporting OS subroutine required: @code{times}.
+
+@*

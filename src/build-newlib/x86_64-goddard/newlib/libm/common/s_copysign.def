@@ -1,0 +1,33 @@
+@node copysign
+@section @code{copysign}, @code{copysignf}---sign of @var{y}, magnitude of @var{x}
+@findex copysign
+@findex copysignf
+@strong{Synopsis}
+@example
+#include <math.h>
+double copysign (double @var{x}, double @var{y});
+float copysignf (float @var{x}, float @var{y});
+
+@end example
+@strong{Description}@*
+@code{copysign} constructs a number with the magnitude (absolute value)
+of its first argument, @var{x}, and the sign of its second argument,
+@var{y}.
+
+@code{copysignf} does the same thing; the two functions differ only in
+the type of their arguments and result.
+
+@*
+@strong{Returns}@*
+@code{copysign} returns a @code{double} with the magnitude of
+@var{x} and the sign of @var{y}.
+@code{copysignf} returns a @code{float} with the magnitude of
+@var{x} and the sign of @var{y}.
+
+@*
+@strong{Portability}@*
+@code{copysign} is not required by either ANSI C or the System V Interface
+Definition (Issue 2).
+
+
+@*

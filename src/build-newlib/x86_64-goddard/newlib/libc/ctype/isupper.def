@@ -1,0 +1,29 @@
+@node isupper
+@section @code{isupper}---uppercase character predicate
+@findex isupper
+@strong{Synopsis}
+@example
+#include <ctype.h>
+int isupper(int @var{c});
+
+@end example
+@strong{Description}@*
+@code{isupper} is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for uppercase letters
+(@code{A}--@code{Z}), and 0 for other characters.  It is defined only when
+@code{isascii}(@var{c}) is true or @var{c} is EOF.
+
+You can use a compiled subroutine instead of the macro definition by
+undefining the macro using `@code{#undef isupper}'.
+
+@*
+@strong{Returns}@*
+@code{isupper} returns non-zero if @var{c} is a uppercase letter (A-Z).
+
+@*
+@strong{Portability}@*
+@code{isupper} is ANSI C.
+
+No supporting OS subroutines are required.
+
+@*

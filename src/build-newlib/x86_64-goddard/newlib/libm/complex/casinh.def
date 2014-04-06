@@ -1,0 +1,46 @@
+@node casinh
+@section @code{casinh}, @code{casinhf}---complex arc hyperbolic sine
+@findex casinh
+@findex casinhf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex casinh(double complex @var{z});
+float complex casinhf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+@ifnottex
+These functions compute the complex arc hyperbolic sine of @var{z},
+with branch cuts outside the interval [-i, +i] along the 
+imaginary axis.        
+@end ifnottex
+@tex
+These functions compute the complex arc hyperbolic sine of @var{z},
+with branch cuts outside the interval [$-i$, $+i$] along the 
+imaginary axis.        
+@end tex
+
+@code{casinhf} is identical to @code{casinh}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+@ifnottex
+These functions return the complex arc hyperbolic sine value, 
+in the range of a strip mathematically unbounded along the 
+real axis and in the interval [-i*p/2, +i*p/2] along the 
+imaginary axis.
+@end ifnottex
+@tex
+These functions return the complex arc hyperbolic sine value, 
+in the range of a strip mathematically unbounded along the 
+real axis and in the interval [$-i\pi/2$, $+i\pi/2$] along the 
+imaginary axis.
+@end tex
+
+@*
+@strong{Portability}@*
+@code{casinh} and @code{casinhf} are ISO C99
+
+@*

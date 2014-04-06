@@ -1,0 +1,35 @@
+@node log1p
+@section @code{log1p}, @code{log1pf}---log of @code{1 + @var{x}}
+@findex log1p
+@findex log1pf
+@strong{Synopsis}
+@example
+#include <math.h>
+double log1p(double @var{x});
+float log1pf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{log1p} calculates 
+@tex
+$ln(1+x)$, 
+@end tex
+the natural logarithm of @code{1+@var{x}}.  You can use @code{log1p} rather
+than `@code{log(1+@var{x})}' for greater precision when @var{x} is very
+small.
+
+@code{log1pf} calculates the same thing, but accepts and returns
+@code{float} values rather than @code{double}.
+
+@*
+@strong{Returns}@*
+@code{log1p} returns a @code{double}, the natural log of @code{1+@var{x}}.
+@code{log1pf} returns a @code{float}, the natural log of @code{1+@var{x}}.
+
+@*
+@strong{Portability}@*
+Neither @code{log1p} nor @code{log1pf} is required by ANSI C or by the System V
+Interface Definition (Issue 2).
+
+
+@*

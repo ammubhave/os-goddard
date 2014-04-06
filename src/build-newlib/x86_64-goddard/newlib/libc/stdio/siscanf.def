@@ -1,0 +1,52 @@
+@node siscanf
+@section @code{siscanf}, @code{fiscanf}, @code{iscanf}---scan and format non-floating input
+@findex iscanf
+@findex _iscanf_r
+@findex fiscanf
+@findex _fiscanf_r
+@findex siscanf
+@findex _siscanf_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+
+int iscanf(const char *@var{format}, ...);
+int fiscanf(FILE *@var{fd}, const char *@var{format}, ...);
+int siscanf(const char *@var{str}, const char *@var{format}, ...);
+
+int _iscanf_r(struct _reent *@var{ptr}, const char *@var{format}, ...);
+int _fiscanf_r(struct _reent *@var{ptr}, FILE *@var{fd}, 
+    const char *@var{format}, ...);
+int _siscanf_r(struct _reent *@var{ptr}, const char *@var{str},
+    const char *@var{format}, ...);
+
+@end example
+@strong{Description}@*
+@code{iscanf}, @code{fiscanf}, and @code{siscanf} are the same as
+@code{scanf}, @code{fscanf}, and @code{sscanf} respectively, only that
+they restrict the available formats to non-floating-point
+format specifiers.
+
+The routines @code{_iscanf_r}, @code{_fiscanf_r}, and @code{_siscanf_r} are reentrant
+versions of @code{iscanf}, @code{fiscanf}, and @code{siscanf} that take an additional
+first argument pointing to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+@code{iscanf} returns the number of input fields successfully
+scanned, converted and stored; the return value does
+not include scanned fields which were not stored.
+
+If @code{iscanf} attempts to read at end-of-file, the return
+value is @code{EOF}.
+
+If no fields were stored, the return value is @code{0}.
+
+@*
+@strong{Portability}@*
+@code{iscanf}, @code{fiscanf}, and @code{siscanf} are newlib extensions.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

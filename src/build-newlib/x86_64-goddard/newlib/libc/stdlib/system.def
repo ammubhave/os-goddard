@@ -1,0 +1,45 @@
+@node system
+@section @code{system}---execute command string
+@findex system
+@findex _system_r
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+int system(char *@var{s});
+
+int _system_r(void *@var{reent}, char *@var{s});
+
+@end example
+@strong{Description}@*
+
+Use @code{system} to pass a command string @code{*@var{s}} to @code{/bin/sh} on
+your system, and wait for it to finish executing.
+
+Use ``@code{system(NULL)}'' to test whether your system has @code{/bin/sh}
+available.
+
+The alternate function @code{_system_r} is a reentrant version.  The
+extra argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+@code{system(NULL)} returns a non-zero value if @code{/bin/sh} is available, and
+@code{0} if it is not.
+
+With a command argument, the result of @code{system} is the exit status
+returned by @code{/bin/sh}.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{system}, but leaves the nature and effects of a
+command processor undefined.  ANSI C does, however, specify that
+@code{system(NULL)} return zero or nonzero to report on the existence of
+a command processor.
+
+POSIX.2 requires @code{system}, and requires that it invoke a @code{sh}.
+Where @code{sh} is found is left unspecified.
+
+Supporting OS subroutines required: @code{_exit}, @code{_execve}, @code{_fork_r},
+@code{_wait_r}.
+
+@*

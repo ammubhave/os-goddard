@@ -1,0 +1,66 @@
+@node setvbuf
+@section @code{setvbuf}---specify file or stream buffering
+@findex setvbuf
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int setvbuf(FILE *@var{fp}, char *@var{buf},
+    int @var{mode}, size_t @var{size});
+
+@end example
+@strong{Description}@*
+Use @code{setvbuf} to specify what kind of buffering you want for the
+file or stream identified by @var{fp}, by using one of the following
+values (from @code{stdio.h}) as the @var{mode} argument:
+
+@table @code
+
+@item _IONBF
+Do not use a buffer: send output directly to the host system for the
+file or stream identified by @var{fp}.
+
+@item _IOFBF
+Use full output buffering: output will be passed on to the host system
+only when the buffer is full, or when an input operation intervenes.
+
+@item _IOLBF
+Use line buffering: pass on output to the host system at every
+newline, as well as when the buffer is full, or when an input
+operation intervenes.
+@end table
+
+
+Use the @var{size} argument to specify how large a buffer you wish.  You
+can supply the buffer itself, if you wish, by passing a pointer to a
+suitable area of memory as @var{buf}.  Otherwise, you may pass @code{NULL}
+as the @var{buf} argument, and @code{setvbuf} will allocate the buffer.
+
+@*
+@strong{Warnings}@*
+You may only use @code{setvbuf} before performing any file operation other
+than opening the file.
+
+If you supply a non-null @var{buf}, you must ensure that the associated
+storage continues to be available until you close the stream
+identified by @var{fp}.
+
+@*
+@strong{Returns}@*
+A @code{0} result indicates success, @code{EOF} failure (invalid @var{mode} or
+@var{size} can cause failure).
+
+@*
+@strong{Portability}@*
+Both ANSI C and the System V Interface Definition (Issue 2) require
+@code{setvbuf}. However, they differ on the meaning of a @code{NULL} buffer
+pointer: the SVID issue 2 specification says that a @code{NULL} buffer
+pointer requests unbuffered output.  For maximum portability, avoid
+@code{NULL} buffer pointers.
+
+Both specifications describe the result on failure only as a
+nonzero value.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

@@ -1,0 +1,126 @@
+@node malloc
+@section @code{malloc}, @code{realloc}, @code{free}---manage memory
+@findex malloc
+@findex realloc
+@findex reallocf
+@findex free
+@findex memalign
+@findex malloc_usable_size
+@findex _malloc_r
+@findex _realloc_r
+@findex _reallocf_r
+@findex _free_r
+@findex _memalign_r
+@findex _malloc_usable_size_r
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+void *malloc(size_t @var{nbytes});
+void *realloc(void *@var{aptr}, size_t @var{nbytes});
+void *reallocf(void *@var{aptr}, size_t @var{nbytes});
+void free(void *@var{aptr});
+
+void *memalign(size_t @var{align}, size_t @var{nbytes});
+
+size_t malloc_usable_size(void *@var{aptr});
+
+void *_malloc_r(void *@var{reent}, size_t @var{nbytes});
+void *_realloc_r(void *@var{reent}, 
+    void *@var{aptr}, size_t @var{nbytes});
+void *_reallocf_r(void *@var{reent}, 
+    void *@var{aptr}, size_t @var{nbytes});
+void _free_r(void *@var{reent}, void *@var{aptr});
+
+void *_memalign_r(void *@var{reent},
+    size_t @var{align}, size_t @var{nbytes});
+
+size_t _malloc_usable_size_r(void *@var{reent}, void *@var{aptr});
+
+@end example
+@strong{Description}@*
+These functions manage a pool of system memory.
+
+Use @code{malloc} to request allocation of an object with at least
+@var{nbytes} bytes of storage available.  If the space is available,
+@code{malloc} returns a pointer to a newly allocated block as its result.
+
+If you already have a block of storage allocated by @code{malloc}, but
+you no longer need all the space allocated to it, you can make it
+smaller by calling @code{realloc} with both the object pointer and the
+new desired size as arguments.  @code{realloc} guarantees that the
+contents of the smaller object match the beginning of the original object.
+
+Similarly, if you need more space for an object, use @code{realloc} to
+request the larger size; again, @code{realloc} guarantees that the
+beginning of the new, larger object matches the contents of the
+original object.
+
+When you no longer need an object originally allocated by @code{malloc}
+or @code{realloc} (or the related function @code{calloc}), return it to the
+memory storage pool by calling @code{free} with the address of the object
+as the argument.  You can also use @code{realloc} for this purpose by
+calling it with @code{0} as the @var{nbytes} argument.
+
+The @code{reallocf} function behaves just like @code{realloc} except if the
+function is required to allocate new storage and this fails.  In this
+case @code{reallocf} will free the original object passed in whereas
+@code{realloc} will not.
+
+The @code{memalign} function returns a block of size @var{nbytes} aligned
+to a @var{align} boundary.  The @var{align} argument must be a power of
+two.
+
+The @code{malloc_usable_size} function takes a pointer to a block
+allocated by @code{malloc}.  It returns the amount of space that is
+available in the block.  This may or may not be more than the size
+requested from @code{malloc}, due to alignment or minimum size
+constraints.
+
+The alternate functions @code{_malloc_r}, @code{_realloc_r}, @code{_reallocf_r}, 
+@code{_free_r}, @code{_memalign_r}, and @code{_malloc_usable_size_r} are reentrant
+versions.  The extra argument @var{reent} is a pointer to a reentrancy structure.
+
+If you have multiple threads of execution which may call any of these
+routines, or if any of these routines may be called reentrantly, then
+you must provide implementations of the @code{__malloc_lock} and
+@code{__malloc_unlock} functions for your system.  See the documentation
+for those functions.
+
+These functions operate by calling the function @code{_sbrk_r} or
+@code{sbrk}, which allocates space.  You may need to provide one of these
+functions for your system.  @code{_sbrk_r} is called with a positive
+value to allocate more space, and with a negative value to release
+previously allocated space if it is no longer required.
+@xref{Stubs}.
+
+@*
+@strong{Returns}@*
+@code{malloc} returns a pointer to the newly allocated space, if
+successful; otherwise it returns @code{NULL}.  If your application needs
+to generate empty objects, you may use @code{malloc(0)} for this purpose.
+
+@code{realloc} returns a pointer to the new block of memory, or @code{NULL}
+if a new block could not be allocated.  @code{NULL} is also the result
+when you use `@code{realloc(@var{aptr},0)}' (which has the same effect as
+`@code{free(@var{aptr})}').  You should always check the result of
+@code{realloc}; successful reallocation is not guaranteed even when
+you request a smaller object.
+
+@code{free} does not return a result.
+
+@code{memalign} returns a pointer to the newly allocated space.
+
+@code{malloc_usable_size} returns the usable size.
+
+@*
+@strong{Portability}@*
+@code{malloc}, @code{realloc}, and @code{free} are specified by the ANSI C
+standard, but other conforming implementations of @code{malloc} may
+behave differently when @var{nbytes} is zero.
+
+@code{memalign} is part of SVR4.
+
+@code{malloc_usable_size} is not portable.
+
+Supporting OS subroutines required: @code{sbrk}.  
+@*

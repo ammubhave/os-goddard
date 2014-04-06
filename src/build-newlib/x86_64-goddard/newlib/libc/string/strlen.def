@@ -1,0 +1,25 @@
+@node strlen
+@section @code{strlen}---character string length
+@findex strlen
+@strong{Synopsis}
+@example
+#include <string.h>
+size_t strlen(const char *@var{str});
+
+@end example
+@strong{Description}@*
+The @code{strlen} function works out the length of the string
+starting at @code{*@var{str}} by counting chararacters until it
+reaches a @code{NULL} character.
+
+@*
+@strong{Returns}@*
+@code{strlen} returns the character count.
+
+@*
+@strong{Portability}@*
+@code{strlen} is ANSI C.
+
+@code{strlen} requires no supporting OS subroutines.
+
+@*

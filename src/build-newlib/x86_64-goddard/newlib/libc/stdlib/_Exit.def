@@ -1,0 +1,31 @@
+@node _Exit
+@section @code{_Exit}---end program execution with no cleanup processing
+@findex _Exit
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+void _Exit(int @var{code});
+
+@end example
+@strong{Description}@*
+Use @code{_Exit} to return control from a program to the host operating
+environment.  Use the argument @var{code} to pass an exit status to the
+operating environment: two particular values, @code{EXIT_SUCCESS} and
+@code{EXIT_FAILURE}, are defined in `@code{stdlib.h}' to indicate success or
+failure in a portable fashion.
+
+@code{_Exit} differs from @code{exit} in that it does not run any
+application-defined cleanup functions registered with @code{atexit} and
+it does not clean up files and streams.  It is identical to @code{_exit}.
+
+@*
+@strong{Returns}@*
+@code{_Exit} does not return to its caller.
+
+@*
+@strong{Portability}@*
+@code{_Exit} is defined by the C99 standard.
+
+Supporting OS subroutines required: @code{_exit}.
+
+@*

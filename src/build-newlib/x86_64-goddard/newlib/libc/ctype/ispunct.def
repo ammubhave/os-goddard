@@ -1,0 +1,30 @@
+@node ispunct
+@section @code{ispunct}---punctuation character predicate
+@findex ispunct
+@strong{Synopsis}
+@example
+#include <ctype.h>
+int ispunct(int @var{c});
+
+@end example
+@strong{Description}@*
+@code{ispunct} is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for printable
+punctuation characters, and 0 for other characters.  It is defined only
+if @var{c} is representable as an unsigned char or if @var{c} is EOF.
+
+You can use a compiled subroutine instead of the macro definition by
+undefining the macro using `@code{#undef ispunct}'.
+
+@*
+@strong{Returns}@*
+@code{ispunct} returns non-zero if @var{c} is a printable punctuation character 
+(@code{isgraph(@var{c}) && !isalnum(@var{c})}).
+
+@*
+@strong{Portability}@*
+@code{ispunct} is ANSI C.
+
+No supporting OS subroutines are required.
+
+@*

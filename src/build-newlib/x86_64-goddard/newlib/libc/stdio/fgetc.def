@@ -1,0 +1,41 @@
+@node fgetc
+@section @code{fgetc}---get a character from a file or stream
+@findex fgetc
+@findex _fgetc_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fgetc(FILE *@var{fp});
+
+#include <stdio.h>
+int _fgetc_r(struct _reent *@var{ptr}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+Use @code{fgetc} to get the next single character from the file or stream
+identified by @var{fp}.  As a side effect, @code{fgetc} advances the file's
+current position indicator.
+
+For a macro version of this function, see @code{getc}.
+
+The function @code{_fgetc_r} is simply a reentrant version of
+@code{fgetc} that is passed the additional reentrant structure
+pointer argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+The next character (read as an @code{unsigned char}, and cast to
+@code{int}), unless there is no more data, or the host system reports a
+read error; in either of these situations, @code{fgetc} returns @code{EOF}.
+
+You can distinguish the two situations that cause an @code{EOF} result by
+using the @code{ferror} and @code{feof} functions.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{fgetc}.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

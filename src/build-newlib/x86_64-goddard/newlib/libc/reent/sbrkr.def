@@ -1,0 +1,15 @@
+@node _sbrk_r
+@section @code{_sbrk_r}---Reentrant version of sbrk
+@findex _sbrk_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+void *_sbrk_r(struct _reent *@var{ptr}, ptrdiff_t @var{incr});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{sbrk}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

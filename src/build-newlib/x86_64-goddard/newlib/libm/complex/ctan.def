@@ -1,0 +1,26 @@
+@node ctan
+@section @code{ctan}, @code{ctanf}---complex tangent
+@findex ctan
+@findex ctanf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex ctan(double complex @var{z});
+float complex ctanf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex tangent of @var{z}.
+
+@code{ctanf} is identical to @code{ctan}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+These functions return the complex tangent value.
+
+@*
+@strong{Portability}@*
+@code{ctan} and @code{ctanf} are ISO C99
+
+@*

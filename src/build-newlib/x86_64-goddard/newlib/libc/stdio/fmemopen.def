@@ -1,0 +1,59 @@
+@node fmemopen
+@section @code{fmemopen}---open a stream around a fixed-length string
+@findex fmemopen
+@strong{Synopsis}
+@example
+#include <stdio.h>
+FILE *fmemopen(void *restrict @var{buf}, size_t @var{size},
+    const char *restrict @var{mode});
+
+@end example
+@strong{Description}@*
+@code{fmemopen} creates a seekable @code{FILE} stream that wraps a
+fixed-length buffer of @var{size} bytes starting at @var{buf}.  The stream
+is opened with @var{mode} treated as in @code{fopen}, where append mode
+starts writing at the first NUL byte.  If @var{buf} is NULL, then
+@var{size} bytes are automatically provided as if by @code{malloc}, with
+the initial size of 0, and @var{mode} must contain @code{+} so that data
+can be read after it is written.
+
+The stream maintains a current position, which moves according to
+bytes read or written, and which can be one past the end of the array.
+The stream also maintains a current file size, which is never greater
+than @var{size}.  If @var{mode} starts with @code{r}, the position starts at
+@code{0}, and file size starts at @var{size} if @var{buf} was provided.  If
+@var{mode} starts with @code{w}, the position and file size start at @code{0},
+and if @var{buf} was provided, the first byte is set to NUL.  If
+@var{mode} starts with @code{a}, the position and file size start at the
+location of the first NUL byte, or else @var{size} if @var{buf} was
+provided.
+
+When reading, NUL bytes have no significance, and reads cannot exceed
+the current file size.  When writing, the file size can increase up to
+@var{size} as needed, and NUL bytes may be embedded in the stream (see
+@code{open_memstream} for an alternative that automatically enlarges the
+buffer).  When the stream is flushed or closed after a write that
+changed the file size, a NUL byte is written at the current position
+if there is still room; if the stream is not also open for reading, a
+NUL byte is additionally written at the last byte of @var{buf} when the
+stream has exceeded @var{size}, so that a write-only @var{buf} is always
+NUL-terminated when the stream is flushed or closed (and the initial
+@var{size} should take this into account).  It is not possible to seek
+outside the bounds of @var{size}.  A NUL byte written during a flush is
+restored to its previous value when seeking elsewhere in the string.
+
+@*
+@strong{Returns}@*
+The return value is an open FILE pointer on success.  On error,
+@code{NULL} is returned, and @code{errno} will be set to EINVAL if @var{size}
+is zero or @var{mode} is invalid, ENOMEM if @var{buf} was NULL and memory
+could not be allocated, or EMFILE if too many streams are already
+open.
+
+@*
+@strong{Portability}@*
+This function is being added to POSIX 200x, but is not in POSIX 2001.
+
+Supporting OS subroutines required: @code{sbrk}.
+
+@*

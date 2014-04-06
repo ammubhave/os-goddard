@@ -1,0 +1,34 @@
+@node round
+@section @code{round}, @code{roundf}--round to integer, to nearest
+@findex round
+@findex roundf
+@strong{Synopsis}
+@example
+#include <math.h>
+double round(double @var{x});
+float roundf(float @var{x});
+
+@end example
+@strong{Description}@*
+The @code{round} functions round their argument to the nearest integer
+value in floating-point format, rounding halfway cases away from zero,
+regardless of the current rounding direction.  (While the "inexact"
+floating-point exception behavior is unspecified by the C standard, the
+@code{round} functions are written so that "inexact" is not raised if the
+result does not equal the argument, which behavior is as recommended by
+IEEE 754 for its related functions.)
+
+@*
+@strong{Returns}@*
+@var{x} rounded to an integral value.
+
+@*
+@strong{Portability}@*
+ANSI C, POSIX
+
+@*
+@strong{See Also}@*
+@code{nearbyint}, @code{rint}
+
+
+@*

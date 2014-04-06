@@ -1,0 +1,38 @@
+@node toupper
+@section @code{toupper}---translate characters to uppercase
+@findex toupper
+@findex _toupper
+@strong{Synopsis}
+@example
+#include <ctype.h>
+int toupper(int @var{c});
+int _toupper(int @var{c});
+
+@end example
+@strong{Description}@*
+@code{toupper} is a macro which converts lowercase characters to uppercase,
+leaving all other characters unchanged.  It is only defined when
+@var{c} is an integer in the range @code{EOF} to @code{255}.
+
+You can use a compiled subroutine instead of the macro definition by
+undefining this macro using `@code{#undef toupper}'.
+
+@code{_toupper} performs the same conversion as @code{toupper}, but should
+only be used when @var{c} is known to be a lowercase character (@code{a}--@code{z}).
+
+@*
+@strong{Returns}@*
+@code{toupper} returns the uppercase equivalent of @var{c} when it is a
+character between @code{a} and @code{z}, and @var{c} otherwise.
+
+@code{_toupper} returns the uppercase equivalent of @var{c} when it is a
+character between @code{a} and @code{z}.  If @var{c} is not one of these
+characters, the behaviour of @code{_toupper} is undefined.
+
+@*
+@strong{Portability}@*
+@code{toupper} is ANSI C.  @code{_toupper} is not recommended for portable programs.
+
+No supporting OS subroutines are required.
+
+@*

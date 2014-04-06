@@ -1,0 +1,25 @@
+@node towupper
+@section @code{towupper}---translate wide characters to uppercase
+@findex towupper
+@strong{Synopsis}
+@example
+#include <wctype.h>
+wint_t towupper(wint_t @var{c});
+
+@end example
+@strong{Description}@*
+@code{towupper} is a function which converts lowercase wide characters to
+uppercase, leaving all other characters unchanged.
+
+@*
+@strong{Returns}@*
+@code{towupper} returns the uppercase equivalent of @var{c} when it is a
+lowercase wide character, otherwise, it returns the input character.
+
+@*
+@strong{Portability}@*
+@code{towupper} is C99.
+
+No supporting OS subroutines are required.
+
+@*

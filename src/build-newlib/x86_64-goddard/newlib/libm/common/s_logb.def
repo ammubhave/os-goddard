@@ -1,0 +1,54 @@
+@node logb
+@section @code{logb}, @code{logbf}--get exponent of floating-point number
+@findex logb
+@findex logbf
+@strong{Synopsis}
+@example
+#include <math.h>
+double logb(double @var{x});
+float logbf(float @var{x});
+
+@end example
+@strong{Description}@*
+The @code{logb} functions extract the exponent of @var{x}, as a signed integer value
+in floating-point format.  If @var{x} is subnormal it is treated as though it were
+normalized; thus, for positive finite @var{x},
+@ifnottex
+1 <= (@var{x} * FLT_RADIX to the power (-logb(@var{x}))) < FLT_RADIX.
+@end ifnottex
+@tex
+$1 \leq ( x \cdot FLT\_RADIX ^ {-logb(x)} ) < FLT\_RADIX$.
+@end tex
+A domain error may occur if the argument is zero.
+In this floating-point implementation, FLT_RADIX is 2.  Which also means
+that for finite @var{x}, @code{logb}(@var{x}) = @code{floor}(@code{log2}(@code{fabs}(@var{x}))).
+
+All nonzero, normal numbers can be described as
+@ifnottex
+@var{m} * 2**@var{p}, where 1.0 <= @var{m} < 2.0.
+@end ifnottex
+@tex
+$m \cdot 2^p$, where $1.0 \leq m < 2.0$.
+@end tex
+The @code{logb} functions examine the argument @var{x}, and return @var{p}.
+The @code{frexp} functions are similar to the @code{logb} functions, but
+returning @var{m} adjusted to the interval [.5, 1) or 0, and @var{p}+1.
+
+@*
+@strong{Returns}@*
+@comment Formatting note:  "$@" forces a new line
+When @var{x} is:@*
++inf or -inf, +inf is returned;@*
+NaN, NaN is returned;@*
+0, -inf is returned, and the divide-by-zero exception is raised;@*
+otherwise, the @code{logb} functions return the signed exponent of @var{x}.
+
+@*
+@strong{Portability}@*
+ANSI C, POSIX
+
+@*
+@strong{See Also}@*
+frexp, ilogb
+
+@*

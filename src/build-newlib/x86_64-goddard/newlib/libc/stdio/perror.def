@@ -1,0 +1,36 @@
+@node perror
+@section @code{perror}---print an error message on standard error
+@findex perror
+@findex _perror_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+void perror(char *@var{prefix});
+
+void _perror_r(struct _reent *@var{reent}, char *@var{prefix});
+
+@end example
+@strong{Description}@*
+Use @code{perror} to print (on standard error) an error message
+corresponding to the current value of the global variable @code{errno}.
+Unless you use @code{NULL} as the value of the argument @var{prefix}, the
+error message will begin with the string at @var{prefix}, followed by a
+colon and a space (@code{: }). The remainder of the error message is one
+of the strings described for @code{strerror}.
+
+The alternate function @code{_perror_r} is a reentrant version.  The
+extra argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+@code{perror} returns no result.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{perror}, but the strings issued vary from one
+implementation to another.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

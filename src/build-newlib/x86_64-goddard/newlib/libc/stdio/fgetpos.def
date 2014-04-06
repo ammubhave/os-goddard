@@ -1,0 +1,44 @@
+@node fgetpos
+@section @code{fgetpos}---record position in a stream or file
+@findex fgetpos
+@findex _fgetpos_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fgetpos(FILE *restrict @var{fp}, fpos_t *restrict @var{pos});
+int _fgetpos_r(struct _reent *@var{ptr}, FILE *restrict @var{fp}, fpos_t *restrict @var{pos});
+
+@end example
+@strong{Description}@*
+Objects of type @code{FILE} can have a ``position'' that records how much
+of the file your program has already read.  Many of the @code{stdio} functions
+depend on this position, and many change it as a side effect.
+
+You can use @code{fgetpos} to report on the current position for a file
+identified by @var{fp}; @code{fgetpos} will write a value
+representing that position at @code{*@var{pos}}.  Later, you can
+use this value with @code{fsetpos} to return the file to this
+position.
+
+In the current implementation, @code{fgetpos} simply uses a character
+count to represent the file position; this is the same number that
+would be returned by @code{ftell}.
+
+@*
+@strong{Returns}@*
+@code{fgetpos} returns @code{0} when successful.  If @code{fgetpos} fails, the
+result is @code{1}.  Failure occurs on streams that do not support
+positioning; the global @code{errno} indicates this condition with the
+value @code{ESPIPE}.
+
+@*
+@strong{Portability}@*
+@code{fgetpos} is required by the ANSI C standard, but the meaning of the
+value it records is not specified beyond requiring that it be
+acceptable as an argument to @code{fsetpos}.  In particular, other
+conforming C implementations may return a different result from
+@code{ftell} than what @code{fgetpos} writes at @code{*@var{pos}}.
+
+No supporting OS subroutines are required.
+
+@*

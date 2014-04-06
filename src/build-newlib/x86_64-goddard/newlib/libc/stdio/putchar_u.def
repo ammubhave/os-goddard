@@ -1,0 +1,31 @@
+@node putchar_unlocked
+@section @code{putchar_unlocked}---non-thread-safe version of putchar (macro)
+@findex putchar_unlocked
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int putchar_unlocked(int @var{ch});
+
+@end example
+@strong{Description}@*
+@code{putchar_unlocked} is a non-thread-safe version of @code{putchar}
+declared in @code{stdio.h}.  @code{putchar_unlocked} may only safely be used
+within a scope protected by flockfile() (or ftrylockfile()) and
+funlockfile().  These functions may safely be used in a multi-threaded
+program if and only if they are called while the invoking thread owns
+the ( FILE *) object, as is the case after a successful call to the
+flockfile() or ftrylockfile() functions.  If threads are disabled,
+then @code{putchar_unlocked} is equivalent to @code{putchar}.
+
+@*
+@strong{Returns}@*
+See @code{putchar}.
+
+@*
+@strong{Portability}@*
+POSIX 1003.1 requires @code{putchar_unlocked}.  @code{putchar_unlocked} may
+be implemented as a macro.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.  
+@*

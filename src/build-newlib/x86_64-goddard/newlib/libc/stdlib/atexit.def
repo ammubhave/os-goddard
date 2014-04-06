@@ -1,0 +1,40 @@
+@node atexit
+@section @code{atexit}---request execution of functions at program exit
+@findex atexit
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+int atexit (void (*@var{function})(void));
+
+@end example
+@strong{Description}@*
+You can use @code{atexit} to enroll functions in a list of functions that
+will be called when your program terminates normally.  The argument is
+a pointer to a user-defined function (which must not require arguments and
+must not return a result).
+
+The functions are kept in a LIFO stack; that is, the last function
+enrolled by @code{atexit} will be the first to execute when your program
+exits.
+
+There is no built-in limit to the number of functions you can enroll
+in this list; however, after every group of 32 functions is enrolled,
+@code{atexit} will call @code{malloc} to get space for the next part of the
+list.   The initial list of 32 functions is statically allocated, so
+you can always count on at least that many slots available.
+
+@*
+@strong{Returns}@*
+@code{atexit} returns @code{0} if it succeeds in enrolling your function,
+@code{-1} if it fails (possible only if no space was available for
+@code{malloc} to extend the list of functions).
+
+@*
+@strong{Portability}@*
+@code{atexit} is required by the ANSI standard, which also specifies that
+implementations must support enrolling at least 32 functions.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

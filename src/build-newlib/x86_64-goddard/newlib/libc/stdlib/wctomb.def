@@ -1,0 +1,40 @@
+@node wctomb
+@section @code{wctomb}---minimal wide char to multibyte converter
+@findex wctomb
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+int wctomb(char *@var{s}, wchar_t @var{wchar});
+
+@end example
+@strong{Description}@*
+When _MB_CAPABLE is not defined, this is a minimal ANSI-conforming 
+implementation of @code{wctomb}.  The
+only ``wide characters'' recognized are single bytes,
+and they are ``converted'' to themselves.  
+
+When _MB_CAPABLE is defined, this routine calls @code{_wctomb_r} to perform
+the conversion, passing a state variable to allow state dependent
+decoding.  The result is based on the locale setting which may
+be restricted to a defined set of locales.
+
+Each call to @code{wctomb} modifies @code{*@var{s}} unless @var{s} is a null
+pointer or _MB_CAPABLE is defined and @var{wchar} is invalid.
+
+@*
+@strong{Returns}@*
+This implementation of @code{wctomb} returns @code{0} if
+@var{s} is @code{NULL}; it returns @code{-1} if _MB_CAPABLE is enabled
+and the wchar is not a valid multi-byte character, it returns @code{1}
+if _MB_CAPABLE is not defined or the wchar is in reality a single
+byte character, otherwise it returns the number of bytes in the
+multi-byte character.
+
+@*
+@strong{Portability}@*
+@code{wctomb} is required in the ANSI C standard.  However, the precise
+effects vary with the locale.
+
+@code{wctomb} requires no supporting OS subroutines.
+
+@*

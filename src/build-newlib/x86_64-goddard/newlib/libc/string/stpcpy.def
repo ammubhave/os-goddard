@@ -1,0 +1,26 @@
+@node stpcpy
+@section @code{stpcpy}---copy string returning a pointer to its end
+@findex stpcpy
+@strong{Synopsis}
+@example
+#include <string.h>
+char *stpcpy(char *restrict @var{dst}, const char *restrict @var{src});
+
+@end example
+@strong{Description}@*
+@code{stpcpy} copies the string pointed to by @var{src}
+(including the terminating null character) to the array
+pointed to by @var{dst}.
+
+@*
+@strong{Returns}@*
+This function returns a pointer to the end of the destination string,
+thus pointing to the trailing '\0'.
+
+@*
+@strong{Portability}@*
+@code{stpcpy} is a GNU extension, candidate for inclusion into POSIX/SUSv4.
+
+@code{stpcpy} requires no supporting OS subroutines.
+
+@*

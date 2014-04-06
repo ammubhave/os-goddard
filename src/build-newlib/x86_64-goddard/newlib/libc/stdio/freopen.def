@@ -1,0 +1,43 @@
+@node freopen
+@section @code{freopen}---open a file using an existing file descriptor
+@findex freopen
+@findex _freopen_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+FILE *freopen(const char *restrict @var{file}, const char *restrict @var{mode},
+    FILE *restrict @var{fp});
+FILE *_freopen_r(struct _reent *@var{ptr}, const char *restrict @var{file},
+    const char *restrict @var{mode}, FILE *restrict @var{fp});
+
+@end example
+@strong{Description}@*
+Use this variant of @code{fopen} if you wish to specify a particular file
+descriptor @var{fp} (notably @code{stdin}, @code{stdout}, or @code{stderr}) for
+the file.
+
+If @var{fp} was associated with another file or stream, @code{freopen}
+closes that other file or stream (but ignores any errors while closing
+it).
+
+@var{file} and @var{mode} are used just as in @code{fopen}.
+
+If @var{file} is @code{NULL}, the underlying stream is modified rather than
+closed.  The file cannot be given a more permissive access mode (for
+example, a @var{mode} of "w" will fail on a read-only file descriptor),
+but can change status such as append or binary mode.  If modification
+is not possible, failure occurs.
+
+@*
+@strong{Returns}@*
+If successful, the result is the same as the argument @var{fp}.  If the
+file cannot be opened as specified, the result is @code{NULL}.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{freopen}.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{open}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

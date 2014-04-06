@@ -1,0 +1,30 @@
+@node ctime
+@section @code{ctime}---convert time to local and format as string
+@findex ctime
+@findex ctime_r
+@strong{Synopsis}
+@example
+#include <time.h>
+char *ctime(const time_t *@var{clock});
+char *ctime_r(const time_t *@var{clock}, char *@var{buf});
+
+@end example
+@strong{Description}@*
+Convert the time value at @var{clock} to local time (like @code{localtime})
+and format it into a string of the form
+@smallexample
+ Wed Jun 15 11:38:07 1988\n\0
+@end smallexample
+(like @code{asctime}).
+
+@*
+@strong{Returns}@*
+A pointer to the string containing a formatted timestamp.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{ctime}.
+
+@code{ctime} requires no supporting OS subroutines.
+
+@*

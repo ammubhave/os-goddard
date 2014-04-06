@@ -1,0 +1,32 @@
+@node setlinebuf
+@section @code{setlinebuf}---specify line buffering for a file or stream
+@findex setlinebuf
+@strong{Synopsis}
+@example
+#include <stdio.h>
+void setlinebuf(FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{setlinebuf} specifies that output to the file or stream identified by
+@var{fp} should be line buffered.  This causes the file or stream to pass
+on output to the host system at every newline, as well as when the
+buffer is full, or when an input operation intervenes.
+
+@*
+@strong{Warnings}@*
+You may only use @code{setlinebuf} before performing any file operation
+other than opening the file.
+
+@*
+@strong{Returns}@*
+@code{setlinebuf} returns as per setvbuf.
+
+@*
+@strong{Portability}@*
+This function comes from BSD not ANSI or POSIX.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

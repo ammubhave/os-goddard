@@ -1,0 +1,18 @@
+@node swab
+@section @code{swab}---swap adjacent bytes
+@strong{Synopsis}
+@example
+#include <unistd.h>
+void swab(const void *@var{in}, void *@var{out}, ssize_t @var{n});
+
+@end example
+@strong{Description}@*
+This function copies @var{n} bytes from the memory region
+pointed to by @var{in} to the memory region pointed to by
+@var{out}, exchanging adjacent even and odd bytes.
+
+@*
+@strong{Portability}@*
+@code{swab} requires no supporting OS subroutines.
+
+@*

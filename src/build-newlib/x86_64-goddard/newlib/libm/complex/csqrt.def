@@ -1,0 +1,28 @@
+@node csqrt
+@section @code{csqrt}, @code{csqrtf}---complex square root
+@findex csqrt
+@findex csqrtf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex csqrt(double complex @var{z});
+float complex csqrtf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex square root of @var{z}, with 
+a branch cut along the negative real axis. 
+
+@code{csqrtf} is identical to @code{csqrt}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+The csqrt functions return the complex square root value, in 
+the range of the right halfplane (including the imaginary axis).
+
+@*
+@strong{Portability}@*
+@code{csqrt} and @code{csqrtf} are ISO C99
+
+@*

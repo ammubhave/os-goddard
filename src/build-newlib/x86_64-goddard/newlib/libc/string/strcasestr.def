@@ -1,0 +1,29 @@
+@node strcasestr
+@section @code{strcasestr}---case-insensitive character string search
+@findex strcasestr
+@strong{Synopsis}
+@example
+#include <string.h>
+char *strcasestr(const char *@var{s}, const char *@var{find});
+
+@end example
+@strong{Description}@*
+@code{strcasestr} searchs the string @var{s} for
+the first occurrence of the sequence @var{find}.  @code{strcasestr}
+is identical to @code{strstr} except the search is
+case-insensitive.
+
+@*
+@strong{Returns}@*
+
+A pointer to the first case-insensitive occurrence of the sequence
+@var{find} or @code{NULL} if no match was found.
+
+@*
+@strong{Portability}@*
+@code{strcasestr} is in the Berkeley Software Distribution.
+
+@code{strcasestr} requires no supporting OS subroutines. It uses
+tolower() from elsewhere in this library.
+
+@*

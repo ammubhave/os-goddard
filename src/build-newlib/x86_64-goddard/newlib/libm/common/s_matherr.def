@@ -1,0 +1,96 @@
+@node matherr
+@section @code{matherr}---modifiable math error handler
+@findex matherr
+@strong{Synopsis}
+@example
+#include <math.h>
+int matherr(struct exception *@var{e});
+
+@end example
+@strong{Description}@*
+@code{matherr} is called whenever a math library function generates an error.
+You can replace @code{matherr} by your own subroutine to customize
+error treatment.  The customized @code{matherr} must return 0 if
+it fails to resolve the error, and non-zero if the error is resolved.
+
+When @code{matherr} returns a nonzero value, no error message is printed
+and the value of @code{errno} is not modified.  You can accomplish either
+or both of these things in your own @code{matherr} using the information
+passed in the structure @code{*@var{e}}.
+
+This is the @code{exception} structure (defined in `@code{math.h}'):
+@smallexample
+	struct exception @{
+	        int type;
+	        char *name;
+	        double arg1, arg2, retval;
+		int err;
+	@};
+@end smallexample
+
+The members of the exception structure have the following meanings:
+@table @code
+
+@item type
+The type of mathematical error that occured; macros encoding error
+types are also defined in `@code{math.h}'.
+
+@item name
+a pointer to a null-terminated string holding the
+name of the math library function where the error occurred.
+
+@item arg1, arg2
+The arguments which caused the error.
+
+@item retval
+The error return value (what the calling function will return).
+
+@item err
+If set to be non-zero, this is the new value assigned to @code{errno}.
+@end table
+
+
+The error types defined in `@code{math.h}' represent possible mathematical
+errors as follows:
+
+@table @code
+
+@item DOMAIN
+An argument was not in the domain of the function; e.g. @code{log(-1.0)}.
+
+@item SING
+The requested calculation would result in a singularity; e.g. @code{pow(0.0,-2.0)}
+
+@item OVERFLOW
+A calculation would produce a result too large to represent; e.g.
+@code{exp(1000.0)}. 
+
+@item UNDERFLOW
+A calculation would produce a result too small to represent; e.g.
+@code{exp(-1000.0)}. 
+
+@item TLOSS
+Total loss of precision.  The result would have no significant digits;
+e.g. @code{sin(10e70)}. 
+
+@item PLOSS
+Partial loss of precision.
+@end table
+
+
+@*
+@strong{Returns}@*
+The library definition for @code{matherr} returns @code{0} in all cases.
+
+You can change the calling function's result from a customized @code{matherr}
+by modifying @code{e->retval}, which propagates backs to the caller.
+
+If @code{matherr} returns @code{0} (indicating that it was not able to resolve
+the error) the caller sets @code{errno} to an appropriate value, and prints
+an error message.
+
+@*
+@strong{Portability}@*
+@code{matherr} is not ANSI C.  
+
+@*

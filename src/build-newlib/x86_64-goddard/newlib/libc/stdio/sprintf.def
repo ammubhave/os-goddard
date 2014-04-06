@@ -1,0 +1,553 @@
+@node sprintf
+@section @code{sprintf}, @code{fprintf}, @code{printf}, @code{snprintf}, @code{asprintf}, @code{asnprintf}---format output
+@findex fprintf
+@findex _fprintf_r
+@findex printf
+@findex _printf_r
+@findex asprintf
+@findex _asprintf_r
+@findex sprintf
+@findex _sprintf_r
+@findex snprintf
+@findex _snprintf_r
+@findex asnprintf
+@findex _asnprintf_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+
+int printf(const char *restrict @var{format}, ...);
+int fprintf(FILE *restrict @var{fd}, const char *restrict @var{format}, ...);
+int sprintf(char *restrict @var{str}, const char *restrict @var{format}, ...);
+int snprintf(char *restrict @var{str}, size_t @var{size}, const char *restrict @var{format},
+    ...);
+int asprintf(char **restrict @var{strp}, const char *restrict @var{format}, ...);
+char *asnprintf(char *restrict @var{str}, size_t *restrict @var{size}, const char *restrict @var{format},
+    ...);
+
+int _printf_r(struct _reent *@var{ptr}, const char *restrict @var{format}, ...);
+int _fprintf_r(struct _reent *@var{ptr}, FILE *restrict @var{fd},
+    const char *restrict @var{format}, ...);
+int _sprintf_r(struct _reent *@var{ptr}, char *restrict @var{str},
+    const char *restrict @var{format}, ...);
+int _snprintf_r(struct _reent *@var{ptr}, char *restrict @var{str}, size_t @var{size},
+    const char *restrict @var{format}, ...);
+int _asprintf_r(struct _reent *@var{ptr}, char **restrict @var{strp},
+    const char *restrict @var{format}, ...);
+char *_asnprintf_r(struct _reent *@var{ptr}, char *restrict @var{str},
+    size_t *restrict @var{size}, const char *restrict @var{format}, ...);
+
+@end example
+@strong{Description}@*
+@code{printf} accepts a series of arguments, applies to each a
+format specifier from @code{*@var{format}}, and writes the
+formatted data to @code{stdout}, without a terminating NUL
+character.  The behavior of @code{printf} is undefined if there
+are not enough arguments for the format.  @code{printf} returns
+when it reaches the end of the format string.  If there are
+more arguments than the format requires, excess arguments are
+ignored.
+
+@code{fprintf} is like @code{printf}, except that output is directed
+to the stream @var{fd} rather than @code{stdout}.
+
+@code{sprintf} is like @code{printf}, except that output is directed
+to the buffer @var{str}, and a terminating NUL is output.
+Behavior is undefined if more output is generated than the
+buffer can hold.
+
+@code{snprintf} is like @code{sprintf}, except that output is
+limited to at most @var{size} bytes, including the terminating
+@code{NUL}.  As a special case, if @var{size} is 0, @var{str} can be
+NULL, and @code{snprintf} merely calculates how many bytes would
+be printed.
+
+@code{asprintf} is like @code{sprintf}, except that the output is
+stored in a dynamically allocated buffer, @var{pstr}, which
+should be freed later with @code{free}.
+
+@code{asnprintf} is like @code{sprintf}, except that the return type
+is either the original @var{str} if it was large enough, or a
+dynamically allocated string if the output exceeds *@var{size};
+the length of the result is returned in *@var{size}.  When
+dynamic allocation occurs, the contents of the original
+@var{str} may have been modified.
+
+For @code{sprintf}, @code{snprintf}, and @code{asnprintf}, the behavior
+is undefined if the output @code{*@var{str}} overlaps with one of
+the arguments.  Behavior is also undefined if the argument for
+@code{%n} within @code{*@var{format}} overlaps another argument.
+
+@var{format} is a pointer to a character string containing two
+types of objects: ordinary characters (other than @code{%}),
+which are copied unchanged to the output, and conversion
+specifications, each of which is introduced by @code{%}. (To
+include @code{%} in the output, use @code{%%} in the format string.)
+A conversion specification has the following form:
+
+@smallexample
+       %[@var{pos}][@var{flags}][@var{width}][.@var{prec}][@var{size}]@var{type}
+@end smallexample
+
+The fields of the conversion specification have the following
+meanings:
+
+@itemize @bullet
+
+@item @var{pos}
+
+Conversions normally consume arguments in the order that they
+are presented.  However, it is possible to consume arguments
+out of order, and reuse an argument for more than one
+conversion specification (although the behavior is undefined
+if the same argument is requested with different types), by
+specifying @var{pos}, which is a decimal integer followed by
+'$'.  The integer must be between 1 and <NL_ARGMAX> from
+limits.h, and if argument @code{%n$} is requested, all earlier
+arguments must be requested somewhere within @var{format}.  If
+positional parameters are used, then all conversion
+specifications except for @code{%%} must specify a position.
+This positional parameters method is a POSIX extension to the C
+standard definition for the functions.
+
+@item @var{flags}
+
+@var{flags} is an optional sequence of characters which control
+output justification, numeric signs, decimal points, trailing
+zeros, and octal and hex prefixes.  The flag characters are
+minus (@code{-}), plus (@code{+}), space ( ), zero (@code{0}), sharp
+(@code{#}), and quote (@code{'}).  They can appear in any
+combination, although not all flags can be used for all
+conversion specification types.
+
+@table @code
+
+@item '
+A POSIX extension to the C standard.  However, this
+implementation presently treats it as a no-op, which
+is the default behavior for the C locale, anyway.  (If
+it did what it is supposed to, when @var{type} were @code{i},
+@code{d}, @code{u}, @code{f}, @code{F}, @code{g}, or @code{G}, the
+integer portion of the conversion would be formatted
+with thousands' grouping wide characters.)
+
+@item -
+The result of the conversion is left
+justified, and the right is padded with
+blanks.  If you do not use this flag, the
+result is right justified, and padded on the
+left.
+
+@item +
+The result of a signed conversion (as
+determined by @var{type} of @code{d}, @code{i}, @code{a},
+@code{A}, @code{e}, @code{E}, @code{f}, @code{F}, @code{g}, or
+@code{G}) will always begin with a plus or minus
+sign.  (If you do not use this flag, positive
+values do not begin with a plus sign.)
+
+@item " " (space)
+If the first character of a signed conversion
+specification is not a sign, or if a signed
+conversion results in no characters, the
+result will begin with a space.  If the space
+( ) flag and the plus (@code{+}) flag both
+appear, the space flag is ignored.
+
+@item 0
+If the @var{type} character is @code{d}, @code{i},
+@code{o}, @code{u}, @code{x}, @code{X}, @code{a}, @code{A},
+@code{e}, @code{E}, @code{f}, @code{F}, @code{g}, or @code{G}:  leading
+zeros are used to pad the field width
+(following any indication of sign or base); no
+spaces are used for padding.  If the zero
+(@code{0}) and minus (@code{-}) flags both appear,
+the zero (@code{0}) flag will be ignored.  For
+@code{d}, @code{i}, @code{o}, @code{u}, @code{x}, and @code{X}
+conversions, if a precision @var{prec} is
+specified, the zero (@code{0}) flag is ignored.
+
+Note that @code{0} is interpreted as a flag, not
+as the beginning of a field width.
+
+@item #
+The result is to be converted to an
+alternative form, according to the @var{type}
+character:
+
+@table @code
+
+@item o
+Increases precision to force the first
+digit of the result to be a zero.
+
+@item x
+A non-zero result will have a @code{0x}
+prefix.
+
+@item X
+A non-zero result will have a @code{0X}
+prefix.
+
+@item a, A, e, E, f, or F
+The result will always contain a
+decimal point even if no digits follow
+the point.  (Normally, a decimal point
+appears only if a digit follows it.)
+Trailing zeros are removed.
+
+@item g or G
+The result will always contain a
+decimal point even if no digits follow
+the point.  Trailing zeros are not
+removed.
+
+@item all others
+Undefined.
+
+@end table
+
+@end table
+
+
+@item @var{width}
+
+@var{width} is an optional minimum field width.  You can
+either specify it directly as a decimal integer, or
+indirectly by using instead an asterisk (@code{*}), in
+which case an @code{int} argument is used as the field
+width.  If positional arguments are used, then the
+width must also be specified positionally as @code{*m$},
+with m as a decimal integer.  Negative field widths
+are treated as specifying the minus (@code{-}) flag for
+left justfication, along with a positive field width.
+The resulting format may be wider than the specified
+width.
+
+@item @var{prec}
+
+@var{prec} is an optional field; if present, it is
+introduced with `@code{.}' (a period). You can specify
+the precision either directly as a decimal integer or
+indirectly by using an asterisk (@code{*}), in which case
+an @code{int} argument is used as the precision.  If
+positional arguments are used, then the precision must
+also be specified positionally as @code{*m$}, with m as a
+decimal integer.  Supplying a negative precision is
+equivalent to omitting the precision.  If only a
+period is specified the precision is zero. The effect
+depends on the conversion @var{type}.
+
+@table @code
+
+@item d, i, o, u, x, or X
+Minimum number of digits to appear.  If no
+precision is given, defaults to 1.
+
+@item a or A
+Number of digits to appear after the decimal
+point.  If no precision is given, the
+precision defaults to the minimum needed for
+an exact representation.
+
+@item e, E, f or F
+Number of digits to appear after the decimal
+point.  If no precision is given, the
+precision defaults to 6.
+
+@item g or G
+Maximum number of significant digits.  A
+precision of 0 is treated the same as a
+precision of 1.  If no precision is given, the
+precision defaults to 6.
+
+@item s or S
+Maximum number of characters to print from the
+string.  If no precision is given, the entire
+string is printed.
+
+@item all others
+undefined.
+
+@end table
+
+
+@item @var{size}
+
+@var{size} is an optional modifier that changes the data
+type that the corresponding argument has.  Behavior is
+unspecified if a size is given that does not match the
+@var{type}.
+
+@table @code
+
+@item hh
+With @code{d}, @code{i}, @code{o}, @code{u}, @code{x}, or
+@code{X}, specifies that the argument should be
+converted to a @code{signed char} or @code{unsigned
+char} before printing.
+
+With @code{n}, specifies that the argument is a
+pointer to a @code{signed char}.
+
+@item h
+With @code{d}, @code{i}, @code{o}, @code{u}, @code{x}, or
+@code{X}, specifies that the argument should be
+converted to a @code{short} or @code{unsigned short}
+before printing.
+
+With @code{n}, specifies that the argument is a
+pointer to a @code{short}.
+
+@item l
+With @code{d}, @code{i}, @code{o}, @code{u}, @code{x}, or
+@code{X}, specifies that the argument is a
+@code{long} or @code{unsigned long}.
+
+With @code{c}, specifies that the argument has
+type @code{wint_t}.
+
+With @code{s}, specifies that the argument is a
+pointer to @code{wchar_t}.
+
+With @code{n}, specifies that the argument is a
+pointer to a @code{long}.
+
+With @code{a}, @code{A}, @code{e}, @code{E}, @code{f}, @code{F},
+@code{g}, or @code{G}, has no effect (because of
+vararg promotion rules, there is no need to
+distinguish between @code{float} and @code{double}).
+
+@item ll
+With @code{d}, @code{i}, @code{o}, @code{u}, @code{x}, or
+@code{X}, specifies that the argument is a
+@code{long long} or @code{unsigned long long}.
+
+With @code{n}, specifies that the argument is a
+pointer to a @code{long long}.
+
+@item j
+With @code{d}, @code{i}, @code{o}, @code{u}, @code{x}, or
+@code{X}, specifies that the argument is an
+@code{intmax_t} or @code{uintmax_t}.
+
+With @code{n}, specifies that the argument is a
+pointer to an @code{intmax_t}.
+
+@item z
+With @code{d}, @code{i}, @code{o}, @code{u}, @code{x}, or
+@code{X}, specifies that the argument is a @code{size_t}.
+
+With @code{n}, specifies that the argument is a
+pointer to a @code{size_t}.
+
+@item t
+With @code{d}, @code{i}, @code{o}, @code{u}, @code{x}, or
+@code{X}, specifies that the argument is a
+@code{ptrdiff_t}.
+
+With @code{n}, specifies that the argument is a
+pointer to a @code{ptrdiff_t}.
+
+@item L
+With @code{a}, @code{A}, @code{e}, @code{E}, @code{f}, @code{F},
+@code{g}, or @code{G}, specifies that the argument
+is a @code{long double}.
+
+@end table
+
+
+@item   @var{type}
+
+@var{type} specifies what kind of conversion @code{printf}
+performs.  Here is a table of these:
+
+@table @code
+
+@item %
+Prints the percent character (@code{%}).
+
+@item c
+Prints @var{arg} as single character.  If the
+@code{l} size specifier is in effect, a multibyte
+character is printed.
+
+@item C
+Short for @code{%lc}.  A POSIX extension to the C standard.
+
+@item s
+Prints the elements of a pointer to @code{char}
+until the precision or a null character is
+reached.  If the @code{l} size specifier is in
+effect, the pointer is to an array of
+@code{wchar_t}, and the string is converted to
+multibyte characters before printing.
+
+@item S
+Short for @code{%ls}.  A POSIX extension to the C standard.
+
+@item d or i
+Prints a signed decimal integer; takes an
+@code{int}.  Leading zeros are inserted as
+necessary to reach the precision.  A value of 0 with
+a precision of 0 produces an empty string.
+
+@item D
+Newlib extension, short for @code{%ld}.
+
+@item o
+Prints an unsigned octal integer; takes an
+@code{unsigned}.  Leading zeros are inserted as
+necessary to reach the precision.  A value of 0 with
+a precision of 0 produces an empty string.
+
+@item O
+Newlib extension, short for @code{%lo}.
+
+@item u
+Prints an unsigned decimal integer; takes an
+@code{unsigned}.  Leading zeros are inserted as
+necessary to reach the precision.  A value of 0 with
+a precision of 0 produces an empty string.
+
+@item U
+Newlib extension, short for @code{%lu}.
+
+@item x
+Prints an unsigned hexadecimal integer (using
+@code{abcdef} as digits beyond @code{9}); takes an
+@code{unsigned}.  Leading zeros are inserted as
+necessary to reach the precision.  A value of 0 with
+a precision of 0 produces an empty string.
+
+@item X
+Like @code{x}, but uses @code{ABCDEF} as digits
+beyond @code{9}.
+
+@item f
+Prints a signed value of the form
+@code{[-]9999.9999}, with the precision
+determining how many digits follow the decimal
+point; takes a @code{double} (remember that
+@code{float} promotes to @code{double} as a vararg).
+The low order digit is rounded to even.  If
+the precision results in at most DECIMAL_DIG
+digits, the result is rounded correctly; if
+more than DECIMAL_DIG digits are printed, the
+result is only guaranteed to round back to the
+original value.
+
+If the value is infinite, the result is
+@code{inf}, and no zero padding is performed.  If
+the value is not a number, the result is
+@code{nan}, and no zero padding is performed.
+
+@item F
+Like @code{f}, but uses @code{INF} and @code{NAN} for
+non-finite numbers.
+
+@item e
+Prints a signed value of the form
+@code{[-]9.9999e[+|-]999}; takes a @code{double}.
+The digit before the decimal point is non-zero
+if the value is non-zero.  The precision
+determines how many digits appear between
+@code{.} and @code{e}, and the exponent always
+contains at least two digits.  The value zero
+has an exponent of zero.  If the value is not
+finite, it is printed like @code{f}.
+
+@item E
+Like @code{e}, but using @code{E} to introduce the
+exponent, and like @code{F} for non-finite
+values.
+
+@item g
+Prints a signed value in either @code{f} or @code{e}
+form, based on the given value and
+precision---an exponent less than -4 or
+greater than the precision selects the @code{e}
+form.  Trailing zeros and the decimal point
+are printed only if necessary; takes a
+@code{double}.
+
+@item G
+Like @code{g}, except use @code{F} or @code{E} form.
+
+@item a
+Prints a signed value of the form
+@code{[-]0x1.ffffp[+|-]9}; takes a @code{double}.
+The letters @code{abcdef} are used for digits
+beyond @code{9}.  The precision determines how
+many digits appear after the decimal point.
+The exponent contains at least one digit, and
+is a decimal value representing the power of
+2; a value of 0 has an exponent of 0.
+Non-finite values are printed like @code{f}.
+
+@item A
+Like @code{a}, except uses @code{X}, @code{P}, and
+@code{ABCDEF} instead of lower case.
+
+@item n
+Takes a pointer to @code{int}, and stores a count
+of the number of bytes written so far.  No
+output is created.
+
+@item p
+Takes a pointer to @code{void}, and prints it in
+an implementation-defined format.  This
+implementation is similar to @code{%#tx}), except
+that @code{0x} appears even for the NULL pointer.
+
+@item m
+Prints the output of @code{strerror(errno)}; no
+argument is required.  A GNU extension.
+
+@end table
+
+@end itemize
+
+
+@code{_printf_r}, @code{_fprintf_r}, @code{_asprintf_r},
+@code{_sprintf_r}, @code{_snprintf_r}, @code{_asnprintf_r} are simply
+reentrant versions of the functions above.
+
+@*
+@strong{Returns}@*
+On success, @code{sprintf} and @code{asprintf} return the number of bytes in
+the output string, except the concluding @code{NUL} is not counted.
+@code{snprintf} returns the number of bytes that would be in the output
+string, except the concluding @code{NUL} is not counted.  @code{printf} and
+@code{fprintf} return the number of characters transmitted.
+@code{asnprintf} returns the original @var{str} if there was enough room,
+otherwise it returns an allocated string.
+
+If an error occurs, the result of @code{printf}, @code{fprintf},
+@code{snprintf}, and @code{asprintf} is a negative value, and the result of
+@code{asnprintf} is NULL.  No error returns occur for @code{sprintf}.  For
+@code{printf} and @code{fprintf}, @code{errno} may be set according to
+@code{fputc}.  For @code{asprintf} and @code{asnprintf}, @code{errno} may be set
+to ENOMEM if allocation fails, and for @code{snprintf}, @code{errno} may be
+set to EOVERFLOW if @var{size} or the output length exceeds INT_MAX.
+
+@*
+@strong{Bugs}@*
+The ``''' (quote) flag does not work when locale's thousands_sep is not empty.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{printf}, @code{fprintf}, @code{sprintf}, and
+@code{snprintf}.  @code{asprintf} and @code{asnprintf} are newlib extensions.
+
+The ANSI C standard specifies that implementations must support at
+least formatted output of up to 509 characters.  This implementation
+has no inherent limit.
+
+Depending on how newlib was configured, not all format specifiers are
+supported.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

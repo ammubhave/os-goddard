@@ -1,0 +1,28 @@
+@node strncmp
+@section @code{strncmp}---character string compare
+@findex strncmp
+@strong{Synopsis}
+@example
+#include <string.h>
+int strncmp(const char *@var{a}, const char * @var{b}, size_t @var{length});
+
+@end example
+@strong{Description}@*
+@code{strncmp} compares up to @var{length} characters
+from the string at @var{a} to the string at @var{b}.
+
+@*
+@strong{Returns}@*
+If @code{*@var{a}} sorts lexicographically after @code{*@var{b}},
+@code{strncmp} returns a number greater than zero.  If the two
+strings are equivalent, @code{strncmp} returns zero.  If @code{*@var{a}}
+sorts lexicographically before @code{*@var{b}}, @code{strncmp} returns a
+number less than zero.
+
+@*
+@strong{Portability}@*
+@code{strncmp} is ANSI C.
+
+@code{strncmp} requires no supporting OS subroutines.
+
+@*

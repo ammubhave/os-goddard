@@ -1,0 +1,25 @@
+@node strcpy
+@section @code{strcpy}---copy string
+@findex strcpy
+@strong{Synopsis}
+@example
+#include <string.h>
+char *strcpy(char *@var{dst}, const char *@var{src});
+
+@end example
+@strong{Description}@*
+@code{strcpy} copies the string pointed to by @var{src}
+(including the terminating null character) to the array
+pointed to by @var{dst}.
+
+@*
+@strong{Returns}@*
+This function returns the initial value of @var{dst}.
+
+@*
+@strong{Portability}@*
+@code{strcpy} is ANSI C.
+
+@code{strcpy} requires no supporting OS subroutines.
+
+@*

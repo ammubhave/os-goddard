@@ -1,0 +1,32 @@
+@node fclose
+@section @code{fclose}---close a file
+@findex fclose
+@findex _fclose_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fclose(FILE *@var{fp});
+int _fclose_r(struct _reent *@var{reent}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+If the file or stream identified by @var{fp} is open, @code{fclose} closes
+it, after first ensuring that any pending data is written (by calling
+@code{fflush(@var{fp})}).
+
+The alternate function @code{_fclose_r} is a reentrant version.
+The extra argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+@code{fclose} returns @code{0} if successful (including when @var{fp} is
+@code{NULL} or not an open file); otherwise, it returns @code{EOF}.
+
+@*
+@strong{Portability}@*
+@code{fclose} is required by ANSI C.
+
+Required OS subroutines: @code{close}, @code{fstat}, @code{isatty}, @code{lseek},
+@code{read}, @code{sbrk}, @code{write}.
+
+@*

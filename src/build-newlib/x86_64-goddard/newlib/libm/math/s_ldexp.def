@@ -1,0 +1,35 @@
+@node ldexp
+@section @code{ldexp}, @code{ldexpf}---load exponent
+@findex ldexp
+@findex ldexpf
+@strong{Synopsis}
+@example
+#include <math.h>
+double ldexp(double @var{val}, int @var{exp});
+float ldexpf(float @var{val}, int @var{exp});
+
+@end example
+@strong{Description}@*
+@code{ldexp} calculates the value 
+@ifnottex
+@var{val} times 2 to the power @var{exp}.
+@end ifnottex
+@tex
+$val\times 2^{exp}$.
+@end tex
+@code{ldexpf} is identical, save that it takes and returns @code{float}
+rather than @code{double} values.
+
+@*
+@strong{Returns}@*
+@code{ldexp} returns the calculated value.
+
+Underflow and overflow both set @code{errno} to @code{ERANGE}.
+On underflow, @code{ldexp} and @code{ldexpf} return 0.0.
+On overflow, @code{ldexp} returns plus or minus @code{HUGE_VAL}.
+
+@*
+@strong{Portability}@*
+@code{ldexp} is ANSI. @code{ldexpf} is an extension.
+
+@*

@@ -1,0 +1,31 @@
+@node memccpy
+@section @code{memccpy}---copy memory regions with end-token check
+@strong{Synopsis}
+@example
+#include <string.h>
+void* memccpy(void *restrict @var{out}, const void *restrict @var{in}, 
+    int @var{endchar}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+This function copies up to @var{n} bytes from the memory region
+pointed to by @var{in} to the memory region pointed to by
+@var{out}.  If a byte matching the @var{endchar} is encountered,
+the byte is copied and copying stops.
+
+If the regions overlap, the behavior is undefined.
+
+@*
+@strong{Returns}@*
+@code{memccpy} returns a pointer to the first byte following the
+@var{endchar} in the @var{out} region.  If no byte matching
+@var{endchar} was copied, then @code{NULL} is returned.
+
+@*
+@strong{Portability}@*
+@code{memccpy} is a GNU extension.
+
+@code{memccpy} requires no supporting OS subroutines.
+
+
+@*

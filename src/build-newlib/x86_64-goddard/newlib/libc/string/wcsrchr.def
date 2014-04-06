@@ -1,0 +1,29 @@
+@node wcsrchr
+@section @code{wcsrchr}---wide-character string scanning operation 
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wchar_t *wcsrchr(const wchar_t *@var{s}, wchar_t @var{c});
+
+@end example
+@strong{Description}@*
+The @code{wcsrchr} function locates the last occurrence of @var{c} in the
+wide-character string pointed to by @var{s}. The value of @var{c} must be a
+character representable as a type wchar_t and must be a wide-character
+code corresponding to a valid character in the current locale.
+The terminating null wide-character code is considered to be part of
+the wide-character string. 
+
+@*
+@strong{Returns}@*
+Upon successful completion, @code{wcsrchr} returns a pointer to the
+wide-character code or a null pointer if @var{c} does not occur in the
+wide-character string.
+
+@*
+@strong{Portability}@*
+@code{wcsrchr} is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+No supporting OS subroutines are required.
+
+@*

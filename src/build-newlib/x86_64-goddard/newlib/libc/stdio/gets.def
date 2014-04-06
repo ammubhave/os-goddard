@@ -1,0 +1,39 @@
+@node gets
+@section @code{gets}---get character string (obsolete, use @code{fgets} instead)
+@findex gets
+@findex _gets_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+
+char *gets(char *@var{buf});
+
+char *_gets_r(struct _reent *@var{reent}, char *@var{buf});
+
+@end example
+@strong{Description}@*
+Reads characters from standard input until a newline is found.
+The characters up to the newline are stored in @var{buf}. The
+newline is discarded, and the buffer is terminated with a 0.
+
+This is a @emph{dangerous} function, as it has no way of checking
+the amount of space available in @var{buf}. One of the attacks
+used by the Internet Worm of 1988 used this to overrun a
+buffer allocated on the stack of the finger daemon and
+overwrite the return address, causing the daemon to execute
+code downloaded into it over the connection.
+
+The alternate function @code{_gets_r} is a reentrant version.  The extra
+argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+@code{gets} returns the buffer passed to it, with the data filled
+in. If end of file occurs with some data already accumulated,
+the data is returned with no other indication. If end of file
+occurs with no data in the buffer, NULL is returned.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

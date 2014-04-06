@@ -1,0 +1,24 @@
+cpuinfo.o: ../../../gcc-4.8.2/libgcc/config/i386/cpuinfo.c \
+ /home/ambhave/Code/os-goddard/src/build-gcc/gcc/include/cpuid.h \
+ ../../../gcc-4.8.2/libgcc/../gcc/tsystem.h \
+ /home/ambhave/Code/os-goddard/src/build-gcc/gcc/include/stddef.h \
+ /home/ambhave/Code/os-goddard/src/build-gcc/gcc/include/float.h \
+ ../../../gcc-4.8.2/libgcc/../include/filenames.h \
+ ../../../gcc-4.8.2/libgcc/../include/hashtab.h \
+ ../../../gcc-4.8.2/libgcc/../include/ansidecl.h auto-target.h
+
+/home/ambhave/Code/os-goddard/src/build-gcc/gcc/include/cpuid.h:
+
+../../../gcc-4.8.2/libgcc/../gcc/tsystem.h:
+
+/home/ambhave/Code/os-goddard/src/build-gcc/gcc/include/stddef.h:
+
+/home/ambhave/Code/os-goddard/src/build-gcc/gcc/include/float.h:
+
+../../../gcc-4.8.2/libgcc/../include/filenames.h:
+
+../../../gcc-4.8.2/libgcc/../include/hashtab.h:
+
+../../../gcc-4.8.2/libgcc/../include/ansidecl.h:
+
+auto-target.h:

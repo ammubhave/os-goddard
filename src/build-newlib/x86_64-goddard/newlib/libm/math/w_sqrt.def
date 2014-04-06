@@ -1,0 +1,27 @@
+@node sqrt
+@section @code{sqrt}, @code{sqrtf}---positive square root
+@findex sqrt
+@findex sqrtf
+@strong{Synopsis}
+@example
+#include <math.h>
+double sqrt(double @var{x});
+float  sqrtf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{sqrt} computes the positive square root of the argument.
+You can modify error handling for this function with
+@code{matherr}.
+
+@*
+@strong{Returns}@*
+On success, the square root is returned. If @var{x} is real and
+positive, then the result is positive.  If @var{x} is real and
+negative, the global value @code{errno} is set to @code{EDOM} (domain error).
+
+@*
+@strong{Portability}@*
+@code{sqrt} is ANSI C.  @code{sqrtf} is an extension.
+
+@*

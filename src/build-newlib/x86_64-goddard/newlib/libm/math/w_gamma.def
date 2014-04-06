@@ -1,0 +1,100 @@
+@node gamma
+@section @code{gamma}, @code{gammaf}, @code{lgamma}, @code{lgammaf}, @code{gamma_r}, @code{gammaf_r}, @code{lgamma_r}, @code{lgammaf_r}, @code{tgamma}, and @code{tgammaf}--logarithmic and plain gamma functions
+@findex gamma
+@findex gammaf
+@findex lgamma
+@findex lgammaf
+@findex gamma_r
+@findex gammaf_r
+@findex lgamma_r
+@findex lgammaf_r
+@findex tgamma
+@findex tgammaf
+@strong{Synopsis}
+@example
+#include <math.h>
+double gamma(double @var{x});
+float gammaf(float @var{x});
+double lgamma(double @var{x});
+float lgammaf(float @var{x});
+double gamma_r(double @var{x}, int *@var{signgamp});
+float gammaf_r(float @var{x}, int *@var{signgamp});
+double lgamma_r(double @var{x}, int *@var{signgamp});
+float lgammaf_r(float @var{x}, int *@var{signgamp});
+double tgamma(double @var{x});
+float tgammaf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{gamma} calculates
+@tex
+$\mit ln\bigl(\Gamma(x)\bigr)$,
+@end tex
+the natural logarithm of the gamma function of @var{x}.  The gamma function
+(@code{exp(gamma(@var{x}))}) is a generalization of factorial, and retains
+the property that
+@ifnottex
+@code{exp(gamma(N))} is equivalent to @code{N*exp(gamma(N-1))}.
+@end ifnottex
+@tex
+$\mit \Gamma(N)\equiv N\times\Gamma(N-1)$.
+@end tex
+Accordingly, the results of the gamma function itself grow very
+quickly.  @code{gamma} is defined as
+@tex
+$\mit ln\bigl(\Gamma(x)\bigr)$ rather than simply $\mit \Gamma(x)$
+@end tex
+@ifnottex
+the natural log of the gamma function, rather than the gamma function
+itself,
+@end ifnottex
+to extend the useful range of results representable.
+
+The sign of the result is returned in the global variable @code{signgam},
+which is declared in math.h.
+
+@code{gammaf} performs the same calculation as @code{gamma}, but uses and
+returns @code{float} values.
+
+@code{lgamma} and @code{lgammaf} are alternate names for @code{gamma} and
+@code{gammaf}.  The use of @code{lgamma} instead of @code{gamma} is a reminder
+that these functions compute the log of the gamma function, rather
+than the gamma function itself.
+
+The functions @code{gamma_r}, @code{gammaf_r}, @code{lgamma_r}, and
+@code{lgammaf_r} are just like @code{gamma}, @code{gammaf}, @code{lgamma}, and
+@code{lgammaf}, respectively, but take an additional argument.  This
+additional argument is a pointer to an integer.  This additional
+argument is used to return the sign of the result, and the global
+variable @code{signgam} is not used.  These functions may be used for
+reentrant calls (but they will still set the global variable @code{errno}
+if an error occurs).
+
+@code{tgamma} and @code{tgammaf} are the "true gamma" functions, returning
+@tex
+$\mit \Gamma(x)$,
+@end tex
+the gamma function of @var{x}--without a logarithm.
+(They are apparently so named because of the prior existence of the old,
+poorly-named @code{gamma} functions which returned the log of gamma up
+through BSD 4.2.)
+
+@*
+@strong{Returns}@*
+Normally, the computed result is returned.
+
+When @var{x} is a nonpositive integer, @code{gamma} returns @code{HUGE_VAL}
+and @code{errno} is set to @code{EDOM}.  If the result overflows, @code{gamma}
+returns @code{HUGE_VAL} and @code{errno} is set to @code{ERANGE}.
+
+You can modify this error treatment using @code{matherr}.
+
+@*
+@strong{Portability}@*
+Neither @code{gamma} nor @code{gammaf} is ANSI C.  It is better not to use either
+of these; use @code{lgamma} or @code{tgamma} instead.@*
+@code{lgamma}, @code{lgammaf}, @code{tgamma}, and @code{tgammaf} are nominally C standard
+in terms of the base return values, although the @code{matherr} error-handling
+is not standard, nor is the @var{signgam} global for @code{lgamma}.
+
+@*

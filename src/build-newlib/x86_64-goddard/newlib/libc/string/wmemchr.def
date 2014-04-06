@@ -1,0 +1,31 @@
+@node wmemchr
+@section @code{wmemchr}---find a wide character in memory
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wchar_t	*wmemchr(const wchar_t *@var{s}, wchar_t @var{c}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+The @code{wmemchr} function locates the first occurrence of @var{c} in the
+initial @var{n} wide characters of the object pointed to be @var{s}. This
+function is not affected by locale and all wchar_t values are treated
+identically.  The null wide character and wchar_t values not
+corresponding to valid characters are not treated specially.
+
+If @var{n} is zero, @var{s} must be a valid pointer and the function
+behaves as if no valid occurrence of @var{c} is found. 
+
+@*
+@strong{Returns}@*
+The @code{wmemchr} function returns a pointer to the located
+wide character, or a null pointer if the wide character does not occur
+in the object. 
+
+@*
+@strong{Portability}@*
+@code{wmemchr} is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+No supporting OS subroutines are required.
+
+@*

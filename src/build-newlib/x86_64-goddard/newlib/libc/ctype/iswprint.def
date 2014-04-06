@@ -1,0 +1,24 @@
+@node iswprint
+@section @code{iswprint}---printable wide character test
+@findex iswprint
+@strong{Synopsis}
+@example
+#include <wctype.h>
+int iswprint(wint_t @var{c});
+
+@end example
+@strong{Description}@*
+@code{iswprint} is a function which classifies wide-character values that
+are printable.
+
+@*
+@strong{Returns}@*
+@code{iswprint} returns non-zero if @var{c} is a printable wide character.
+
+@*
+@strong{Portability}@*
+@code{iswprint} is C99.
+
+No supporting OS subroutines are required.
+
+@*

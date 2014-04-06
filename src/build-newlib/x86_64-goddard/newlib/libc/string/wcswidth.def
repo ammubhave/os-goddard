@@ -1,0 +1,31 @@
+@node wcswidth
+@section @code{wcswidth}---number of column positions of a wide-character string
+@findex wcswidth
+@strong{Synopsis}
+@example
+#include <wchar.h>
+int wcswidth(const wchar_t *@var{pwcs}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+The @code{wcswidth} function shall determine the number of column
+positions required for @var{n} wide-character codes (or fewer than @var{n}
+wide-character codes if a null wide-character code is encountered
+before @var{n} wide-character codes are exhausted) in the string pointed
+to by @var{pwcs}.
+
+@*
+@strong{Returns}@*
+The @code{wcswidth} function either shall return 0 (if @var{pwcs} points to a
+null wide-character code), or return the number of column positions
+to be occupied by the wide-character string pointed to by @var{pwcs}, or
+return -1 (if any of the first @var{n} wide-character codes in the
+wide-character string pointed to by @var{pwcs} is not a printable
+wide-character code).
+
+@*
+@strong{Portability}@*
+@code{wcswidth} has been introduced in the Single UNIX Specification Volume 2.
+@code{wcswidth} has been marked as an extension in the Single UNIX Specification Volume 3.
+
+@*

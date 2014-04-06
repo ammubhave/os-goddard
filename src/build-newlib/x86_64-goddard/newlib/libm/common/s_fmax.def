@@ -1,0 +1,26 @@
+@node fmax
+@section @code{fmax}, @code{fmaxf}--maximum
+@findex fmax
+@findex fmaxf
+@strong{Synopsis}
+@example
+#include <math.h>
+double fmax(double @var{x}, double @var{y});
+float fmaxf(float @var{x}, float @var{y});
+
+@end example
+@strong{Description}@*
+The @code{fmax} functions determine the maximum numeric value of their arguments.
+NaN arguments are treated as missing data:  if one argument is a NaN and the
+other numeric, then the @code{fmax} functions choose the numeric value.
+
+@*
+@strong{Returns}@*
+The @code{fmax} functions return the maximum numeric value of their arguments.
+
+@*
+@strong{Portability}@*
+ANSI C, POSIX.
+
+
+@*

@@ -1,0 +1,35 @@
+@node expm1
+@section @code{expm1}, @code{expm1f}---exponential minus 1
+@findex expm1
+@findex expm1f
+@strong{Synopsis}
+@example
+#include <math.h>
+double expm1(double @var{x});
+float expm1f(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{expm1} and @code{expm1f} calculate the exponential of @var{x}
+and subtract 1, that is,
+@ifnottex
+e raised to the power @var{x} minus 1 (where e
+@end ifnottex
+@tex
+$e^x - 1$ (where $e$
+@end tex
+is the base of the natural system of logarithms, approximately
+2.71828).  The result is accurate even for small values of
+@var{x}, where using @code{exp(@var{x})-1} would lose many
+significant digits.
+
+@*
+@strong{Returns}@*
+e raised to the power @var{x}, minus 1.
+
+@*
+@strong{Portability}@*
+Neither @code{expm1} nor @code{expm1f} is required by ANSI C or by
+the System V Interface Definition (Issue 2).
+
+@*

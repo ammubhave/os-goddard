@@ -1,0 +1,24 @@
+@node iswblank
+@section @code{iswblank}---blank wide character test
+@findex iswblank
+@strong{Synopsis}
+@example
+#include <wctype.h>
+int iswblank(wint_t @var{c});
+
+@end example
+@strong{Description}@*
+@code{iswblank} is a function which classifies wide-character values that
+are categorized as blank.
+
+@*
+@strong{Returns}@*
+@code{iswblank} returns non-zero if @var{c} is a blank wide character.
+
+@*
+@strong{Portability}@*
+@code{iswblank} is C99.
+
+No supporting OS subroutines are required.
+
+@*

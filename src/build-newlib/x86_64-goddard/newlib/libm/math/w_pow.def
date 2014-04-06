@@ -1,0 +1,34 @@
+@node pow
+@section @code{pow}, @code{powf}---x to the power y
+@findex pow
+@findex powf
+@strong{Synopsis}
+@example
+#include <math.h>
+double pow(double @var{x}, double @var{y});
+float powf(float @var{x}, float @var{y});
+
+@end example
+@strong{Description}@*
+@code{pow} and @code{powf} calculate @var{x} raised to the exponent @var{y}.
+@tex
+(That is, $x^y$.)
+@end tex
+
+@*
+@strong{Returns}@*
+On success, @code{pow} and @code{powf} return the value calculated.
+
+When the argument values would produce overflow, @code{pow}
+returns @code{HUGE_VAL} and set @code{errno} to @code{ERANGE}.  If the
+argument @var{x} passed to @code{pow} or @code{powf} is a negative
+noninteger, and @var{y} is also not an integer, then @code{errno}
+is set to @code{EDOM}.  If @var{x} and @var{y} are both 0, then
+@code{pow} and @code{powf} return @code{1}.
+
+You can modify error handling for these functions using @code{matherr}.
+
+@*
+@strong{Portability}@*
+@code{pow} is ANSI C. @code{powf} is an extension.  
+@*

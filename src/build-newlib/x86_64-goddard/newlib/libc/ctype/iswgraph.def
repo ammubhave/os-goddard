@@ -1,0 +1,24 @@
+@node iswgraph
+@section @code{iswgraph}---graphic wide character test
+@findex iswgraph
+@strong{Synopsis}
+@example
+#include <wctype.h>
+int iswgraph(wint_t @var{c});
+
+@end example
+@strong{Description}@*
+@code{iswgraph} is a function which classifies wide-character values that
+are graphic.
+
+@*
+@strong{Returns}@*
+@code{iswgraph} returns non-zero if @var{c} is a graphic wide character.
+
+@*
+@strong{Portability}@*
+@code{iswgraph} is C99.
+
+No supporting OS subroutines are required.
+
+@*

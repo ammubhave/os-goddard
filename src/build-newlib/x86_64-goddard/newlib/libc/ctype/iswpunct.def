@@ -1,0 +1,24 @@
+@node iswpunct
+@section @code{iswpunct}---punctuation wide character test
+@findex iswpunct
+@strong{Synopsis}
+@example
+#include <wctype.h>
+int iswpunct(wint_t @var{c});
+
+@end example
+@strong{Description}@*
+@code{iswpunct} is a function which classifies wide-character values that
+are punctuation.
+
+@*
+@strong{Returns}@*
+@code{iswpunct} returns non-zero if @var{c} is a punctuation wide character.
+
+@*
+@strong{Portability}@*
+@code{iswpunct} is C99.
+
+No supporting OS subroutines are required.
+
+@*

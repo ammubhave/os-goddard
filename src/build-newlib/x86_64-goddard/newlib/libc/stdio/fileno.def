@@ -1,0 +1,25 @@
+@node fileno
+@section @code{fileno}---return file descriptor associated with stream
+@findex fileno
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fileno(FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+You can use @code{fileno} to return the file descriptor identified by @var{fp}.
+
+@*
+@strong{Returns}@*
+@code{fileno} returns a non-negative integer when successful.
+If @var{fp} is not an open stream, @code{fileno} returns -1.
+
+@*
+@strong{Portability}@*
+@code{fileno} is not part of ANSI C.
+POSIX requires @code{fileno}.
+
+Supporting OS subroutines required: none.
+
+@*

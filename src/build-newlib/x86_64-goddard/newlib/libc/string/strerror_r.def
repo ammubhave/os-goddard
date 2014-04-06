@@ -1,0 +1,57 @@
+@node strerror_r
+@section @code{strerror_r}---convert error number to string and copy to buffer
+@findex strerror_r
+@strong{Synopsis}
+@example
+#include <string.h>
+#ifdef _GNU_SOURCE
+char *strerror_r(int @var{errnum}, char *@var{buffer}, size_t @var{n});
+#else
+int strerror_r(int @var{errnum}, char *@var{buffer}, size_t @var{n});
+#endif
+
+@end example
+@strong{Description}@*
+@code{strerror_r} converts the error number @var{errnum} into a
+string and copies the result into the supplied @var{buffer} for
+a length up to @var{n}, including the NUL terminator. The value of
+@var{errnum} is usually a copy of @code{errno}.  If @code{errnum} is not a known
+error number, the result is the empty string.
+
+See @code{strerror} for how strings are mapped to @code{errnum}.
+
+@*
+@strong{Returns}@*
+There are two variants: the GNU version always returns a NUL-terminated
+string, which is @var{buffer} if all went well, but which is another
+pointer if @var{n} was too small (leaving @var{buffer} untouched).  If the
+return is not @var{buffer}, your application must not modify that string.
+The POSIX version returns 0 on success, @var{EINVAL} if @code{errnum} was not
+recognized, and @var{ERANGE} if @var{n} was too small.  The variant chosen
+depends on macros that you define before inclusion of @code{string.h}.
+
+@*
+@strong{Portability}@*
+@code{strerror_r} with a @var{char *} result is a GNU extension.
+@code{strerror_r} with an @var{int} result is required by POSIX 2001.
+This function is compliant only if @code{_user_strerror} is not provided,
+or if it is thread-safe and uses separate storage according to whether
+the second argument of that function is non-zero.  For more details
+on @code{_user_strerror}, see the @code{strerror} documentation.
+
+POSIX states that the contents of @var{buf} are unspecified on error,
+although this implementation guarantees a NUL-terminated string for
+all except @var{n} of 0.
+
+POSIX recommends that unknown @var{errnum} result in a message including
+that value, however it is not a requirement and this implementation
+provides only an empty string (unless you provide @code{_user_strerror}).
+POSIX also recommends that unknown @var{errnum} fail with EINVAL even
+when providing such a message, however it is not a requirement and
+this implementation will return success if @code{_user_strerror} provided
+a non-empty alternate string without assigning into its third argument.
+
+@code{strerror_r} requires no supporting OS subroutines.
+
+
+@*

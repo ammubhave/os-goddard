@@ -1,0 +1,55 @@
+@node atof
+@section @code{atof}, @code{atoff}---string to double or float
+@findex atof
+@findex atoff
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+double atof(const char *@var{s});
+float atoff(const char *@var{s});
+
+@end example
+@strong{Description}@*
+@code{atof} converts the initial portion of a string to a @code{double}.
+@code{atoff} converts the initial portion of a string to a @code{float}.
+
+The functions parse the character string @var{s},
+locating a substring which can be converted to a floating-point
+value. The substring must match the format:
+@smallexample
+ [+|-]@var{digits}[.][@var{digits}][(e|E)[+|-]@var{digits}]
+@end smallexample
+The substring converted is the longest initial
+fragment of @var{s} that has the expected format, beginning with
+the first non-whitespace character.  The substring
+is empty if @code{str} is empty, consists entirely
+of whitespace, or if the first non-whitespace character is
+something other than @code{+}, @code{-}, @code{.}, or a digit.
+
+@code{atof(@var{s})} is implemented as @code{strtod(@var{s}, NULL)}.
+@code{atoff(@var{s})} is implemented as @code{strtof(@var{s}, NULL)}.
+
+@*
+@strong{Returns}@*
+@code{atof} returns the converted substring value, if any, as a
+@code{double}; or @code{0.0},  if no conversion could be performed.
+If the correct value is out of the range of representable values, plus
+or minus @code{HUGE_VAL} is returned, and @code{ERANGE} is stored in
+@code{errno}.
+If the correct value would cause underflow, @code{0.0} is returned
+and @code{ERANGE} is stored in @code{errno}.
+
+@code{atoff} obeys the same rules as @code{atof}, except that it
+returns a @code{float}.
+
+@*
+@strong{Portability}@*
+@code{atof} is ANSI C. @code{atof}, @code{atoi}, and @code{atol} are subsumed by @code{strod}
+and @code{strol}, but are used extensively in existing code. These functions are
+less reliable, but may be faster if the argument is verified to be in a valid
+range.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

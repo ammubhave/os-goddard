@@ -1,0 +1,26 @@
+@node ccos
+@section @code{ccos}, @code{ccosf}---complex cosine
+@findex ccos
+@findex ccosf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex ccos(double complex @var{z});
+float complex ccosf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex cosine of @var{z}.
+
+@code{ccosf} is identical to @code{ccos}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+These functions return the complex cosine value.
+
+@*
+@strong{Portability}@*
+@code{ccos} and @code{ccosf} are ISO C99
+
+@*

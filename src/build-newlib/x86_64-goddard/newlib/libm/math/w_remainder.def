@@ -1,0 +1,26 @@
+@node remainder
+@section @code{remainder}, @code{remainderf}---round and  remainder
+@findex remainder
+@findex remainderf
+@strong{Synopsis}
+@example
+#include <math.h>
+double remainder(double @var{x}, double @var{y});
+float remainderf(float @var{x}, float @var{y});
+
+@end example
+@strong{Description}@*
+@code{remainder} and @code{remainderf} find the remainder of
+@var{x}/@var{y}; this value is in the range -@var{y}/2 .. +@var{y}/2.
+
+@*
+@strong{Returns}@*
+@code{remainder} returns the integer result as a double.
+
+@*
+@strong{Portability}@*
+@code{remainder} is a System V release 4.
+@code{remainderf} is an extension.
+
+
+@*

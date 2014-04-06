@@ -1,0 +1,32 @@
+@node sin
+@section @code{sin}, @code{sinf}, @code{cos}, @code{cosf}---sine or cosine
+@findex sin
+@findex sinf
+@findex cos
+@findex cosf
+@strong{Synopsis}
+@example
+#include <math.h>
+double sin(double @var{x});
+float  sinf(float @var{x});
+double cos(double @var{x});
+float cosf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{sin} and @code{cos} compute (respectively) the sine and cosine
+of the argument @var{x}.  Angles are specified in radians. 
+
+@code{sinf} and @code{cosf} are identical, save that they take and
+return @code{float} values. 
+
+@*
+@strong{Returns}@*
+The sine or cosine of @var{x} is returned.
+
+@*
+@strong{Portability}@*
+@code{sin} and @code{cos} are ANSI C. 
+@code{sinf} and @code{cosf} are extensions.
+
+@*

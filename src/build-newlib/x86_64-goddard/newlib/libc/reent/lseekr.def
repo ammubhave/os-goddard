@@ -1,0 +1,16 @@
+@node _lseek_r
+@section @code{_lseek_r}---Reentrant version of lseek
+@findex _lseek_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+off_t _lseek_r(struct _reent *@var{ptr},
+    int @var{fd}, off_t @var{pos}, int @var{whence});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{lseek}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

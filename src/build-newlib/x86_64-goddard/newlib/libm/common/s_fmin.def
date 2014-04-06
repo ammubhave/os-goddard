@@ -1,0 +1,26 @@
+@node fmin
+@section @code{fmin}, @code{fminf}--minimum
+@findex fmin
+@findex fminf
+@strong{Synopsis}
+@example
+#include <math.h>
+double fmin(double @var{x}, double @var{y});
+float fminf(float @var{x}, float @var{y});
+
+@end example
+@strong{Description}@*
+The @code{fmin} functions determine the minimum numeric value of their arguments.
+NaN arguments are treated as missing data:  if one argument is a NaN and the
+other numeric, then the @code{fmin} functions choose the numeric value.
+
+@*
+@strong{Returns}@*
+The @code{fmin} functions return the minimum numeric value of their arguments.
+
+@*
+@strong{Portability}@*
+ANSI C, POSIX.
+
+
+@*

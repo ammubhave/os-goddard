@@ -1,0 +1,30 @@
+@node psignal
+@section @code{psignal}---print a signal message on standard error
+@findex psignal
+@strong{Synopsis}
+@example
+#include <stdio.h>
+void psignal(int @var{signal}, const char *@var{prefix});
+
+@end example
+@strong{Description}@*
+Use @code{psignal} to print (on standard error) a signal message
+corresponding to the value of the signal number @var{signal}.
+Unless you use @code{NULL} as the value of the argument @var{prefix}, the
+signal message will begin with the string at @var{prefix}, followed by a
+colon and a space (@code{: }). The remainder of the signal message is one
+of the strings described for @code{strsignal}.
+
+@*
+@strong{Returns}@*
+@code{psignal} returns no result.
+
+@*
+@strong{Portability}@*
+POSIX.1-2008 requires @code{psignal}, but the strings issued vary from one
+implementation to another.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

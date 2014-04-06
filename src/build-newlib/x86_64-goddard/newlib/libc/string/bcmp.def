@@ -1,0 +1,27 @@
+@node bcmp
+@section @code{bcmp}---compare two memory areas
+@findex bcmp
+@strong{Synopsis}
+@example
+#include <strings.h>
+int bcmp(const void *@var{s1}, const void *@var{s2}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+This function compares not more than @var{n} bytes of the
+object pointed to by @var{s1} with the object pointed to by @var{s2}.
+
+This function is identical to @code{memcmp}.
+
+@*
+@strong{Returns}@*
+The function returns an integer greater than, equal to or
+less than zero 	according to whether the object pointed to by
+@var{s1} is greater than, equal to or less than the object
+pointed to by @var{s2}.
+
+@*
+@strong{Portability}@*
+@code{bcmp} requires no supporting OS subroutines.
+
+@*

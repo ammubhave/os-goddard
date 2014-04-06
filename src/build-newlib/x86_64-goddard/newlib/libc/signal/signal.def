@@ -1,0 +1,60 @@
+@node signal
+@section @code{signal}---specify handler subroutine for a signal
+@findex signal
+@findex _signal_r
+@strong{Synopsis}
+@example
+#include <signal.h>
+void (*signal(int @var{sig}, void(*@var{func})(int))) (int);
+
+void (*_signal_r(void *@var{reent}, int @var{sig}, void(*@var{func})(int))) (int);
+
+@end example
+@strong{Description}@*
+@code{signal} provides a simple signal-handling implementation for embedded
+targets.
+
+@code{signal} allows you to request changed treatment for a particular
+signal @var{sig}.  You can use one of the predefined macros @code{SIG_DFL}
+(select system default handling) or @code{SIG_IGN} (ignore this signal)
+as the value of @var{func}; otherwise, @var{func} is a function pointer
+that identifies a subroutine in your program as the handler for this signal.
+
+Some of the execution environment for signal handlers is
+unpredictable; notably, the only library function required to work
+correctly from within a signal handler is @code{signal} itself, and
+only when used to redefine the handler for the current signal value.
+
+Static storage is likewise unreliable for signal handlers, with one
+exception: if you declare a static storage location as `@code{volatile
+sig_atomic_t}', then you may use that location in a signal handler to
+store signal values.
+
+If your signal handler terminates using @code{return} (or implicit
+return), your program's execution continues at the point
+where it was when the signal was raised (whether by your program
+itself, or by an external event).  Signal handlers can also
+use functions such as @code{exit} and @code{abort} to avoid returning.
+
+The alternate function @code{_signal_r} is the reentrant version.
+The extra argument @var{reent} is a pointer to a reentrancy structure.
+
+@c FIXME: do we have setjmp.h and assoc fns?
+
+@*
+@strong{Returns}@*
+If your request for a signal handler cannot be honored, the result is
+@code{SIG_ERR}; a specific error number is also recorded in @code{errno}.
+
+Otherwise, the result is the previous handler (a function pointer or
+one of the predefined macros).
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{signal}.
+
+No supporting OS subroutines are required to link with @code{signal}, but
+it will not have any useful effects, except for software generated signals,
+without an operating system that can actually raise exceptions.
+
+@*

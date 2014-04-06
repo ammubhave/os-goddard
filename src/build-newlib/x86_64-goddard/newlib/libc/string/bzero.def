@@ -1,0 +1,26 @@
+@node bzero
+@section @code{bzero}---initialize memory to zero
+@findex bzero
+@strong{Synopsis}
+@example
+#include <strings.h>
+void bzero(void *@var{b}, size_t @var{length});
+
+@end example
+@strong{Description}@*
+@code{bzero} initializes @var{length} bytes of memory, starting at address
+@var{b}, to zero.
+
+@*
+@strong{Returns}@*
+@code{bzero} does not return a result.
+
+@*
+@strong{Portability}@*
+@code{bzero} is in the Berkeley Software Distribution.
+Neither ANSI C nor the System V Interface Definition (Issue 2) require
+@code{bzero}.
+
+@code{bzero} requires no supporting OS subroutines.
+
+@*

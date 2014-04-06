@@ -1,0 +1,34 @@
+@node carg
+@section @code{carg}, @code{cargf}---argument (phase angle)
+@findex carg
+@findex cargf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double carg(double complex @var{z});
+float cargf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the argument (also called phase angle) 
+of @var{z}, with a branch cut along the negative real axis.
+
+@code{cargf} is identical to @code{carg}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+@ifnottex
+The carg functions return the value of the argument in the 
+interval [-pi, +pi]
+@end ifnottex
+@tex
+The carg functions return the value of the argument in the 
+interval [$-\pi$, $+\pi$]
+@end tex
+
+@*
+@strong{Portability}@*
+@code{carg} and @code{cargf} are ISO C99
+
+@*

@@ -1,0 +1,16 @@
+@node _rename_r
+@section @code{_rename_r}---Reentrant version of rename
+@findex _rename_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _rename_r(struct _reent *@var{ptr},
+    const char *@var{old}, const char *@var{new});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{rename}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

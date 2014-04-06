@@ -1,0 +1,36 @@
+@node clog
+@section @code{clog}, @code{clogf}---complex base-e logarithm
+@findex clog
+@findex clogf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex clog(double complex @var{z});
+float complex clogf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex natural (base-@var{e}) logarithm 
+of @var{z}, with a branch cut along the negative real axis. 
+
+@code{clogf} is identical to @code{clog}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+@ifnottex
+The clog functions return the complex natural logarithm value, in 
+the range of a strip mathematically unbounded along the real axis 
+and in the interval [-i*pi , +i*pi] along the imaginary axis.
+@end ifnottex
+@tex
+The clog functions return the complex natural logarithm value, in
+the range of a strip mathematically unbounded along the real axis
+and in the interval [$-i\pi$, $+i\pi$] along the imaginary axis.
+@end tex
+
+@*
+@strong{Portability}@*
+@code{clog} and @code{clogf} are ISO C99
+
+@*

@@ -1,0 +1,29 @@
+@node log10
+@section @code{log10}, @code{log10f}---base 10 logarithms
+@findex log10
+@findex log10f
+@strong{Synopsis}
+@example
+#include <math.h>
+double log10(double @var{x});
+float log10f(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{log10} returns the base 10 logarithm of @var{x}.
+It is implemented as @code{log(@var{x}) / log(10)}.
+
+@code{log10f} is identical, save that it takes and returns @code{float} values.
+
+@*
+@strong{Returns}@*
+@code{log10} and @code{log10f} return the calculated value. 
+
+See the description of @code{log} for information on errors.
+
+@*
+@strong{Portability}@*
+@code{log10} is ANSI C.  @code{log10f} is an extension.
+
+
+@*

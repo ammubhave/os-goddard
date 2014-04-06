@@ -1,0 +1,46 @@
+@node _execve_r
+@section @code{_execve_r}---Reentrant version of execve	
+@findex _execve_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _execve_r(struct _reent *@var{ptr}, const char *@var{name},
+    char *const @var{argv}[], char *const @var{env}[]);
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{execve}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*
+@node _fork_r
+@section @code{_fork_r}---Reentrant version of fork
+@findex _fork_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _fork_r(struct _reent *@var{ptr});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{fork}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*
+@node _wait_r
+@section @code{_wait_r}---Reentrant version of wait
+@findex _wait_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _wait_r(struct _reent *@var{ptr}, int *@var{status});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{wait}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

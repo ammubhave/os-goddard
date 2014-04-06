@@ -1,0 +1,27 @@
+@node __malloc_lock
+@section @code{__malloc_lock}, @code{__malloc_unlock}---lock malloc pool
+@findex __malloc_lock
+@findex __malloc_unlock
+@strong{Synopsis}
+@example
+#include <malloc.h>
+void __malloc_lock (struct _reent *@var{reent});
+void __malloc_unlock (struct _reent *@var{reent});
+
+@end example
+@strong{Description}@*
+The @code{malloc} family of routines call these functions when they need to lock
+the memory pool.  The version of these routines supplied in the library use
+the lock API defined in sys/lock.h.  If multiple threads of execution can
+call @code{malloc}, or if @code{malloc} can be called reentrantly, then you need to
+define your own versions of these functions in order to safely lock the
+memory pool during a call.  If you do not, the memory pool may become
+corrupted.
+
+A call to @code{malloc} may call @code{__malloc_lock} recursively; that is,
+the sequence of calls may go @code{__malloc_lock}, @code{__malloc_lock},
+@code{__malloc_unlock}, @code{__malloc_unlock}.  Any implementation of these
+routines must be careful to avoid causing a thread to wait for a lock
+that it already holds.
+
+@*

@@ -1,0 +1,87 @@
+@node mktemp
+@section @code{mktemp}, @code{mkstemp}, @code{mkostemp}, @code{mkstemps},
+@findex mktemp
+@findex mkdtemp
+@findex mkstemp
+@findex mkstemps
+@findex mkostemp
+@findex mkostemps
+@findex _mktemp_r
+@findex _mkdtemp_r
+@findex _mkstemp_r
+@findex _mkstemps_r
+@findex _mkostemp_r
+@findex _mkostemps_r
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+char *mktemp(char *@var{path});
+char *mkdtemp(char *@var{path});
+int mkstemp(char *@var{path});
+int mkstemps(char *@var{path}, int @var{suffixlen});
+int mkostemp(char *@var{path}, int @var{flags});
+int mkostemps(char *@var{path}, int @var{suffixlen}, int @var{flags});
+
+char *_mktemp_r(struct _reent *@var{reent}, char *@var{path});
+char *_mkdtemp_r(struct _reent *@var{reent}, char *@var{path});
+int *_mkstemp_r(struct _reent *@var{reent}, char *@var{path});
+int *_mkstemps_r(struct _reent *@var{reent}, char *@var{path}, int @var{len});
+int *_mkostemp_r(struct _reent *@var{reent}, char *@var{path},
+    int @var{flags});
+int *_mkostemps_r(struct _reent *@var{reent}, char *@var{path}, int @var{len},
+    int @var{flags});
+
+@end example
+@strong{Description}@*
+@code{mktemp}, @code{mkstemp}, and @code{mkstemps} attempt to generate a file name
+that is not yet in use for any existing file.  @code{mkstemp} and @code{mkstemps}
+create the file and open it for reading and writing; @code{mktemp} simply
+generates the file name (making @code{mktemp} a security risk).  @code{mkostemp}
+and @code{mkostemps} allow the addition of other @code{open} flags, such
+as @code{O_CLOEXEC}, @code{O_APPEND}, or @code{O_SYNC}.  On platforms with a
+separate text mode, @code{mkstemp} forces @code{O_BINARY}, while @code{mkostemp}
+allows the choice between @code{O_BINARY}, @code{O_TEXT}, or 0 for default.
+@code{mkdtemp} attempts to create a directory instead of a file, with a
+permissions mask of 0700.
+
+You supply a simple pattern for the generated file name, as the string
+at @var{path}.  The pattern should be a valid filename (including path
+information if you wish) ending with at least six `@code{X}'
+characters.  The generated filename will match the leading part of the
+name you supply, with the trailing `@code{X}' characters replaced by some
+combination of digits and letters.  With @code{mkstemps}, the `@code{X}'
+characters end @var{suffixlen} bytes before the end of the string.
+
+The alternate functions @code{_mktemp_r}, @code{_mkdtemp_r}, @code{_mkstemp_r},
+@code{_mkostemp_r}, @code{_mkostemps_r}, and @code{_mkstemps_r} are reentrant
+versions.  The extra argument @var{reent} is a pointer to a reentrancy
+structure.
+
+@*
+@strong{Returns}@*
+@code{mktemp} returns the pointer @var{path} to the modified string
+representing an unused filename, unless it could not generate one, or
+the pattern you provided is not suitable for a filename; in that case,
+it returns @code{NULL}.  Be aware that there is an inherent race between
+generating the name and attempting to create a file by that name;
+you are advised to use @code{O_EXCL|O_CREAT}.
+
+@code{mkdtemp} returns the pointer @var{path} to the modified string if the
+directory was created, otherwise it returns @code{NULL}.
+
+@code{mkstemp}, @code{mkstemps}, @code{mkostemp}, and @code{mkostemps} return a file
+descriptor to the newly created file, unless it could not generate an
+unused filename, or the pattern you provided is not suitable for a
+filename; in that case, it returns @code{-1}.
+
+@*
+@strong{Portability}@*
+ANSI C does not require either @code{mktemp} or @code{mkstemp}; the System
+V Interface Definition requires @code{mktemp} as of Issue 2.  POSIX 2001
+requires @code{mkstemp}, and POSIX 2008 requires @code{mkdtemp} while
+deprecating @code{mktemp}.  @code{mkstemps}, @code{mkostemp}, and @code{mkostemps}
+are not standardized.
+
+Supporting OS subroutines required: @code{getpid}, @code{mkdir}, @code{open}, @code{stat}.
+
+@*

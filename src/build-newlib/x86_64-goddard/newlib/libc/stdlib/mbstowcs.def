@@ -1,0 +1,42 @@
+@node mbstowcs
+@section @code{mbstowcs}---minimal multibyte string to wide char converter
+@findex mbstowcs
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+int mbstowcs(wchar_t *restrict @var{pwc}, const char *restrict @var{s}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+When _MB_CAPABLE is not defined, this is a minimal ANSI-conforming 
+implementation of @code{mbstowcs}.  In this case, the
+only ``multi-byte character sequences'' recognized are single bytes,
+and they are ``converted'' to wide-char versions simply by byte
+extension.
+
+When _MB_CAPABLE is defined, this routine calls @code{_mbstowcs_r} to perform
+the conversion, passing a state variable to allow state dependent
+decoding.  The result is based on the locale setting which may
+be restricted to a defined set of locales.
+
+@*
+@strong{Returns}@*
+This implementation of @code{mbstowcs} returns @code{0} if
+@var{s} is @code{NULL} or is the empty string; 
+it returns @code{-1} if _MB_CAPABLE and one of the
+multi-byte characters is invalid or incomplete;
+otherwise it returns the minimum of: @code{n} or the
+number of multi-byte characters in @code{s} plus 1 (to
+compensate for the nul character).
+If the return value is -1, the state of the @code{pwc} string is
+indeterminate.  If the input has a length of 0, the output
+string will be modified to contain a wchar_t nul terminator.
+
+@*
+@strong{Portability}@*
+@code{mbstowcs} is required in the ANSI C standard.  However, the precise
+effects vary with the locale.
+
+@code{mbstowcs} requires no supporting OS subroutines.
+
+@*

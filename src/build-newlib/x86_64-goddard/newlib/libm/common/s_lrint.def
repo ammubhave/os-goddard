@@ -1,0 +1,38 @@
+@node lrint
+@section @code{lrint}, @code{lrintf}, @code{llrint}, @code{llrintf}--round to integer
+@findex lrint
+@findex lrintf
+@findex llrint
+@findex llrintf
+@strong{Synopsis}
+@example
+#include <math.h>
+long int lrint(double @var{x});
+long int lrintf(float @var{x});
+long long int llrint(double @var{x});
+long long int llrintf(float @var{x});
+
+@end example
+@strong{Description}@*
+The @code{lrint} and @code{llrint} functions round their argument to the nearest
+integer value, using the current rounding direction.  If the rounded value is
+outside the range of the return type, the numeric result is unspecified.  A
+range error may occur if the magnitude of @var{x} is too large.
+The "inexact" floating-point exception is raised in implementations that
+support it when the result differs in value from the argument (i.e., when
+a fraction actually has been truncated).
+
+@*
+@strong{Returns}@*
+@var{x} rounded to an integral value, using the current rounding direction.
+
+@*
+@strong{See Also}@*
+@code{lround}
+
+@*
+@strong{Portability}@*
+ANSI C, POSIX
+
+
+@*

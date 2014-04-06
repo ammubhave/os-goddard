@@ -1,0 +1,32 @@
+@node log
+@section @code{log}, @code{logf}---natural logarithms
+@findex log
+@findex logf
+@strong{Synopsis}
+@example
+#include <math.h>
+double log(double @var{x});
+float logf(float @var{x});
+
+@end example
+@strong{Description}@*
+Return the natural logarithm of @var{x}, that is, its logarithm base e
+(where e is the base of the natural system of logarithms, 2.71828@dots{}).
+@code{log} and @code{logf} are identical save for the return and argument types.
+
+You can use the (non-ANSI) function @code{matherr} to specify error
+handling for these functions. 
+
+@*
+@strong{Returns}@*
+Normally, returns the calculated value.  When @var{x} is zero, the
+returned value is @code{-HUGE_VAL} and @code{errno} is set to @code{ERANGE}.
+When @var{x} is negative, the returned value is NaN (not a number) and
+@code{errno} is set to @code{EDOM}.  You can control the error behavior via
+@code{matherr}.
+
+@*
+@strong{Portability}@*
+@code{log} is ANSI. @code{logf} is an extension.
+
+@*

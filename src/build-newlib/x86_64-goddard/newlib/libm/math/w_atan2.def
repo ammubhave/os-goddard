@@ -1,0 +1,44 @@
+@node atan2
+@section @code{atan2}, @code{atan2f}---arc tangent of y/x
+@findex atan2
+@findex atan2f
+@strong{Synopsis}
+@example
+#include <math.h>
+double atan2(double @var{y},double @var{x});
+float atan2f(float @var{y},float @var{x});
+
+@end example
+@strong{Description}@*
+
+@code{atan2} computes the inverse tangent (arc tangent) of @var{y}/@var{x}. 
+@code{atan2} produces the correct result even for angles near 
+@ifnottex
+pi/2 or -pi/2 
+@end ifnottex
+@tex
+$\pi/2$ or $-\pi/2$
+@end tex
+(that is, when @var{x} is near 0). 
+
+@code{atan2f} is identical to @code{atan2}, save that it takes and returns
+@code{float}. 
+
+@*
+@strong{Returns}@*
+@code{atan2} and @code{atan2f} return a value in radians, in the range of 
+@ifnottex
+-pi to pi.
+@end ifnottex
+@tex
+$-\pi$ to $\pi$.
+@end tex
+
+You can modify error handling for these functions using @code{matherr}.
+
+@*
+@strong{Portability}@*
+@code{atan2} is ANSI C.  @code{atan2f} is an extension.
+
+
+@*

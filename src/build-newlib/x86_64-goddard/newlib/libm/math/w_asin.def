@@ -1,0 +1,37 @@
+@node asin
+@section @code{asin}, @code{asinf}---arc sine
+@findex asin
+@findex asinf
+@strong{Synopsis}
+@example
+#include <math.h>
+double asin(double @var{x});
+float asinf(float @var{x});
+
+@end example
+@strong{Description}@*
+
+@code{asin} computes the inverse sine (arc sine) of the argument @var{x}.
+Arguments to @code{asin} must be in the range @minus{}1 to 1.
+
+@code{asinf} is identical to @code{asin}, other than taking and
+returning floats.
+
+You can modify error handling for these routines using @code{matherr}. 
+
+@*
+@strong{Returns}@*
+@ifnottex
+@code{asin} returns values in radians, in the range of -pi/2 to pi/2.
+@end ifnottex
+@tex
+@code{asin} returns values in radians, in the range of $-\pi/2$ to $\pi/2$.
+@end tex
+
+If @var{x} is not in the range @minus{}1 to 1, @code{asin} and @code{asinf}
+return NaN (not a number), set the global variable @code{errno} to
+@code{EDOM}, and issue a @code{DOMAIN error} message.
+
+You can change this error treatment using @code{matherr}.
+
+@*

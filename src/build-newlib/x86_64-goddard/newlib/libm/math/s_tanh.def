@@ -1,0 +1,32 @@
+@node tanh
+@section @code{tanh}, @code{tanhf}---hyperbolic tangent
+@findex tanh
+@findex tanhf
+@strong{Synopsis}
+@example
+#include <math.h>
+double tanh(double @var{x});
+float tanhf(float @var{x});
+
+@end example
+@strong{Description}@*
+
+@code{tanh} computes the hyperbolic tangent of
+the argument @var{x}.  Angles are specified in radians.  
+
+@code{tanh(@var{x})} is defined as 
+@smallexample
+ sinh(@var{x})/cosh(@var{x})
+@end smallexample
+@code{tanhf} is identical, save that it takes and returns @code{float} values.
+
+@*
+@strong{Returns}@*
+The hyperbolic tangent of @var{x} is returned.
+
+@*
+@strong{Portability}@*
+@code{tanh} is ANSI C.  @code{tanhf} is an extension.
+
+
+@*

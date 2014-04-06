@@ -1,0 +1,25 @@
+@node strcspn
+@section @code{strcspn}---count characters not in string
+@findex strcspn
+@strong{Synopsis}
+@example
+size_t strcspn(const char *@var{s1}, const char *@var{s2});
+
+@end example
+@strong{Description}@*
+This function computes the length of the initial part of
+the string pointed to by @var{s1} which consists entirely of
+characters @var{NOT} from the string pointed to by @var{s2}
+(excluding the terminating null character).
+
+@*
+@strong{Returns}@*
+@code{strcspn} returns the length of the substring found.
+
+@*
+@strong{Portability}@*
+@code{strcspn} is ANSI C.
+
+@code{strcspn} requires no supporting OS subroutines.
+
+@*

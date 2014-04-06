@@ -1,0 +1,31 @@
+@node getdelim
+@section @code{getdelim}---read a line up to a specified line delimiter
+@findex getdelim
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int getdelim(char **@var{bufptr}, size_t *@var{n},
+    int @var{delim}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{getdelim} reads a file @var{fp} up to and possibly including a specified
+delimiter @var{delim}.  The line is read into a buffer pointed to
+by @var{bufptr} and designated with size *@var{n}.  If the buffer is
+not large enough, it will be dynamically grown by @code{getdelim}.
+As the buffer is grown, the pointer to the size @var{n} will be
+updated.
+
+@*
+@strong{Returns}@*
+@code{getdelim} returns @code{-1} if no characters were successfully read;
+otherwise, it returns the number of bytes successfully read.
+At end of file, the result is nonzero.
+
+@*
+@strong{Portability}@*
+@code{getdelim} is a glibc extension.
+
+No supporting OS subroutines are directly required.
+
+@*

@@ -1,0 +1,32 @@
+@node labs
+@section @code{labs}---long integer absolute value
+@findex labs
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+long labs(long @var{i});
+
+@end example
+@strong{Description}@*
+@code{labs} returns
+@tex
+$|x|$,
+@end tex
+the absolute value of @var{i} (also called the magnitude
+of @var{i}).  That is, if @var{i} is negative, the result is the opposite
+of @var{i}, but if @var{i} is nonnegative the result is @var{i}.
+
+The similar function @code{abs} uses and returns @code{int} rather than
+@code{long} values.
+
+@*
+@strong{Returns}@*
+The result is a nonnegative long integer.
+
+@*
+@strong{Portability}@*
+@code{labs} is ANSI.
+
+No supporting OS subroutine calls are required.
+
+@*

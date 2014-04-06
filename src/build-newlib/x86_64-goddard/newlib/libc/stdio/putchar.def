@@ -1,0 +1,35 @@
+@node putchar
+@section @code{putchar}---write a character (macro)
+@findex putchar
+@findex _putchar_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int putchar(int @var{ch});
+
+int _putchar_r(struct _reent *@var{reent}, int @var{ch});
+
+@end example
+@strong{Description}@*
+@code{putchar} is a macro, defined in @code{stdio.h}.  @code{putchar}
+writes its argument to the standard output stream,
+after converting it from an @code{int} to an @code{unsigned char}.
+
+The alternate function @code{_putchar_r} is a reentrant version.  The
+extra argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+If successful, @code{putchar} returns its argument @var{ch}.  If an error
+intervenes, the result is @code{EOF}.  You can use `@code{ferror(stdin)}' to
+query for errors.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{putchar}; it suggests, but does not require, that
+@code{putchar} be implemented as a macro.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

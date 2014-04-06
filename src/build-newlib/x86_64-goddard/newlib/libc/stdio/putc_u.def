@@ -1,0 +1,40 @@
+@node putc_unlocked
+@section @code{putc_unlocked}---non-thread-safe version of putc (macro)
+@findex putc_unlocked
+@findex _putc_unlocked_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int putc_unlocked(int @var{ch}, FILE *@var{fp});
+
+#include <stdio.h>
+int _putc_unlocked_r(struct _reent *@var{ptr}, int @var{ch}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{putc_unlocked} is a non-thread-safe version of @code{putc} declared in
+@code{stdio.h}.  @code{putc_unlocked} may only safely be used within a scope
+protected by flockfile() (or ftrylockfile()) and funlockfile().  These
+functions may safely be used in a multi-threaded program if and only
+if they are called while the invoking thread owns the ( FILE *)
+object, as is the case after a successful call to the flockfile() or
+ftrylockfile() functions.  If threads are disabled, then
+@code{putc_unlocked} is equivalent to @code{putc}.
+
+The function @code{_putc_unlocked_r} is simply the reentrant version of
+@code{putc_unlocked} that takes an additional reentrant structure pointer
+argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+See @code{putc}.
+
+@*
+@strong{Portability}@*
+POSIX 1003.1 requires @code{putc_unlocked}.  @code{putc_unlocked} may be
+implemented as a macro, so arguments should not have side-effects.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

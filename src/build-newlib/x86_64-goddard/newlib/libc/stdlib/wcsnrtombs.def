@@ -1,0 +1,62 @@
+@node wcsrtombs
+@section @code{wcsrtombs}, @code{wcsnrtombs}---convert a wide-character string to a character string
+@findex wcsrtombs
+@findex _wcsrtombs_r
+@findex wcsnrtombs
+@findex _wcsnrtombs_r
+@strong{Synopsis}
+@example
+#include <wchar.h>
+size_t wcsrtombs(char *__restrict @var{dst},
+    const wchar_t **__restrict @var{src}, size_t @var{len},
+    mbstate_t *__restrict @var{ps});
+
+#include <wchar.h>
+size_t _wcsrtombs_r(struct _reent *@var{ptr}, char *@var{dst},
+    const wchar_t **@var{src}, size_t @var{len},
+    mbstate_t *@var{ps});
+
+#include <wchar.h>
+size_t wcsnrtombs(char *__restrict @var{dst},
+    const wchar_t **__restrict @var{src},
+    size_t @var{nwc}, size_t @var{len},
+    mbstate_t *__restrict @var{ps});
+
+#include <wchar.h>
+size_t _wcsnrtombs_r(struct _reent *@var{ptr}, char *@var{dst},
+    const wchar_t **@var{src}, size_t @var{nwc},
+    size_t @var{len}, mbstate_t *@var{ps});
+
+@end example
+@strong{Description}@*
+The @code{wcsrtombs} function converts a string of wide characters indirectly
+pointed to by @var{src} to a corresponding multibyte character string stored in
+the array pointed to by @var{dst}>.  No more than @var{len} bytes are written to
+@var{dst}>.
+
+If @var{dst}> is NULL, no characters are stored.
+
+If @var{dst}> is not NULL, the pointer pointed to by @var{src} is updated to point
+to the character after the one that conversion stopped at.  If conversion
+stops because a null character is encountered, *@var{src} is set to NULL.
+
+The mbstate_t argument, @var{ps}, is used to keep track of the shift state.  If
+it is NULL, @code{wcsrtombs} uses an internal, static mbstate_t object, which
+is initialized to the initial conversion state at program startup.
+
+The @code{wcsnrtombs} function behaves identically to @code{wcsrtombs}, except that
+conversion stops after reading at most @var{nwc} characters from the buffer
+pointed to by @var{src}.
+
+@*
+@strong{Returns}@*
+The @code{wcsrtombs} and @code{wcsnrtombs} functions return the number of bytes
+stored in the array pointed to by @var{dst} (not including any terminating
+null), if successful, otherwise it returns (size_t)-1.
+
+@*
+@strong{Portability}@*
+@code{wcsrtombs} is defined by C99 standard.
+@code{wcsnrtombs} is defined by the POSIX.1-2008 standard.
+
+@*

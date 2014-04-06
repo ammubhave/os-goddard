@@ -1,0 +1,28 @@
+@node wctrans
+@section @code{wctrans}---get wide-character translation type
+@findex wctrans
+@strong{Synopsis}
+@example
+#include <wctype.h>
+wctrans_t wctrans(const char *@var{c});
+
+@end example
+@strong{Description}@*
+@code{wctrans} is a function which takes a string @var{c} and gives back
+the appropriate wctrans_t type value associated with the string,
+if one exists.  The following values are guaranteed to be recognized:
+"tolower" and "toupper".
+
+@*
+@strong{Returns}@*
+@code{wctrans} returns 0 and sets @code{errno} to @code{EINVAL} if the
+given name is invalid.  Otherwise, it returns a valid non-zero wctrans_t
+value.
+
+@*
+@strong{Portability}@*
+@code{wctrans} is C99.
+
+No supporting OS subroutines are required.
+
+@*

@@ -1,0 +1,51 @@
+@node remquo
+@section @code{remquo}, @code{remquof}--remainder and part of quotient
+@findex remquo
+@findex remquof
+@strong{Synopsis}
+@example
+#include <math.h>
+double remquo(double @var{x}, double @var{y}, int *@var{quo});
+float remquof(float @var{x}, float @var{y}, int *@var{quo});
+
+@end example
+@strong{Description}@*
+The @code{remquo} functions compute the same remainder as the @code{remainder}
+functions; this value is in the range -@var{y}/2 ... +@var{y}/2.  In the object
+pointed to by @code{quo} they store a value whose sign is the sign of @code{x}/@code{y}
+and whose magnitude is congruent modulo 2**n to the magnitude of the integral
+quotient of @code{x}/@code{y}.  (That is, @code{quo} is given the n lsbs of the
+quotient, not counting the sign.)  This implementation uses n=31 if int is 32
+bits or more, otherwise, n is 1 less than the width of int.
+
+For example:
+@smallexample
+	remquo(-29.0, 3.0, &@var{quo})
+@end smallexample
+returns -1.0 and sets @var{quo}=10, and
+@smallexample
+	remquo(-98307.0, 3.0, &@var{quo})
+@end smallexample
+returns -0.0 and sets @var{quo}=-32769, although for 16-bit int, @var{quo}=-1.  In
+the latter case, the actual quotient of -(32769=0x8001) is reduced to -1
+because of the 15-bit limitation for the quotient.
+
+@*
+@strong{Returns}@*
+When either argument is NaN, NaN is returned.  If @var{y} is 0 or @var{x} is
+infinite (and neither is NaN), a domain error occurs (i.e. the "invalid"
+floating point exception is raised or errno is set to EDOM), and NaN is
+returned.
+Otherwise, the @code{remquo} functions return @var{x} REM @var{y}.
+
+@*
+@strong{Bugs}@*
+IEEE754-2008 calls for @code{remquo}(subnormal, inf) to cause the "underflow"
+floating-point exception.  This implementation does not.
+
+@*
+@strong{Portability}@*
+C99, POSIX.
+
+
+@*

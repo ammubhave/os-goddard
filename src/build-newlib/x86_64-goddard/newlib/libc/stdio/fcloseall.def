@@ -1,0 +1,32 @@
+@node fcloseall
+@section @code{fcloseall}---close all files
+@findex fcloseall
+@findex _fcloseall_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fcloseall(void);
+int _fcloseall_r (struct _reent *@var{ptr});
+
+@end example
+@strong{Description}@*
+@code{fcloseall} closes all files in the current reentrancy struct's domain.
+The function @code{_fcloseall_r} is the same function, except the reentrancy
+struct is passed in as the @var{ptr} argument.
+
+This function is not recommended as it closes all streams, including
+the std streams.
+
+@*
+@strong{Returns}@*
+@code{fclose} returns @code{0} if all closes are successful.  Otherwise,
+EOF is returned.
+
+@*
+@strong{Portability}@*
+@code{fcloseall} is a glibc extension.
+
+Required OS subroutines: @code{close}, @code{fstat}, @code{isatty}, @code{lseek},
+@code{read}, @code{sbrk}, @code{write}.
+
+@*

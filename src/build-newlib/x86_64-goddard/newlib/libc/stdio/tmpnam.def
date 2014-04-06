@@ -1,0 +1,69 @@
+@node tmpnam
+@section @code{tmpnam}, @code{tempnam}---name for a temporary file
+@findex tmpnam
+@findex tempnam
+@findex _tmpnam_r
+@findex _tempnam_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+char *tmpnam(char *@var{s});
+char *tempnam(char *@var{dir}, char *@var{pfx});
+char *_tmpnam_r(struct _reent *@var{reent}, char *@var{s});
+char *_tempnam_r(struct _reent *@var{reent}, char *@var{dir}, char *@var{pfx});
+
+@end example
+@strong{Description}@*
+Use either of these functions to generate a name for a temporary file.
+The generated name is guaranteed to avoid collision with other files
+(for up to @code{TMP_MAX} calls of either function).
+
+@code{tmpnam} generates file names with the value of @code{P_tmpdir}
+(defined in `@code{stdio.h}') as the leading directory component of the path.
+
+You can use the @code{tmpnam} argument @var{s} to specify a suitable area
+of memory for the generated filename; otherwise, you can call
+@code{tmpnam(NULL)} to use an internal static buffer.
+
+@code{tempnam} allows you more control over the generated filename: you
+can use the argument @var{dir} to specify the path to a directory for
+temporary files, and you can use the argument @var{pfx} to specify a
+prefix for the base filename.
+
+If @var{dir} is @code{NULL}, @code{tempnam} will attempt to use the value of
+environment variable @code{TMPDIR} instead; if there is no such value,
+@code{tempnam} uses the value of @code{P_tmpdir} (defined in `@code{stdio.h}').
+
+If you don't need any particular prefix to the basename of temporary
+files, you can pass @code{NULL} as the @var{pfx} argument to @code{tempnam}.
+
+@code{_tmpnam_r} and @code{_tempnam_r} are reentrant versions of @code{tmpnam}
+and @code{tempnam} respectively.  The extra argument @var{reent} is a
+pointer to a reentrancy structure.
+
+@*
+@strong{Warnings}@*
+The generated filenames are suitable for temporary files, but do not
+in themselves make files temporary.  Files with these names must still
+be explicitly removed when you no longer want them.
+
+If you supply your own data area @var{s} for @code{tmpnam}, you must ensure
+that it has room for at least @code{L_tmpnam} elements of type @code{char}.
+
+@*
+@strong{Returns}@*
+Both @code{tmpnam} and @code{tempnam} return a pointer to the newly
+generated filename.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{tmpnam}, but does not specify the use of
+@code{P_tmpdir}.  The System V Interface Definition (Issue 2) requires
+both @code{tmpnam} and @code{tempnam}.
+
+Supporting OS subroutines required: @code{close},  @code{fstat}, @code{getpid},
+@code{isatty}, @code{lseek}, @code{open}, @code{read}, @code{sbrk}, @code{write}.
+
+The global pointer @code{environ} is also required.
+
+@*

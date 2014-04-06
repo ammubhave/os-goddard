@@ -1,0 +1,30 @@
+@node isalpha
+@section @code{isalpha}---alphabetic character predicate
+@findex isalpha
+@strong{Synopsis}
+@example
+#include <ctype.h>
+int isalpha(int @var{c});
+
+@end example
+@strong{Description}@*
+@code{isalpha} is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero when @var{c} represents an
+alphabetic ASCII character, and 0 otherwise.  It is defined only if
+@var{c} is representable as an unsigned char or if @var{c} is EOF.
+
+You can use a compiled subroutine instead of the macro definition by
+undefining the macro using `@code{#undef isalpha}'.
+
+@*
+@strong{Returns}@*
+@code{isalpha} returns non-zero if @var{c} is a letter (@code{A}--@code{Z} or
+@code{a}--@code{z}). 
+
+@*
+@strong{Portability}@*
+@code{isalpha} is ANSI C.
+
+No supporting OS subroutines are required.
+
+@*

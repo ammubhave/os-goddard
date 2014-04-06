@@ -1,0 +1,49 @@
+@node assert
+@section @code{assert}---macro for debugging diagnostics
+@findex assert
+@strong{Synopsis}
+@example
+#include <assert.h>
+void assert(int @var{expression});
+
+@end example
+@strong{Description}@*
+Use this macro to embed debuggging diagnostic statements in
+your programs.  The argument @var{expression} should be an
+expression which evaluates to true (nonzero) when your program
+is working as you intended.
+
+When @var{expression} evaluates to false (zero), @code{assert}
+calls @code{abort}, after first printing a message showing what
+failed and where:
+
+@smallexample
+ Assertion failed: @var{expression}, file @var{filename}, line @var{lineno}, function: @var{func}
+@end smallexample
+
+If the name of the current function is not known (for example,
+when using a C89 compiler that does not understand __func__),
+the function location is omitted.
+
+The macro is defined to permit you to turn off all uses of
+@code{assert} at compile time by defining @code{NDEBUG} as a
+preprocessor variable.   If you do this, the @code{assert} macro
+expands to
+
+@smallexample
+ (void(0))
+@end smallexample
+
+@*
+@strong{Returns}@*
+@code{assert} does not return a value.
+
+@*
+@strong{Portability}@*
+The @code{assert} macro is required by ANSI, as is the behavior
+when @code{NDEBUG} is defined.
+
+Supporting OS subroutines required (only if enabled): @code{close}, @code{fstat},
+@code{getpid}, @code{isatty}, @code{kill}, @code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

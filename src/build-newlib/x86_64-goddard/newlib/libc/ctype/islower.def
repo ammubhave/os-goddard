@@ -1,0 +1,30 @@
+@node islower
+@section @code{islower}---lowercase character predicate
+@findex islower
+@strong{Synopsis}
+@example
+#include <ctype.h>
+int islower(int @var{c});
+
+@end example
+@strong{Description}@*
+@code{islower} is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for minuscules
+(lowercase alphabetic characters), and 0 for other characters.
+It is defined only if @var{c} is representable as an unsigned char or if
+@var{c} is EOF.
+
+You can use a compiled subroutine instead of the macro definition by
+undefining the macro using `@code{#undef islower}'.
+
+@*
+@strong{Returns}@*
+@code{islower} returns non-zero if @var{c} is a lowercase letter (@code{a}--@code{z}).
+
+@*
+@strong{Portability}@*
+@code{islower} is ANSI C.
+
+No supporting OS subroutines are required.
+
+@*

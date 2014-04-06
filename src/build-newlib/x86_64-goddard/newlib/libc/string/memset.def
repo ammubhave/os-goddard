@@ -1,0 +1,25 @@
+@node memset
+@section @code{memset}---set an area of memory
+@findex memset
+@strong{Synopsis}
+@example
+#include <string.h>
+void *memset(void *@var{dst}, int @var{c}, size_t @var{length});
+
+@end example
+@strong{Description}@*
+This function converts the argument @var{c} into an unsigned
+char and fills the first @var{length} characters of the array
+pointed to by @var{dst} to the value.
+
+@*
+@strong{Returns}@*
+@code{memset} returns the value of @var{dst}.
+
+@*
+@strong{Portability}@*
+@code{memset} is ANSI C.
+
+@code{memset} requires no supporting OS subroutines.
+
+@*

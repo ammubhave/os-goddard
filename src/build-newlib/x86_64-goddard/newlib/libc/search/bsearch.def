@@ -1,0 +1,40 @@
+@node bsearch
+@section @code{bsearch}---binary search
+@findex bsearch
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+void *bsearch(const void *@var{key}, const void *@var{base},
+    size_t @var{nmemb}, size_t @var{size},
+    int (*@var{compar})(const void *, const void *));
+
+@end example
+@strong{Description}@*
+@code{bsearch} searches an array beginning at @var{base} for any element
+that matches @var{key}, using binary search.  @var{nmemb} is the element
+count of the array; @var{size} is the size of each element.
+
+The array must be sorted in ascending order with respect to the
+comparison function @var{compar} (which you supply as the last argument of
+@code{bsearch}).
+
+You must define the comparison function @code{(*@var{compar})} to have two
+arguments; its result must be negative if the first argument is
+less than the second, zero if the two arguments match, and
+positive if the first argument is greater than the second (where
+``less than'' and ``greater than'' refer to whatever arbitrary
+ordering is appropriate).
+
+@*
+@strong{Returns}@*
+Returns a pointer to an element of @var{array} that matches @var{key}.  If
+more than one matching element is available, the result may point to
+any of them.
+
+@*
+@strong{Portability}@*
+@code{bsearch} is ANSI.
+
+No supporting OS subroutines are required.
+
+@*

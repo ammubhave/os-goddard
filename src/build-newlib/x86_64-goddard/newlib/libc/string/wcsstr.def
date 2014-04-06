@@ -1,0 +1,30 @@
+@node wcsstr
+@section @code{wcsstr}---find a wide-character substring 
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wchar_t *wcsstr(const wchar_t *__restrict @var{big},
+    const wchar_t *__restrict @var{little});
+
+@end example
+@strong{Description}@*
+The @code{wcsstr} function locates the first occurrence in the
+wide-character string pointed to by @var{big} of the sequence of
+wide characters (excluding the terminating null wide character) in the
+wide-character string pointed to by @var{little}.
+
+@*
+@strong{Returns}@*
+On successful completion, @code{wcsstr} returns a pointer to the located
+wide-character string, or a null pointer if the wide-character string
+is not found.
+
+If @var{little} points to a wide-character string with zero length,
+the function returns @var{big}.
+
+@*
+@strong{Portability}@*
+@code{wcsstr} is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+
+@*

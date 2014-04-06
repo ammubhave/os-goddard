@@ -1,0 +1,24 @@
+mkdeps.o: ../../gcc-4.8.2/libcpp/mkdeps.c config.h \
+ ../../gcc-4.8.2/libcpp/system.h \
+ ../../gcc-4.8.2/libcpp/../include/filenames.h \
+ ../../gcc-4.8.2/libcpp/../include/hashtab.h \
+ ../../gcc-4.8.2/libcpp/../include/ansidecl.h \
+ ../../gcc-4.8.2/libcpp/../include/libiberty.h \
+ ../../gcc-4.8.2/libcpp/../include/safe-ctype.h \
+ ../../gcc-4.8.2/libcpp/include/mkdeps.h
+
+config.h:
+
+../../gcc-4.8.2/libcpp/system.h:
+
+../../gcc-4.8.2/libcpp/../include/filenames.h:
+
+../../gcc-4.8.2/libcpp/../include/hashtab.h:
+
+../../gcc-4.8.2/libcpp/../include/ansidecl.h:
+
+../../gcc-4.8.2/libcpp/../include/libiberty.h:
+
+../../gcc-4.8.2/libcpp/../include/safe-ctype.h:
+
+../../gcc-4.8.2/libcpp/include/mkdeps.h:

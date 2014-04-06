@@ -1,0 +1,31 @@
+@node fputws
+@section @code{fputws}---write a wide character string in a file or stream
+@findex fputws   
+@findex _fputws_r
+@strong{Synopsis}
+@example
+#include <wchar.h>
+int fputws(const wchar_t *__restrict @var{ws}, FILE *__restrict @var{fp});
+
+#include <wchar.h>
+int _fputws_r(struct _reent *@var{ptr}, const wchar_t *@var{ws},
+    FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{fputws} writes the wide character string at @var{ws} (but without the
+trailing null) to the file or stream identified by @var{fp}.
+
+@code{_fputws_r} is simply the reentrant version of @code{fputws} that takes
+an additional reentrant struct pointer argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+If successful, the result is a non-negative integer; otherwise, the result
+is @code{-1} to indicate an error.
+
+@*
+@strong{Portability}@*
+C99, POSIX.1-2001
+
+@*

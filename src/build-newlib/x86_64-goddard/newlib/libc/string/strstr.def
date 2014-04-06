@@ -1,0 +1,27 @@
+@node strstr
+@section @code{strstr}---find string segment
+@findex strstr
+@strong{Synopsis}
+@example
+#include <string.h>
+char *strstr(const char *@var{s1}, const char *@var{s2});
+
+@end example
+@strong{Description}@*
+Locates the first occurrence in the string pointed to by @var{s1} of
+the sequence of characters in the string pointed to by @var{s2}
+(excluding the terminating null character).
+
+@*
+@strong{Returns}@*
+Returns a pointer to the located string segment, or a null
+pointer if the string @var{s2} is not found. If @var{s2} points to
+a string with zero length, @var{s1} is returned.
+
+@*
+@strong{Portability}@*
+@code{strstr} is ANSI C.
+
+@code{strstr} requires no supporting OS subroutines.
+
+@*

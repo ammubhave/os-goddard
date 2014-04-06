@@ -1,0 +1,16 @@
+@node _times_r
+@section @code{_times_r}---Reentrant version of times
+@findex _times_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+#include <sys/times.h>
+clock_t _times_r(struct _reent *@var{ptr}, struct tms *@var{ptms});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{times}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

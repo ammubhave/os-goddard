@@ -1,0 +1,66 @@
+@node viprintf
+@section @code{viprintf}, @code{vfiprintf}, @code{vsiprintf}, @code{vsniprintf}, @code{vasiprintf}, @code{vasniprintf}---format argument list (integer only)
+@findex viprintf
+@findex _viprintf_r
+@findex vfiprintf
+@findex _vfiprintf_r
+@findex vsiprintf
+@findex _vsiprintf_r
+@findex vsniprintf
+@findex _vsniprintf_r
+@findex vasiprintf
+@findex _vasiprintf_r
+@findex vasniprintf
+@findex _vasniprintf_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+#include <stdarg.h>
+int viprintf(const char *@var{fmt}, va_list @var{list});
+int vfiprintf(FILE *@var{fp}, const char *@var{fmt}, va_list @var{list});
+int vsiprintf(char *@var{str}, const char *@var{fmt}, va_list @var{list});
+int vsniprintf(char *@var{str}, size_t @var{size}, const char *@var{fmt},
+    va_list @var{list});
+int vasiprintf(char **@var{strp}, const char *@var{fmt}, va_list @var{list});
+char *vasniprintf(char *@var{str}, size_t *@var{size}, const char *@var{fmt},
+    va_list @var{list});
+
+int _viprintf_r(struct _reent *@var{reent}, const char *@var{fmt},
+    va_list @var{list});
+int _vfiprintf_r(struct _reent *@var{reent}, FILE *@var{fp},
+    const char *@var{fmt}, va_list @var{list});
+int _vsiprintf_r(struct _reent *@var{reent}, char *@var{str},
+    const char *@var{fmt}, va_list @var{list});
+int _vsniprintf_r(struct _reent *@var{reent}, char *@var{str},
+    size_t @var{size}, const char *@var{fmt}, va_list @var{list});
+int _vasiprintf_r(struct _reent *@var{reent}, char **@var{str},
+    const char *@var{fmt}, va_list @var{list});
+char *_vasniprintf_r(struct _reent *@var{reent}, char *@var{str},
+    size_t *@var{size}, const char *@var{fmt}, va_list @var{list});
+
+@end example
+@strong{Description}@*
+@code{viprintf}, @code{vfiprintf}, @code{vasiprintf}, @code{vsiprintf},
+@code{vsniprintf}, and @code{vasniprintf} are (respectively) variants of
+@code{iprintf}, @code{fiprintf}, @code{asiprintf}, @code{siprintf}, @code{sniprintf},
+and @code{asniprintf}.  They differ only in allowing their caller to pass
+the variable argument list as a @code{va_list} object (initialized by
+@code{va_start}) rather than directly accepting a variable number of
+arguments.  The caller is responsible for calling @code{va_end}.
+
+@code{_viprintf_r}, @code{_vfiprintf_r}, @code{_vasiprintf_r},
+@code{_vsiprintf_r}, @code{_vsniprintf_r}, and @code{_vasniprintf_r} are
+reentrant versions of the above.
+
+@*
+@strong{Returns}@*
+The return values are consistent with the corresponding functions:
+
+@*
+@strong{Portability}@*
+All of these functions are newlib extensions.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

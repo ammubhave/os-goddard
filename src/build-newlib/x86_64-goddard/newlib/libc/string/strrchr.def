@@ -1,0 +1,26 @@
+@node strrchr
+@section @code{strrchr}---reverse search for character in string
+@findex strrchr
+@strong{Synopsis}
+@example
+#include <string.h>
+char * strrchr(const char *@var{string}, int @var{c});
+
+@end example
+@strong{Description}@*
+This function finds the last occurence of @var{c} (converted to
+a char) in the string pointed to by @var{string} (including the
+terminating null character).
+
+@*
+@strong{Returns}@*
+Returns a pointer to the located character, or a null pointer
+if @var{c} does not occur in @var{string}.
+
+@*
+@strong{Portability}@*
+@code{strrchr} is ANSI C.
+
+@code{strrchr} requires no supporting OS subroutines.
+
+@*

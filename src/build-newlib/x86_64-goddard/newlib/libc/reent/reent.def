@@ -1,0 +1,8 @@
+@node reent
+@section @code{reent}---definition of impure data.
+@findex reent
+@strong{Description}@*
+This module defines the impure data area used by the
+non-reentrant functions, such as strtok.
+
+@*

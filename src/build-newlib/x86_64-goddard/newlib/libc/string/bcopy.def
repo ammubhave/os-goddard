@@ -1,0 +1,20 @@
+@node bcopy
+@section @code{bcopy}---copy memory regions
+@strong{Synopsis}
+@example
+#include <strings.h>
+void bcopy(const void *@var{in}, void *@var{out}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+This function copies @var{n} bytes from the memory region
+pointed to by @var{in} to the memory region pointed to by
+@var{out}.
+
+This function is implemented in term of @code{memmove}.
+
+@*
+@strong{Portability}@*
+@code{bcopy} requires no supporting OS subroutines.
+
+@*

@@ -1,0 +1,36 @@
+@node raise
+@section @code{raise}---send a signal
+@findex raise
+@findex _raise_r
+@strong{Synopsis}
+@example
+#include <signal.h>
+int raise(int @var{sig});
+
+int _raise_r(void *@var{reent}, int @var{sig});
+
+@end example
+@strong{Description}@*
+Send the signal @var{sig} (one of the macros from `@code{sys/signal.h}').
+This interrupts your program's normal flow of execution, and allows a signal
+handler (if you've defined one, using @code{signal}) to take control.
+
+The alternate function @code{_raise_r} is a reentrant version.  The extra
+argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+The result is @code{0} if @var{sig} was successfully raised, @code{1}
+otherwise.  However, the return value (since it depends on the normal
+flow of execution) may not be visible, unless the signal handler for
+@var{sig} terminates with a @code{return} or unless @code{SIG_IGN} is in
+effect for this signal.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{raise}, but allows the full set of signal numbers
+to vary from one implementation to another.
+
+Required OS subroutines: @code{getpid}, @code{kill}.
+
+@*

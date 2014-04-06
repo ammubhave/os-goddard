@@ -1,0 +1,28 @@
+@node wcsnlen
+@section @code{wcsnlen}---get fixed-size wide-character string length
+@findex wcsnlen
+@strong{Synopsis}
+@example
+#include <wchar.h>
+size_t wcsnlen(const wchar_t *@var{s}, size_t @var{maxlen});
+
+@end example
+@strong{Description}@*
+The @code{wcsnlen} function computes the number of wide-character codes
+in the wide-character string pointed to by @var{s} not including the
+terminating L'\0' wide character but at most @var{maxlen} wide
+characters.
+
+@*
+@strong{Returns}@*
+@code{wcsnlen} returns the length of @var{s} if it is less then @var{maxlen},
+or @var{maxlen} if there is no L'\0' wide character in first @var{maxlen}
+characters.
+
+@*
+@strong{Portability}@*
+@code{wcsnlen} is a GNU extension.
+
+@code{wcsnlen} requires no supporting OS subroutines.
+
+@*

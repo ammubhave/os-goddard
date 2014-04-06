@@ -5,7 +5,7 @@ class KConsoleOut
 {
 public:
     KConsoleOut& operator<<(char);
-    KConsoleOut& operator<<(char*);
+    KConsoleOut& operator<<(const char*);
     
     void put(char);
     void putint(long);

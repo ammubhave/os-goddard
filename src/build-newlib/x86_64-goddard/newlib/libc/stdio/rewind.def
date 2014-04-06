@@ -1,0 +1,27 @@
+@node rewind
+@section @code{rewind}---reinitialize a file or stream
+@findex rewind
+@findex _rewind_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+void rewind(FILE *@var{fp});
+void _rewind_r(struct _reent *@var{ptr}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{rewind} returns the file position indicator (if any) for the file
+or stream identified by @var{fp} to the beginning of the file.  It also
+clears any error indicator and flushes any pending output.
+
+@*
+@strong{Returns}@*
+@code{rewind} does not return a result.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{rewind}.
+
+No supporting OS subroutines are required.
+
+@*

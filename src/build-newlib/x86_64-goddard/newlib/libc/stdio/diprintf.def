@@ -1,0 +1,36 @@
+@node diprintf
+@section @code{diprintf}, @code{vdiprintf}---print to a file descriptor (integer only)
+@findex diprintf
+@findex _diprintf_r
+@findex vdiprintf
+@findex _vdiprintf_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+#include <stdarg.h>
+int diprintf(int @var{fd}, const char *@var{format}, ...);
+int vdiprintf(int @var{fd}, const char *@var{format}, va_list @var{ap});
+int _diprintf_r(struct _reent *@var{ptr}, int @var{fd},
+    const char *@var{format}, ...);
+int _vdiprintf_r(struct _reent *@var{ptr}, int @var{fd},
+    const char *@var{format}, va_list @var{ap});
+
+@end example
+@strong{Description}@*
+@code{diprintf} and @code{vdiprintf} are similar to @code{dprintf} and @code{vdprintf},
+except that only integer format specifiers are processed.
+
+The functions @code{_diprintf_r} and @code{_vdiprintf_r} are simply
+reentrant versions of the functions above.
+
+@*
+@strong{Returns}@*
+Similar to @code{dprintf} and @code{vdprintf}.
+
+@*
+@strong{Portability}@*
+This set of functions is an integer-only extension, and is not portable.
+
+Supporting OS subroutines required: @code{sbrk}, @code{write}.
+
+@*

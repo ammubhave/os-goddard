@@ -1,0 +1,36 @@
+@node calloc
+@section @code{calloc}---allocate space for arrays
+@findex calloc
+@findex _calloc_r
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+void *calloc(size_t @var{n}, size_t @var{s});
+void *_calloc_r(void *@var{reent}, size_t @var{n}, size_t @var{s});
+@end example
+@strong{Description}@*
+Use @code{calloc} to request a block of memory sufficient to hold an
+array of @var{n} elements, each of which has size @var{s}.
+
+The memory allocated by @code{calloc} comes out of the same memory pool
+used by @code{malloc}, but the memory block is initialized to all zero
+bytes.  (To avoid the overhead of initializing the space, use
+@code{malloc} instead.)
+
+The alternate function @code{_calloc_r} is reentrant.
+The extra argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+If successful, a pointer to the newly allocated space.
+
+If unsuccessful, @code{NULL}.
+
+@*
+@strong{Portability}@*
+@code{calloc} is ANSI.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

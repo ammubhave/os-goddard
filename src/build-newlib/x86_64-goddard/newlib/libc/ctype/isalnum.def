@@ -1,0 +1,30 @@
+@node isalnum
+@section @code{isalnum}---alphanumeric character predicate
+@findex isalnum
+@strong{Synopsis}
+@example
+#include <ctype.h>
+int isalnum(int @var{c});
+
+@end example
+@strong{Description}@*
+@code{isalnum} is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for alphabetic or
+numeric ASCII characters, and @code{0} for other arguments.  It is defined
+only if @var{c} is representable as an unsigned char or if @var{c} is EOF.
+
+You can use a compiled subroutine instead of the macro definition by
+undefining the macro using `@code{#undef isalnum}'.
+
+@*
+@strong{Returns}@*
+@code{isalnum} returns non-zero if @var{c} is a letter (@code{a}--@code{z} or
+@code{A}--@code{Z}) or a digit (@code{0}--@code{9}).
+
+@*
+@strong{Portability}@*
+@code{isalnum} is ANSI C.
+
+No OS subroutines are required.
+
+@*

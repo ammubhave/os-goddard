@@ -1,0 +1,39 @@
+@node dprintf
+@section @code{dprintf}, @code{vdprintf}---print to a file descriptor
+@findex dprintf
+@findex _dprintf_r
+@findex vdprintf
+@findex _vdprintf_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+#include <stdarg.h>
+int dprintf(int @var{fd}, const char *restrict @var{format}, ...);
+int vdprintf(int @var{fd}, const char *restrict @var{format},
+    va_list @var{ap});
+int _dprintf_r(struct _reent *@var{ptr}, int @var{fd},
+    const char *restrict @var{format}, ...);
+int _vdprintf_r(struct _reent *@var{ptr}, int @var{fd},
+    const char *restrict @var{format}, va_list @var{ap});
+
+@end example
+@strong{Description}@*
+@code{dprintf} and @code{vdprintf} allow printing a format, similarly to
+@code{printf}, but write to a file descriptor instead of to a @code{FILE}
+stream.
+
+The functions @code{_dprintf_r} and @code{_vdprintf_r} are simply
+reentrant versions of the functions above.
+
+@*
+@strong{Returns}@*
+The return value and errors are exactly as for @code{write}, except that
+@code{errno} may also be set to @code{ENOMEM} if the heap is exhausted.
+
+@*
+@strong{Portability}@*
+This function is originally a GNU extension in glibc and is not portable.
+
+Supporting OS subroutines required: @code{sbrk}, @code{write}.
+
+@*

@@ -1,0 +1,30 @@
+@node wcscat
+@section @code{wcscat}---concatenate two wide-character strings
+@findex wcscat
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wchar_t *wcscat(wchar_t *__restrict @var{s1},
+    const wchar_t *__restrict @var{s2});
+
+@end example
+@strong{Description}@*
+The @code{wcscat} function appends a copy of the wide-character string
+pointed to by @var{s2} (including the terminating null wide-character
+code) to the end of the wide-character string pointed to by @var{s1}.
+The initial wide-character code of @var{s2} overwrites the null
+wide-character code at the end of @var{s1}. If copying takes place between
+objects that overlap, the behaviour is undefined. 
+
+@*
+@strong{Returns}@*
+The @code{wcscat} function returns @var{s1};
+no return value is reserved to indicate an error. 
+
+@*
+@strong{Portability}@*
+@code{wcscat} is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+No supporting OS subroutines are required.
+
+@*

@@ -1,0 +1,26 @@
+@node csin
+@section @code{csin}, @code{csinf}---complex sine
+@findex csin
+@findex csinf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex csin(double complex @var{z});
+float complex csinf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex sine of @var{z}.
+
+@code{csinf} is identical to @code{csin}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+These functions return the complex sine value.
+
+@*
+@strong{Portability}@*
+@code{csin} and @code{csinf} are ISO C99
+
+@*

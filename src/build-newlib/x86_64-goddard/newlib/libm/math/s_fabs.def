@@ -1,0 +1,30 @@
+@node fabs
+@section @code{fabs}, @code{fabsf}---absolute value (magnitude)
+@findex fabs
+@findex fabsf
+@strong{Synopsis}
+@example
+#include <math.h>
+double fabs(double @var{x});
+float fabsf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{fabs} and @code{fabsf} calculate 
+@tex
+$|x|$, 
+@end tex
+the absolute value (magnitude) of the argument @var{x}, by direct
+manipulation of the bit representation of @var{x}.
+
+@*
+@strong{Returns}@*
+The calculated value is returned.  No errors are detected.
+
+@*
+@strong{Portability}@*
+@code{fabs} is ANSI.
+@code{fabsf} is an extension.
+
+
+@*

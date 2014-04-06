@@ -1,0 +1,38 @@
+@node fsetpos
+@section @code{fsetpos}---restore position of a stream or file
+@findex fsetpos
+@findex _fsetpos_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fsetpos(FILE *@var{fp}, const fpos_t *@var{pos});
+int _fsetpos_r(struct _reent *@var{ptr}, FILE *@var{fp},
+    const fpos_t *@var{pos});
+
+@end example
+@strong{Description}@*
+Objects of type @code{FILE} can have a ``position'' that records how much
+of the file your program has already read.  Many of the @code{stdio} functions
+depend on this position, and many change it as a side effect.
+
+You can use @code{fsetpos} to return the file identified by @var{fp} to a previous
+position @code{*@var{pos}} (after first recording it with @code{fgetpos}).
+
+See @code{fseek} for a similar facility.
+
+@*
+@strong{Returns}@*
+@code{fgetpos} returns @code{0} when successful.  If @code{fgetpos} fails, the
+result is @code{1}.  The reason for failure is indicated in @code{errno}:
+either @code{ESPIPE} (the stream identified by @var{fp} doesn't support
+repositioning) or @code{EINVAL} (invalid file position).
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{fsetpos}, but does not specify the nature of
+@code{*@var{pos}} beyond identifying it as written by @code{fgetpos}.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

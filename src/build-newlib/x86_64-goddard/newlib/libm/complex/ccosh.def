@@ -1,0 +1,26 @@
+@node ccosh
+@section @code{ccosh}, @code{ccoshf}---complex hyperbolic cosine
+@findex ccosh
+@findex ccoshf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex ccosh(double complex @var{z});
+float complex ccoshf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex hyperbolic cosine of @var{z}.
+
+@code{ccoshf} is identical to @code{ccosh}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+These functions return the complex hyperbolic cosine value.
+
+@*
+@strong{Portability}@*
+@code{ccosh} and @code{ccoshf} are ISO C99
+
+@*

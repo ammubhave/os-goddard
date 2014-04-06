@@ -1,0 +1,54 @@
+@node viscanf
+@section @code{viscanf}, @code{vfiscanf}, @code{vsiscanf}---format argument list
+@findex viscanf
+@findex _viscanf_r
+@findex vfiscanf
+@findex _vfiscanf_r
+@findex vsiscanf
+@findex _vsiscanf_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+#include <stdarg.h>
+int viscanf(const char *@var{fmt}, va_list @var{list});
+int vfiscanf(FILE *@var{fp}, const char *@var{fmt}, va_list @var{list});
+int vsiscanf(const char *@var{str}, const char *@var{fmt}, va_list @var{list});
+
+int _viscanf_r(struct _reent *@var{reent}, const char *@var{fmt}, 
+    va_list @var{list});
+int _vfiscanf_r(struct _reent *@var{reent}, FILE *@var{fp}, const char *@var{fmt}, 
+    va_list @var{list});
+int _vsiscanf_r(struct _reent *@var{reent}, const char *@var{str},
+    const char *@var{fmt}, va_list @var{list});
+
+@end example
+@strong{Description}@*
+@code{viscanf}, @code{vfiscanf}, and @code{vsiscanf} are (respectively) variants
+of @code{iscanf}, @code{fiscanf}, and @code{siscanf}.  They differ only in 
+allowing their caller to pass the variable argument list as a 
+@code{va_list} object (initialized by @code{va_start}) rather than 
+directly accepting a variable number of arguments.
+
+@*
+@strong{Returns}@*
+The return values are consistent with the corresponding functions:
+@code{viscanf} returns the number of input fields successfully scanned,
+converted, and stored; the return value does not include scanned
+fields which were not stored.  
+
+If @code{viscanf} attempts to read at end-of-file, the return value 
+is @code{EOF}.
+
+If no fields were stored, the return value is @code{0}.
+
+The routines @code{_viscanf_r}, @code{_vfiscanf_f}, and @code{_vsiscanf_r} are
+reentrant versions which take an additional first parameter which points to the
+reentrancy structure.
+
+@*
+@strong{Portability}@*
+These are newlib extensions.
+
+Supporting OS subroutines required:
+
+@*

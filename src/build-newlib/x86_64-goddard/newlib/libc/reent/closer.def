@@ -1,0 +1,15 @@
+@node _close_r
+@section @code{_close_r}---Reentrant version of close
+@findex _close_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _close_r(struct _reent *@var{ptr}, int @var{fd});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{close}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

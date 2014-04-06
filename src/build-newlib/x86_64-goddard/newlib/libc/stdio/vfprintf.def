@@ -1,0 +1,67 @@
+@node vfprintf
+@section @code{vfprintf}, @code{vprintf}, @code{vsprintf}, @code{vsnprintf}, @code{vasprintf}, @code{vasnprintf}---format argument list
+@findex vfprintf
+@findex _vfprintf_r
+@findex vprintf
+@findex _vprintf_r
+@findex vsprintf
+@findex _vsprintf_r
+@findex vsnprintf
+@findex _vsnprintf_r
+@findex vasprintf
+@findex _vasprintf_r
+@findex vasnprintf
+@findex _vasnprintf_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+#include <stdarg.h>
+int vprintf(const char *@var{fmt}, va_list @var{list});
+int vfprintf(FILE *@var{fp}, const char *@var{fmt}, va_list @var{list});
+int vsprintf(char *@var{str}, const char *@var{fmt}, va_list @var{list});
+int vsnprintf(char *@var{str}, size_t @var{size}, const char *@var{fmt},
+    va_list @var{list});
+int vasprintf(char **@var{strp}, const char *@var{fmt}, va_list @var{list});
+char *vasnprintf(char *@var{str}, size_t *@var{size}, const char *@var{fmt},
+    va_list @var{list});
+
+int _vprintf_r(struct _reent *@var{reent}, const char *@var{fmt},
+    va_list @var{list});
+int _vfprintf_r(struct _reent *@var{reent}, FILE *@var{fp},
+    const char *@var{fmt}, va_list @var{list});
+int _vsprintf_r(struct _reent *@var{reent}, char *@var{str},
+    const char *@var{fmt}, va_list @var{list});
+int _vasprintf_r(struct _reent *@var{reent}, char **@var{str},
+    const char *@var{fmt}, va_list @var{list});
+int _vsnprintf_r(struct _reent *@var{reent}, char *@var{str},
+    size_t @var{size}, const char *@var{fmt}, va_list @var{list});
+char *_vasnprintf_r(struct _reent *@var{reent}, char *@var{str},
+    size_t *@var{size}, const char *@var{fmt}, va_list @var{list});
+
+@end example
+@strong{Description}@*
+@code{vprintf}, @code{vfprintf}, @code{vasprintf}, @code{vsprintf}, @code{vsnprintf},
+and @code{vasnprintf} are (respectively) variants of @code{printf},
+@code{fprintf}, @code{asprintf}, @code{sprintf}, @code{snprintf}, and
+@code{asnprintf}.  They differ only in allowing their caller to pass the
+variable argument list as a @code{va_list} object (initialized by
+@code{va_start}) rather than directly accepting a variable number of
+arguments.  The caller is responsible for calling @code{va_end}.
+
+@code{_vprintf_r}, @code{_vfprintf_r}, @code{_vasprintf_r}, @code{_vsprintf_r},
+@code{_vsnprintf_r}, and @code{_vasnprintf_r} are reentrant versions of the
+above.
+
+@*
+@strong{Returns}@*
+The return values are consistent with the corresponding functions.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{vprintf}, @code{vfprintf}, @code{vsprintf}, and
+@code{vsnprintf}.  The remaining functions are newlib extensions.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

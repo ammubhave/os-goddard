@@ -1,0 +1,36 @@
+@node casin
+@section @code{casin}, @code{casinf}---complex arc sine
+@findex casin
+@findex casinf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex casin(double complex @var{z});
+float complex casinf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex arc sine of @var{z},
+with branch cuts outside the interval [-1, +1] along the real axis.
+
+@code{casinf} is identical to @code{casin}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+@ifnottex
+These functions return the complex arc sine value, in the range
+of a strip mathematically  unbounded  along the imaginary axis
+and in the interval [-pi/2, +pi/2] along the real axis.
+@end ifnottex
+@tex
+These functions return the complex arc sine value, in the range
+of a strip mathematically  unbounded  along the imaginary axis
+and in the interval [$-\pi/2$, $+\pi/2$] along the real axis.
+@end tex
+
+@*
+@strong{Portability}@*
+@code{casin} and @code{casinf} are ISO C99
+
+@*

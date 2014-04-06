@@ -1,0 +1,47 @@
+@node putc
+@section @code{putc}---write a character (macro)
+@findex putc
+@findex _putc_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int putc(int @var{ch}, FILE *@var{fp});
+
+#include <stdio.h>
+int _putc_r(struct _reent *@var{ptr}, int @var{ch}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{putc} is a macro, defined in @code{stdio.h}.  @code{putc}
+writes the argument @var{ch} to the file or stream identified by
+@var{fp}, after converting it from an @code{int} to an @code{unsigned char}.
+
+If the file was opened with append mode (or if the stream cannot
+support positioning), then the new character goes at the end of the
+file or stream.  Otherwise, the new character is written at the
+current value of the position indicator, and the position indicator
+advances by one.
+
+For a subroutine version of this macro, see @code{fputc}.
+
+The @code{_putc_r} function is simply the reentrant version of
+@code{putc} that takes an additional reentrant structure argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+If successful, @code{putc} returns its argument @var{ch}.  If an error
+intervenes, the result is @code{EOF}.  You can use `@code{ferror(@var{fp})}' to
+query for errors.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{putc}; it suggests, but does not require, that
+@code{putc} be implemented as a macro.  The standard explicitly permits
+macro implementations of @code{putc} to use the @var{fp} argument more than once;
+therefore, in a portable program, you should not use an expression
+with side effects as this argument.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

@@ -1,0 +1,54 @@
+@node vfscanf
+@section @code{vfscanf}, @code{vscanf}, @code{vsscanf}---format argument list
+@findex vfscanf
+@findex _vfscanf_r
+@findex vscanf
+@findex _vscanf_r
+@findex vsscanf
+@findex _vsscanf_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+#include <stdarg.h>
+int vscanf(const char *@var{fmt}, va_list @var{list});
+int vfscanf(FILE *@var{fp}, const char *@var{fmt}, va_list @var{list});
+int vsscanf(const char *@var{str}, const char *@var{fmt}, va_list @var{list});
+
+int _vscanf_r(struct _reent *@var{reent}, const char *@var{fmt},
+    va_list @var{list});
+int _vfscanf_r(struct _reent *@var{reent}, FILE *@var{fp}, const char *@var{fmt},
+    va_list @var{list});
+int _vsscanf_r(struct _reent *@var{reent}, const char *@var{str},
+    const char *@var{fmt}, va_list @var{list});
+
+@end example
+@strong{Description}@*
+@code{vscanf}, @code{vfscanf}, and @code{vsscanf} are (respectively) variants
+of @code{scanf}, @code{fscanf}, and @code{sscanf}.  They differ only in
+allowing their caller to pass the variable argument list as a
+@code{va_list} object (initialized by @code{va_start}) rather than
+directly accepting a variable number of arguments.
+
+@*
+@strong{Returns}@*
+The return values are consistent with the corresponding functions:
+@code{vscanf} returns the number of input fields successfully scanned,
+converted, and stored; the return value does not include scanned
+fields which were not stored.
+
+If @code{vscanf} attempts to read at end-of-file, the return value
+is @code{EOF}.
+
+If no fields were stored, the return value is @code{0}.
+
+The routines @code{_vscanf_r}, @code{_vfscanf_f}, and @code{_vsscanf_r} are
+reentrant versions which take an additional first parameter which points to the
+reentrancy structure.
+
+@*
+@strong{Portability}@*
+These are GNU extensions.
+
+Supporting OS subroutines required:
+
+@*

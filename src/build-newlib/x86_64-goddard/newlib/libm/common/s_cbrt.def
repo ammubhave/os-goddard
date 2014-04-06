@@ -1,0 +1,23 @@
+@node cbrt
+@section @code{cbrt}, @code{cbrtf}---cube root
+@findex cbrt
+@findex cbrtf
+@strong{Synopsis}
+@example
+#include <math.h>
+double cbrt(double @var{x});
+float  cbrtf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{cbrt} computes the cube root of the argument.
+
+@*
+@strong{Returns}@*
+The cube root is returned. 
+
+@*
+@strong{Portability}@*
+@code{cbrt} is in System V release 4.  @code{cbrtf} is an extension.
+
+@*

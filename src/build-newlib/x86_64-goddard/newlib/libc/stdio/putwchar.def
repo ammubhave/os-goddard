@@ -1,0 +1,30 @@
+@node putwchar
+@section @code{putwchar}---write a wide character to standard output
+@findex putwchar
+@findex _putwchar_r
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wint_t putwchar(wchar_t @var{wc});
+
+wint_t _putwchar_r(struct _reent *@var{reent}, wchar_t @var{wc});
+
+@end example
+@strong{Description}@*
+The @code{putwchar} function or macro is the wide-character equivalent of
+the @code{putchar} function. It writes the wide character wc to stdout.
+
+The alternate function @code{_putwchar_r} is a reentrant version.  The
+extra argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+If successful, @code{putwchar} returns its argument @var{wc}.  If an error
+intervenes, the result is @code{EOF}.  You can use `@code{ferror(stdin)}' to
+query for errors.
+
+@*
+@strong{Portability}@*
+C99
+
+@*

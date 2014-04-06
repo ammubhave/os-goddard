@@ -1,0 +1,27 @@
+@node fdopen
+@section @code{fdopen}---turn open file into a stream
+@findex fdopen
+@findex _fdopen_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+FILE *fdopen(int @var{fd}, const char *@var{mode});
+FILE *_fdopen_r(struct _reent *@var{reent},
+    int @var{fd}, const char *@var{mode});
+
+@end example
+@strong{Description}@*
+@code{fdopen} produces a file descriptor of type @code{FILE *}, from a
+descriptor for an already-open file (returned, for example, by the
+system subroutine @code{open} rather than by @code{fopen}).
+The @var{mode} argument has the same meanings as in @code{fopen}.
+
+@*
+@strong{Returns}@*
+File pointer or @code{NULL}, as for @code{fopen}.
+
+@*
+@strong{Portability}@*
+@code{fdopen} is ANSI.
+
+@*

@@ -1,0 +1,27 @@
+@node cabs
+@section @code{cabs}, @code{cabsf}---complex absolute-value
+@findex cabs
+@findex cabsf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double cabs(double complex @var{z});
+float cabsf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute compute the complex absolute value 
+(also called norm, modulus, or magnitude) of @var{z}. 
+
+@code{cabsf} is identical to @code{cabs}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+The cabs functions return the complex absolute value.
+
+@*
+@strong{Portability}@*
+@code{cabs} and @code{cabsf} are ISO C99
+
+@*

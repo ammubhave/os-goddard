@@ -1,0 +1,26 @@
+@node cimag
+@section @code{cimag}, @code{cimagf}---imaginary part
+@findex cimag
+@findex cimagf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double cimag(double complex @var{z});
+float cimagf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the imaginary part of @var{z}.
+
+@code{cimagf} is identical to @code{cimag}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+The cimag functions return the imaginary part value (as a real).
+
+@*
+@strong{Portability}@*
+@code{cimag} and @code{cimagf} are ISO C99
+
+@*

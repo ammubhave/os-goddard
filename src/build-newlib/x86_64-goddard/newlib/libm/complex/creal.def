@@ -1,0 +1,26 @@
+@node creal
+@section @code{creal}, @code{crealf}---real part
+@findex creal
+@findex crealf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double creal(double complex @var{z});
+float crealf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the real part of @var{z}.
+
+@code{crealf} is identical to @code{creal}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+The creal functions return the real part value.
+
+@*
+@strong{Portability}@*
+@code{creal} and @code{crealf} are ISO C99
+
+@*

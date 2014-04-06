@@ -1,0 +1,42 @@
+@node scalbn
+@section @code{scalbn}, @code{scalbnf}, @code{scalbln}, @code{scalblnf}--scale by power of FLT_RADIX (=2)
+@findex scalbn
+@findex scalbnf
+@findex scalbln
+@findex scalblnf
+@strong{Synopsis}
+@example
+#include <math.h>
+double scalbn(double @var{x}, int @var{n});
+float scalbnf(float @var{x}, int @var{n});
+double scalbln(double @var{x}, long int @var{n});
+float scalblnf(float @var{x}, long int @var{n});
+
+@end example
+@strong{Description}@*
+The @code{scalbn} and @code{scalbln} functions compute 
+@ifnottex
+@var{x} times FLT_RADIX to the power @var{n}.
+@end ifnottex
+@tex
+$x \cdot FLT\_RADIX^n$.
+@end tex
+efficiently.  The result is computed by manipulating the exponent, rather than
+by actually performing an exponentiation or multiplication.  In this
+floating-point implementation FLT_RADIX=2, which makes the @code{scalbn}
+functions equivalent to the @code{ldexp} functions.
+
+@*
+@strong{Returns}@*
+@var{x} times 2 to the power @var{n}.  A range error may occur.
+
+@*
+@strong{Portability}@*
+ANSI C, POSIX
+
+@*
+@strong{See Also}@*
+@code{ldexp}
+
+
+@*

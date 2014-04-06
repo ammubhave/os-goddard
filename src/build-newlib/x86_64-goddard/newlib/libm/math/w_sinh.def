@@ -1,0 +1,42 @@
+@node sinh
+@section @code{sinh}, @code{sinhf}---hyperbolic sine
+@findex sinh
+@findex sinhf
+@strong{Synopsis}
+@example
+#include <math.h>
+double sinh(double @var{x});
+float  sinhf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{sinh} computes the hyperbolic sine of the argument @var{x}.
+Angles are specified in radians.   @code{sinh}(@var{x}) is defined as 
+@ifnottex
+@smallexample
+ (exp(@var{x}) - exp(-@var{x}))/2
+@end smallexample
+@end ifnottex
+@tex
+$${e^x - e^{-x}}\over 2$$
+@end tex
+
+@code{sinhf} is identical, save that it takes and returns @code{float} values.
+
+@*
+@strong{Returns}@*
+The hyperbolic sine of @var{x} is returned.  
+
+When the correct result is too large to be representable (an
+overflow),  @code{sinh} returns @code{HUGE_VAL} with the
+appropriate sign, and sets the global value @code{errno} to
+@code{ERANGE}. 
+
+You can modify error handling for these functions with @code{matherr}.
+
+@*
+@strong{Portability}@*
+@code{sinh} is ANSI C.  
+@code{sinhf} is an extension.
+
+@*

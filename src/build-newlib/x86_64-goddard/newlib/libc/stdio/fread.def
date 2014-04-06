@@ -1,0 +1,40 @@
+@node fread
+@section @code{fread}---read array elements from a file
+@findex fread
+@findex _fread_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+size_t fread(void *restrict @var{buf}, size_t @var{size}, size_t @var{count},
+    FILE *restrict @var{fp});
+
+#include <stdio.h>
+size_t _fread_r(struct _reent *@var{ptr}, void *restrict @var{buf},
+    size_t @var{size}, size_t @var{count}, FILE *restrict @var{fp});
+
+@end example
+@strong{Description}@*
+@code{fread} attempts to copy, from the file or stream identified by
+@var{fp}, @var{count} elements (each of size @var{size}) into memory,
+starting at @var{buf}.   @code{fread} may copy fewer elements than
+@var{count} if an error, or end of file, intervenes.
+
+@code{fread} also advances the file position indicator (if any) for
+@var{fp} by the number of @emph{characters} actually read.
+
+@code{_fread_r} is simply the reentrant version of @code{fread} that
+takes an additional reentrant structure pointer argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+The result of @code{fread} is the number of elements it succeeded in
+reading.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{fread}.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

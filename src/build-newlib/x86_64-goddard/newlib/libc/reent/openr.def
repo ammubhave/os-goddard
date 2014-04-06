@@ -1,0 +1,16 @@
+@node _open_r
+@section @code{_open_r}---Reentrant version of open
+@findex _open_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _open_r(struct _reent *@var{ptr},
+    const char *@var{file}, int @var{flags}, int @var{mode});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{open}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

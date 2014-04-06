@@ -1,0 +1,35 @@
+@node asinh
+@section @code{asinh}, @code{asinhf}---inverse hyperbolic sine 
+@findex asinh
+@findex asinhf
+@strong{Synopsis}
+@example
+#include <math.h>
+double asinh(double @var{x});
+float asinhf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{asinh} calculates the inverse hyperbolic sine of @var{x}.
+@code{asinh} is defined as 
+@ifnottex
+@smallexample
+ sgn(@var{x}) * log(abs(@var{x}) + sqrt(1+@var{x}*@var{x}))
+@end smallexample
+@end ifnottex
+@tex
+$$sign(x) \times ln\Bigl(|x| + \sqrt{1+x^2}\Bigr)$$
+@end tex
+
+@code{asinhf} is identical, other than taking and returning floats.
+
+@*
+@strong{Returns}@*
+@code{asinh} and @code{asinhf} return the calculated value.
+
+@*
+@strong{Portability}@*
+Neither @code{asinh} nor @code{asinhf} are ANSI C.
+
+
+@*

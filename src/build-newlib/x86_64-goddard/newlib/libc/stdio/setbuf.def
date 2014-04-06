@@ -1,0 +1,46 @@
+@node setbuf
+@section @code{setbuf}---specify full buffering for a file or stream
+@findex setbuf
+@strong{Synopsis}
+@example
+#include <stdio.h>
+void setbuf(FILE *@var{fp}, char *@var{buf});
+
+@end example
+@strong{Description}@*
+@code{setbuf} specifies that output to the file or stream identified by @var{fp}
+should be fully buffered.  All output for this file will go to a
+buffer (of size @code{BUFSIZ}, specified in `@code{stdio.h}').  Output will
+be passed on to the host system only when the buffer is full, or when
+an input operation intervenes.
+
+You may, if you wish, supply your own buffer by passing a pointer to
+it as the argument @var{buf}.  It must have size @code{BUFSIZ}.  You can
+also use @code{NULL} as the value of @var{buf}, to signal that the
+@code{setbuf} function is to allocate the buffer.
+
+@*
+@strong{Warnings}@*
+You may only use @code{setbuf} before performing any file operation other
+than opening the file.
+
+If you supply a non-null @var{buf}, you must ensure that the associated
+storage continues to be available until you close the stream
+identified by @var{fp}.
+
+@*
+@strong{Returns}@*
+@code{setbuf} does not return a result.
+
+@*
+@strong{Portability}@*
+Both ANSI C and the System V Interface Definition (Issue 2) require
+@code{setbuf}.  However, they differ on the meaning of a @code{NULL} buffer
+pointer: the SVID issue 2 specification says that a @code{NULL} buffer
+pointer requests unbuffered output.  For maximum portability, avoid
+@code{NULL} buffer pointers.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

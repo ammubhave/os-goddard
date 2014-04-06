@@ -1,0 +1,25 @@
+@node feof
+@section @code{feof}---test for end of file
+@findex feof
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int feof(FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{feof} tests whether or not the end of the file identified by @var{fp}
+has been reached.
+
+@*
+@strong{Returns}@*
+@code{feof} returns @code{0} if the end of file has not yet been reached; if
+at end of file, the result is nonzero.
+
+@*
+@strong{Portability}@*
+@code{feof} is required by ANSI C.
+
+No supporting OS subroutines are required.
+
+@*

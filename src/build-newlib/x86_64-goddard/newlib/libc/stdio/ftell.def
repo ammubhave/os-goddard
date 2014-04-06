@@ -1,0 +1,50 @@
+@node ftell
+@section @code{ftell}, @code{ftello}---return position in a stream or file
+@findex ftell
+@findex ftello
+@findex _ftell_r
+@findex _ftello_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+long ftell(FILE *@var{fp});
+off_t ftello(FILE *@var{fp});
+long _ftell_r(struct _reent *@var{ptr}, FILE *@var{fp});
+off_t _ftello_r(struct _reent *@var{ptr}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+Objects of type @code{FILE} can have a ``position'' that records how much
+of the file your program has already read.  Many of the @code{stdio} functions
+depend on this position, and many change it as a side effect.
+
+The result of @code{ftell}/@code{ftello} is the current position for a file
+identified by @var{fp}.  If you record this result, you can later
+use it with @code{fseek}/@code{fseeko} to return the file to this
+position.  The difference between @code{ftell} and @code{ftello} is that
+@code{ftell} returns @code{long} and @code{ftello} returns @code{off_t}.
+
+In the current implementation, @code{ftell}/@code{ftello} simply uses a character
+count to represent the file position; this is the same number that
+would be recorded by @code{fgetpos}.
+
+@*
+@strong{Returns}@*
+@code{ftell}/@code{ftello} return the file position, if possible.  If they cannot do
+this, they return @code{-1L}.  Failure occurs on streams that do not support
+positioning; the global @code{errno} indicates this condition with the
+value @code{ESPIPE}.
+
+@*
+@strong{Portability}@*
+@code{ftell} is required by the ANSI C standard, but the meaning of its
+result (when successful) is not specified beyond requiring that it be
+acceptable as an argument to @code{fseek}.  In particular, other
+conforming C implementations may return a different result from
+@code{ftell} than what @code{fgetpos} records.
+
+@code{ftello} is defined by the Single Unix specification.
+
+No supporting OS subroutines are required.
+
+@*

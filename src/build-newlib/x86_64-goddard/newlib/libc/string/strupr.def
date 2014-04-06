@@ -1,0 +1,24 @@
+@node strupr
+@section @code{strupr}---force string to uppercase
+@findex strupr
+@strong{Synopsis}
+@example
+#include <string.h>
+char *strupr(char *@var{a});
+
+@end example
+@strong{Description}@*
+@code{strupr} converts each character in the string at @var{a} to
+uppercase.
+
+@*
+@strong{Returns}@*
+@code{strupr} returns its argument, @var{a}.
+
+@*
+@strong{Portability}@*
+@code{strupr} is not widely portable.
+
+@code{strupr} requires no supporting OS subroutines.
+
+@*

@@ -1,0 +1,26 @@
+@node strcat
+@section @code{strcat}---concatenate strings
+@findex strcat
+@strong{Synopsis}
+@example
+#include <string.h>
+char *strcat(char *restrict @var{dst}, const char *restrict @var{src});
+
+@end example
+@strong{Description}@*
+@code{strcat} appends a copy of the string pointed to by @var{src}
+(including the terminating null character) to the end of the
+string pointed to by @var{dst}.  The initial character of
+@var{src} overwrites the null character at the end of @var{dst}.
+
+@*
+@strong{Returns}@*
+This function returns the initial value of @var{dst}
+
+@*
+@strong{Portability}@*
+@code{strcat} is ANSI C.
+
+@code{strcat} requires no supporting OS subroutines.
+
+@*

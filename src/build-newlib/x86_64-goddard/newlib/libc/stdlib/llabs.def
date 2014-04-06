@@ -1,0 +1,27 @@
+@node llabs
+@section @code{llabs}---compute the absolute value of an long long integer.
+@findex llabs
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+long long llabs(long long j);
+
+@end example
+@strong{Description}@*
+The @code{llabs} function computes the absolute value of the long long integer 
+argument @var{j} (also called the magnitude of @var{j}).
+
+The similar function @code{labs} uses and returns @code{long} rather than
+@code{long long} values.
+
+@*
+@strong{Returns}@*
+A nonnegative long long integer.
+
+@*
+@strong{Portability}@*
+@code{llabs} is ISO 9899 (C99) compatable.
+
+No supporting OS subroutines are required.
+
+@*

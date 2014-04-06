@@ -1,0 +1,52 @@
+@node wcstok
+@section @code{wcstok}---get next token from a string
+@findex wcstok
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wchar_t *wcstok(wchar_t *__restrict @var{source},
+    const wchar_t *__restrict @var{delimiters},
+    wchar_t **__restrict @var{lasts})
+
+@end example
+@strong{Description}@*
+The @code{wcstok} function is the wide-character equivalent of the
+@code{strtok_r} function (which in turn is the same as the @code{strtok}
+function with an added argument to make it thread-safe).
+
+The @code{wcstok} function is used to isolate (one at a time)
+sequential tokens in a null-terminated wide-character string,
+@code{*@var{source}}.  A token is defined as a substring not containing
+any wide-characters from @code{*@var{delimiters}}.
+
+The first time that @code{wcstok} is called, @code{*@var{source}} should
+be specified with the wide-character string to be searched, and
+@code{*@var{lasts}}--but not @code{lasts}, which must be non-NULL--may be
+random; subsequent calls, wishing to obtain further tokens from
+the same string, should pass a null pointer for @code{*@var{source}}
+instead but must supply @code{*@var{lasts}} unchanged from the last
+call.  The separator wide-character string, @code{*@var{delimiters}},
+must be supplied each time and may change between calls.
+A pointer to placeholder @code{*@var{lasts}} must be supplied by
+the caller, and is set each time as needed to save the state
+by @code{wcstok}.	Every call to @code{wcstok} with @code{*@var{source}}
+== @code{NULL} must pass the value of @code{*@var{lasts}} as last set
+by @code{wcstok}.
+
+The @code{wcstok} function returns a pointer to the beginning of each 
+subsequent token in the string, after replacing the separator 
+wide-character itself with a null wide-character.  When no more tokens
+remain, a null pointer is returned.
+
+@*
+@strong{Returns}@*
+@code{wcstok} returns a pointer to the first wide character of a token, or
+@code{NULL} if there is no token.
+
+@*
+@strong{Portability}@*
+@code{wcstok} is C99 and POSIX.1-2001.
+
+@code{wcstok} requires no supporting OS subroutines.
+
+@*

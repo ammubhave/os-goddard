@@ -1,0 +1,33 @@
+@node fputs
+@section @code{fputs}---write a character string in a file or stream
+@findex fputs
+@findex _fputs_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fputs(const char *restrict @var{s}, FILE *restrict @var{fp});
+
+#include <stdio.h>
+int _fputs_r(struct _reent *@var{ptr}, const char *restrict @var{s}, FILE *restrict @var{fp});
+
+@end example
+@strong{Description}@*
+@code{fputs} writes the string at @var{s} (but without the trailing null)
+to the file or stream identified by @var{fp}.
+
+@code{_fputs_r} is simply the reentrant version of @code{fputs} that takes
+an additional reentrant struct pointer argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+If successful, the result is @code{0}; otherwise, the result is @code{EOF}.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{fputs}, but does not specify that the result on
+success must be @code{0}; any non-negative value is permitted.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

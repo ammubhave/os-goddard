@@ -1,0 +1,71 @@
+@node strtoll
+@section @code{strtoll}---string to long long
+@findex strtoll
+@findex _strtoll_r
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+long long strtoll(const char *restrict @var{s}, char **restrict @var{ptr},int @var{base});
+
+long long _strtoll_r(void *@var{reent}, 
+    const char *restrict @var{s}, char **restrict @var{ptr},int @var{base});
+
+@end example
+@strong{Description}@*
+The function @code{strtoll} converts the string @code{*@var{s}} to
+a @code{long long}. First, it breaks down the string into three parts:
+leading whitespace, which is ignored; a subject string consisting
+of characters resembling an integer in the radix specified by @var{base};
+and a trailing portion consisting of zero or more unparseable characters,
+and always including the terminating null character. Then, it attempts
+to convert the subject string into a @code{long long} and returns the
+result.
+
+If the value of @var{base} is 0, the subject string is expected to look
+like a normal C integer constant: an optional sign, a possible `@code{0x}'
+indicating a hexadecimal base, and a number. If @var{base} is between
+2 and 36, the expected form of the subject is a sequence of letters
+and digits representing an integer in the radix specified by @var{base},
+with an optional plus or minus sign. The letters @code{a}--@code{z} (or,
+equivalently, @code{A}--@code{Z}) are used to signify values from 10 to 35;
+only letters whose ascribed values are less than @var{base} are
+permitted. If @var{base} is 16, a leading @code{0x} is permitted.
+
+The subject sequence is the longest initial sequence of the input
+string that has the expected form, starting with the first
+non-whitespace character.  If the string is empty or consists entirely
+of whitespace, or if the first non-whitespace character is not a
+permissible letter or digit, the subject string is empty.
+
+If the subject string is acceptable, and the value of @var{base} is zero,
+@code{strtoll} attempts to determine the radix from the input string. A
+string with a leading @code{0x} is treated as a hexadecimal value; a string with
+a leading 0 and no @code{x} is treated as octal; all other strings are
+treated as decimal. If @var{base} is between 2 and 36, it is used as the
+conversion radix, as described above. If the subject string begins with
+a minus sign, the value is negated. Finally, a pointer to the first
+character past the converted subject string is stored in @var{ptr}, if
+@var{ptr} is not @code{NULL}.
+
+If the subject string is empty (or not in acceptable form), no conversion
+is performed and the value of @var{s} is stored in @var{ptr} (if @var{ptr} is
+not @code{NULL}).
+
+The alternate function @code{_strtoll_r} is a reentrant version.  The
+extra argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+@code{strtoll} returns the converted value, if any. If no conversion was
+made, 0 is returned.
+
+@code{strtoll} returns @code{LONG_LONG_MAX} or @code{LONG_LONG_MIN} if the magnitude of
+the converted value is too large, and sets @code{errno} to @code{ERANGE}.
+
+@*
+@strong{Portability}@*
+@code{strtoll} is ANSI.
+
+No supporting OS subroutines are required.
+
+@*

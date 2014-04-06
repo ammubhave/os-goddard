@@ -1,0 +1,16 @@
+@node _fcntl_r
+@section @code{_fcntl_r}---Reentrant version of fcntl
+@findex _fcntl_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _fcntl_r(struct _reent *@var{ptr},
+    int @var{fd}, int @var{cmd}, @var{arg});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{fcntl}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

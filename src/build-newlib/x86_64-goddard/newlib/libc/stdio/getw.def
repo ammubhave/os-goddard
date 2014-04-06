@@ -1,0 +1,31 @@
+@node getw
+@section @code{getw}---read a word (int)
+@findex getw
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int getw(FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{getw} is a function, defined in @code{stdio.h}.  You can use @code{getw}
+to get the next word from the file or stream identified by @var{fp}.  As
+a side effect, @code{getw} advances the file's current position
+indicator.
+
+@*
+@strong{Returns}@*
+The next word (read as an @code{int}), unless there is no more
+data or the host system reports a read error; in either of these
+situations, @code{getw} returns @code{EOF}.  Since @code{EOF} is a valid
+@code{int}, you must use @code{ferror} or @code{feof} to distinguish these
+situations.
+
+@*
+@strong{Portability}@*
+@code{getw} is a remnant of K&R C; it is not part of any ISO C Standard.
+@code{fread} should be used instead.  In fact, this implementation of
+@code{getw} is based upon @code{fread}.
+
+Supporting OS subroutines required: @code{fread}.  
+@*

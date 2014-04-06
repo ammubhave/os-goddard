@@ -1,0 +1,29 @@
+@node wctype
+@section @code{wctype}---get wide-character classification type
+@findex wctype
+@strong{Synopsis}
+@example
+#include <wctype.h>
+wctype_t wctype(const char *@var{c});
+
+@end example
+@strong{Description}@*
+@code{wctype} is a function which takes a string @var{c} and gives back
+the appropriate wctype_t type value associated with the string,
+if one exists.  The following values are guaranteed to be recognized:
+"alnum", "alpha", "blank", "cntrl", "digit", "graph", "lower", "print",
+"punct", "space", "upper", and "xdigit".
+
+@*
+@strong{Returns}@*
+@code{wctype} returns 0 and sets @code{errno} to @code{EINVAL} if the
+given name is invalid.  Otherwise, it returns a valid non-zero wctype_t
+value.
+
+@*
+@strong{Portability}@*
+@code{wctype} is C99.
+
+No supporting OS subroutines are required.
+
+@*

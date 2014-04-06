@@ -1,0 +1,26 @@
+@node strchr
+@section @code{strchr}---search for character in string
+@findex strchr
+@strong{Synopsis}
+@example
+#include <string.h>
+char * strchr(const char *@var{string}, int @var{c});
+
+@end example
+@strong{Description}@*
+This function finds the first occurence of @var{c} (converted to
+a char) in the string pointed to by @var{string} (including the
+terminating null character).
+
+@*
+@strong{Returns}@*
+Returns a pointer to the located character, or a null pointer
+if @var{c} does not occur in @var{string}.
+
+@*
+@strong{Portability}@*
+@code{strchr} is ANSI C.
+
+@code{strchr} requires no supporting OS subroutines.
+
+@*

@@ -1,0 +1,45 @@
+@node getc
+@section @code{getc}---read a character (macro)
+@findex getc
+@findex _getc_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int getc(FILE *@var{fp});
+
+#include <stdio.h>
+int _getc_r(struct _reent *@var{ptr}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{getc} is a macro, defined in @code{stdio.h}.  You can use @code{getc}
+to get the next single character from the file or stream
+identified by @var{fp}.  As a side effect, @code{getc} advances the file's
+current position indicator.
+
+For a subroutine version of this macro, see @code{fgetc}.
+
+The @code{_getc_r} function is simply the reentrant version of @code{getc}
+which passes an additional reentrancy structure pointer argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+The next character (read as an @code{unsigned char}, and cast to
+@code{int}), unless there is no more data, or the host system reports a
+read error; in either of these situations, @code{getc} returns @code{EOF}.
+
+You can distinguish the two situations that cause an @code{EOF} result by
+using the @code{ferror} and @code{feof} functions.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{getc}; it suggests, but does not require, that
+@code{getc} be implemented as a macro.  The standard explicitly permits
+macro implementations of @code{getc} to use the argument more than once;
+therefore, in a portable program, you should not use an expression
+with side effects as the @code{getc} argument.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

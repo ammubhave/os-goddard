@@ -1,0 +1,41 @@
+@node setbuffer
+@section @code{setbuffer}---specify full buffering for a file or stream with size
+@findex setbuffer
+@strong{Synopsis}
+@example
+#include <stdio.h>
+void setbuffer(FILE *@var{fp}, char *@var{buf}, int @var{size});
+
+@end example
+@strong{Description}@*
+@code{setbuffer} specifies that output to the file or stream identified by
+@var{fp} should be fully buffered.  All output for this file will go to a
+buffer (of size @var{size}).  Output will be passed on to the host system
+only when the buffer is full, or when an input operation intervenes.
+
+You may, if you wish, supply your own buffer by passing a pointer to
+it as the argument @var{buf}.  It must have size @var{size}.  You can
+also use @code{NULL} as the value of @var{buf}, to signal that the
+@code{setbuffer} function is to allocate the buffer.
+
+@*
+@strong{Warnings}@*
+You may only use @code{setbuffer} before performing any file operation
+other than opening the file.
+
+If you supply a non-null @var{buf}, you must ensure that the associated
+storage continues to be available until you close the stream
+identified by @var{fp}.
+
+@*
+@strong{Returns}@*
+@code{setbuffer} does not return a result.
+
+@*
+@strong{Portability}@*
+This function comes from BSD not ANSI or POSIX.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

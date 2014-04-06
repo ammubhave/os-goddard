@@ -1,0 +1,39 @@
+@node getc_unlocked
+@section @code{getc_unlocked}---non-thread-safe version of getc (macro)
+@findex getc_unlocked
+@findex _getc_unlocked_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int getc_unlocked(FILE *@var{fp});
+
+#include <stdio.h>
+int _getc_unlocked_r(FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{getc_unlocked} is a non-thread-safe version of @code{getc} declared in
+@code{stdio.h}.  @code{getc_unlocked} may only safely be used within a scope
+protected by flockfile() (or ftrylockfile()) and funlockfile().  These
+functions may safely be used in a multi-threaded program if and only
+if they are called while the invoking thread owns the ( FILE *)
+object, as is the case after a successful call to the flockfile() or
+ftrylockfile() functions.  If threads are disabled, then
+@code{getc_unlocked} is equivalent to @code{getc}.
+
+The @code{_getc_unlocked_r} function is simply the reentrant version of
+@code{get_unlocked} which passes an additional reentrancy structure pointer
+argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+See @code{getc}.
+
+@*
+@strong{Portability}@*
+POSIX 1003.1 requires @code{getc_unlocked}.  @code{getc_unlocked} may be
+implemented as a macro, so arguments should not have side-effects.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.  
+@*

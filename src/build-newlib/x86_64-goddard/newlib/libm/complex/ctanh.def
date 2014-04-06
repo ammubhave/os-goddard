@@ -1,0 +1,26 @@
+@node ctanh
+@section @code{ctanh}, @code{ctanf}---complex hyperbolic tangent
+@findex ctanh
+@findex ctanhf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex ctanh(double complex @var{z});
+float complex ctanhf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex hyperbolic tangent of @var{z}.
+
+@code{ctanhf} is identical to @code{ctanh}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+These functions return the complex hyperbolic tangent value.
+
+@*
+@strong{Portability}@*
+@code{ctanh} and @code{ctanhf} are ISO C99
+
+@*

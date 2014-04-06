@@ -1,0 +1,84 @@
+@node fopen
+@section @code{fopen}---open a file
+@findex fopen
+@findex _fopen_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+FILE *fopen(const char *@var{file}, const char *@var{mode});
+
+FILE *_fopen_r(struct _reent *@var{reent}, 
+    const char *@var{file}, const char *@var{mode});
+
+@end example
+@strong{Description}@*
+@code{fopen} initializes the data structures needed to read or write a
+file.  Specify the file's name as the string at @var{file}, and the kind
+of access you need to the file with the string at @var{mode}.
+
+The alternate function @code{_fopen_r} is a reentrant version.
+The extra argument @var{reent} is a pointer to a reentrancy structure.
+
+Three fundamental kinds of access are available: read, write, and append.
+@code{*@var{mode}} must begin with one of the three characters `@code{r}',
+`@code{w}', or `@code{a}', to select one of these:
+
+@table @code
+
+@item r
+Open the file for reading; the operation will fail if the file does
+not exist, or if the host system does not permit you to read it.
+
+@item w
+Open the file for writing @emph{from the beginning} of the file:
+effectively, this always creates a new file.  If the file whose name you
+specified already existed, its old contents are discarded.
+
+@item a
+Open the file for appending data, that is writing from the end of
+file.  When you open a file this way, all data always goes to the
+current end of file; you cannot change this using @code{fseek}.
+@end table
+
+
+Some host systems distinguish between ``binary'' and ``text'' files.
+Such systems may perform data transformations on data written to, or
+read from, files opened as ``text''.
+If your system is one of these, then you can append a `@code{b}' to any
+of the three modes above, to specify that you are opening the file as
+a binary file (the default is to open the file as a text file).
+
+`@code{rb}', then, means ``read binary''; `@code{wb}', ``write binary''; and
+`@code{ab}', ``append binary''.
+
+To make C programs more portable, the `@code{b}' is accepted on all
+systems, whether or not it makes a difference.
+
+Finally, you might need to both read and write from the same file.
+You can also append a `@code{+}' to any of the three modes, to permit
+this.  (If you want to append both `@code{b}' and `@code{+}', you can do it
+in either order: for example, @code{"rb+"} means the same thing as
+@code{"r+b"} when used as a mode string.)
+
+Use @code{"r+"} (or @code{"rb+"}) to permit reading and writing anywhere in
+an existing file, without discarding any data; @code{"w+"} (or @code{"wb+"})
+to create a new file (or begin by discarding all data from an old one)
+that permits reading and writing anywhere in it; and @code{"a+"} (or
+@code{"ab+"}) to permit reading anywhere in an existing file, but writing
+only at the end.
+
+@*
+@strong{Returns}@*
+@code{fopen} returns a file pointer which you can use for other file
+operations, unless the file you requested could not be opened; in that
+situation, the result is @code{NULL}.  If the reason for failure was an
+invalid string at @var{mode}, @code{errno} is set to @code{EINVAL}.
+
+@*
+@strong{Portability}@*
+@code{fopen} is required by ANSI C.
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{open}, @code{read}, @code{sbrk}, @code{write}.
+
+@*

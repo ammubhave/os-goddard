@@ -1,0 +1,35 @@
+@node exit
+@section @code{exit}---end program execution
+@findex exit
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+void exit(int @var{code});
+
+@end example
+@strong{Description}@*
+Use @code{exit} to return control from a program to the host operating
+environment.  Use the argument @var{code} to pass an exit status to the
+operating environment: two particular values, @code{EXIT_SUCCESS} and
+@code{EXIT_FAILURE}, are defined in `@code{stdlib.h}' to indicate success or
+failure in a portable fashion.
+
+@code{exit} does two kinds of cleanup before ending execution of your
+program.  First, it calls all application-defined cleanup functions
+you have enrolled with @code{atexit}.  Second, files and streams are
+cleaned up: any pending output is delivered to the host system, each
+open file or stream is closed, and files created by @code{tmpfile} are
+deleted.
+
+@*
+@strong{Returns}@*
+@code{exit} does not return to its caller.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{exit}, and specifies that @code{EXIT_SUCCESS} and
+@code{EXIT_FAILURE} must be defined.
+
+Supporting OS subroutines required: @code{_exit}.
+
+@*

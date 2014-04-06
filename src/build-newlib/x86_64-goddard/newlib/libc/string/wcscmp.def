@@ -1,0 +1,30 @@
+@node wcscmp
+@section @code{wcscmp}---compare two wide-character strings
+@strong{Synopsis}
+@example
+#include <wchar.h>
+int wcscmp(const wchar_t *@var{s1}, *@var{s2});
+
+@end example
+@strong{Description}@*
+The @code{wcscmp} function compares the wide-character string pointed to
+by @var{s1} to the wide-character string pointed to by @var{s2}.
+
+The sign of a non-zero return value is determined by the sign of the
+difference between the values of the first pair of wide-character codes
+that differ in the objects being compared.
+
+@*
+@strong{Returns}@*
+Upon completion, @code{wcscmp} returns an integer greater than, equal to
+or less than 0, if the wide-character string pointed to by @var{s1} is
+greater than, equal to or less than the wide-character string pointed
+to by @var{s2} respectively. 
+
+@*
+@strong{Portability}@*
+@code{wcscmp} is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+No supporting OS subroutines are required.
+
+@*

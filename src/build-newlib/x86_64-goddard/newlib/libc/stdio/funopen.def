@@ -1,0 +1,75 @@
+@node funopen
+@section @code{funopen}, @code{fropen}, @code{fwopen}---open a stream with custom callbacks
+@findex funopen
+@findex fropen
+@findex fwopen
+@strong{Synopsis}
+@example
+#include <stdio.h>
+FILE *funopen(const void *@var{cookie},
+    int (*@var{readfn}) (void *cookie, char *buf, int n),
+    int (*@var{writefn}) (void *cookie, const char *buf, int n),
+    fpos_t (*@var{seekfn}) (void *cookie, fpos_t off, int whence),
+    int (*@var{closefn}) (void *cookie));
+FILE *fropen(const void *@var{cookie},
+    int (*@var{readfn}) (void *cookie, char *buf, int n));
+FILE *fwopen(const void *@var{cookie},
+    int (*@var{writefn}) (void *cookie, const char *buf, int n));
+
+@end example
+@strong{Description}@*
+@code{funopen} creates a @code{FILE} stream where I/O is performed using
+custom callbacks.  At least one of @var{readfn} and @var{writefn} must be
+provided, which determines whether the stream behaves with mode <"r">,
+<"w">, or <"r+">.
+
+@var{readfn} should return -1 on failure, or else the number of bytes
+read (0 on EOF).  It is similar to @code{read}, except that <int> rather
+than <size_t> bounds a transaction size, and @var{cookie} will be passed
+as the first argument.  A NULL @var{readfn} makes attempts to read the
+stream fail.
+
+@var{writefn} should return -1 on failure, or else the number of bytes
+written.  It is similar to @code{write}, except that <int> rather than
+<size_t> bounds a transaction size, and @var{cookie} will be passed as
+the first argument.  A NULL @var{writefn} makes attempts to write the
+stream fail.
+
+@var{seekfn} should return (fpos_t)-1 on failure, or else the current
+file position.  It is similar to @code{lseek}, except that @var{cookie}
+will be passed as the first argument.  A NULL @var{seekfn} makes the
+stream behave similarly to a pipe in relation to stdio functions that
+require positioning.  This implementation assumes fpos_t and off_t are
+the same type.
+
+@var{closefn} should return -1 on failure, or 0 on success.  It is
+similar to @code{close}, except that @var{cookie} will be passed as the
+first argument.  A NULL @var{closefn} merely flushes all data then lets
+@code{fclose} succeed.  A failed close will still invalidate the stream.
+
+Read and write I/O functions are allowed to change the underlying
+buffer on fully buffered or line buffered streams by calling
+@code{setvbuf}.  They are also not required to completely fill or empty
+the buffer.  They are not, however, allowed to change streams from
+unbuffered to buffered or to change the state of the line buffering
+flag.  They must also be prepared to have read or write calls occur on
+buffers other than the one most recently specified.
+
+The functions @code{fropen} and @code{fwopen} are convenience macros around
+@code{funopen} that only use the specified callback.
+
+@*
+@strong{Returns}@*
+The return value is an open FILE pointer on success.  On error,
+@code{NULL} is returned, and @code{errno} will be set to EINVAL if a
+function pointer is missing, ENOMEM if the stream cannot be created,
+or EMFILE if too many streams are already open.
+
+@*
+@strong{Portability}@*
+This function is a newlib extension, copying the prototype from BSD.
+It is not portable.  See also the @code{fopencookie} interface from Linux.
+
+Supporting OS subroutines required: @code{sbrk}.
+
+@*

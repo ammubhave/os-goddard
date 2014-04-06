@@ -1,0 +1,35 @@
+@node hypot
+@section @code{hypot}, @code{hypotf}---distance from origin
+@findex hypot
+@findex hypotf
+@strong{Synopsis}
+@example
+#include <math.h>
+double hypot(double @var{x}, double @var{y});
+float hypotf(float @var{x}, float @var{y});
+
+@end example
+@strong{Description}@*
+@code{hypot} calculates the Euclidean distance
+@tex
+$\sqrt{x^2+y^2}$
+@end tex
+@ifnottex
+@code{sqrt(@var{x}*@var{x} + @var{y}*@var{y})}
+@end ifnottex
+between the origin (0,0) and a point represented by the
+Cartesian coordinates (@var{x},@var{y}).  @code{hypotf} differs only
+in the type of its arguments and result.
+
+@*
+@strong{Returns}@*
+Normally, the distance value is returned.  On overflow,
+@code{hypot} returns @code{HUGE_VAL} and sets @code{errno} to
+@code{ERANGE}.
+
+You can change the error treatment with @code{matherr}.
+
+@*
+@strong{Portability}@*
+@code{hypot} and @code{hypotf} are not ANSI C.  
+@*

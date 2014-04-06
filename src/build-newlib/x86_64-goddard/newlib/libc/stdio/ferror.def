@@ -1,0 +1,29 @@
+@node ferror
+@section @code{ferror}---test whether read/write error has occurred
+@findex ferror
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int ferror(FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+The @code{stdio} functions maintain an error indicator with each file
+pointer @var{fp}, to record whether any read or write errors have
+occurred on the associated file or stream.
+Use @code{ferror} to query this indicator.
+
+See @code{clearerr} to reset the error indicator.
+
+@*
+@strong{Returns}@*
+@code{ferror} returns @code{0} if no errors have occurred; it returns a
+nonzero value otherwise.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{ferror}.
+
+No supporting OS subroutines are required.
+
+@*

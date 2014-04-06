@@ -1,0 +1,42 @@
+@node fdim
+@section @code{fdim}, @code{fdimf}--positive difference
+@findex fdim
+@findex fdimf
+@strong{Synopsis}
+@example
+#include <math.h>
+double fdim(double @var{x}, double @var{y});
+float fdimf(float @var{x}, float @var{y});
+
+@end example
+@strong{Description}@*
+The @code{fdim} functions determine the positive difference between their
+arguments, returning:
+@smallexample
+	@var{x} - @var{y}	if @var{x} > @var{y}, or
+@end smallexample
+@ifnottex
+@smallexample
+	+0	if @var{x} <= @var{y}, or
+@end smallexample
+@end ifnottex
+@tex
+@smallexample
+	+0	if @var{x} $\leq$ @var{y}, or
+@end smallexample
+@end tex
+@smallexample
+	NAN	if either argument is NAN.
+@end smallexample
+A range error may occur.
+
+@*
+@strong{Returns}@*
+The @code{fdim} functions return the positive difference value.
+
+@*
+@strong{Portability}@*
+ANSI C, POSIX.
+
+
+@*

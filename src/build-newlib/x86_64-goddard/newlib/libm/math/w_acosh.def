@@ -1,0 +1,41 @@
+@node acosh
+@section @code{acosh}, @code{acoshf}---inverse hyperbolic cosine 
+@findex acosh
+@findex acoshf
+@strong{Synopsis}
+@example
+#include <math.h>
+double acosh(double @var{x});
+float acoshf(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{acosh} calculates the inverse hyperbolic cosine of @var{x}.
+@code{acosh} is defined as 
+@ifnottex
+@smallexample
+ log(@var{x} + sqrt(@var{x}*@var{x}-1))
+@end smallexample
+@end ifnottex
+@tex
+$$ln\Bigl(x + \sqrt{x^2-1}\Bigr)$$
+@end tex
+
+@var{x} must be a number greater than or equal to 1.
+
+@code{acoshf} is identical, other than taking and returning floats.
+
+@*
+@strong{Returns}@*
+@code{acosh} and @code{acoshf} return the calculated value.  If @var{x} 
+less than 1, the return value is NaN and @code{errno} is set to @code{EDOM}.
+
+You can change the error-handling behavior with the non-ANSI
+@code{matherr} function.
+
+@*
+@strong{Portability}@*
+Neither @code{acosh} nor @code{acoshf} are ANSI C.  They are not recommended
+for portable programs.
+
+@*

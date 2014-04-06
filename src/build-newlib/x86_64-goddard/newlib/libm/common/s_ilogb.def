@@ -1,0 +1,43 @@
+@node ilogb
+@section @code{ilogb}, @code{ilogbf}---get exponent of floating-point number
+@findex ilogb
+@findex ilogbf
+@strong{Synopsis}
+@example
+#include <math.h>
+int ilogb(double @var{val});
+int ilogbf(float @var{val});
+
+@end example
+@strong{Description}@*
+
+All nonzero, normal numbers can be described as @var{m} *
+2**@var{p}.  @code{ilogb} and @code{ilogbf} examine the argument
+@var{val}, and return @var{p}.  The functions @code{frexp} and
+@code{frexpf} are similar to @code{ilogb} and @code{ilogbf}, but also
+return @var{m}.
+
+@*
+@strong{Returns}@*
+
+@code{ilogb} and @code{ilogbf} return the power of two used to form the
+floating-point argument.
+If @var{val} is @code{0}, they return @code{FP_ILOGB0}.
+If @var{val} is infinite, they return @code{INT_MAX}.
+If @var{val} is NaN, they return @code{FP_ILOGBNAN}.
+(@code{FP_ILOGB0} and @code{FP_ILOGBNAN} are defined in math.h, but in turn are
+defined as INT_MIN or INT_MAX from limits.h.  The value of FP_ILOGB0 may be
+either INT_MIN or -INT_MAX.  The value of FP_ILOGBNAN may be either INT_MAX or
+INT_MIN.)
+
+@comment The bugs might not be worth noting, given the mass non-C99/POSIX
+@comment behavior of much of the Newlib math library.
+@comment BUGS
+@comment On errors, errno is not set per C99 and POSIX requirements even if
+@comment (math_errhandling & MATH_ERRNO) is non-zero.
+
+@*
+@strong{Portability}@*
+C99, POSIX
+
+@*

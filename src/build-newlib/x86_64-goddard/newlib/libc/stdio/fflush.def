@@ -1,0 +1,44 @@
+@node fflush
+@section @code{fflush}---flush buffered file output
+@findex fflush
+@findex _fflush_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int fflush(FILE *@var{fp});
+
+int _fflush_r(struct _reent *@var{reent}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+The @code{stdio} output functions can buffer output before delivering it
+to the host system, in order to minimize the overhead of system calls.
+
+Use @code{fflush} to deliver any such pending output (for the file
+or stream identified by @var{fp}) to the host system.
+
+If @var{fp} is @code{NULL}, @code{fflush} delivers pending output from all
+open files.
+
+Additionally, if @var{fp} is a seekable input stream visiting a file
+descriptor, set the position of the file descriptor to match next
+unread byte, useful for obeying POSIX semantics when ending a process
+without consuming all input from the stream.
+
+The alternate function @code{_fflush_r} is a reentrant version, where the
+extra argument @var{reent} is a pointer to a reentrancy structure, and
+@var{fp} must not be NULL.
+
+@*
+@strong{Returns}@*
+@code{fflush} returns @code{0} unless it encounters a write error; in that
+situation, it returns @code{EOF}.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{fflush}.  The behavior on input streams is only
+specified by POSIX, and not all implementations follow POSIX rules.
+
+No supporting OS subroutines are required.
+
+@*

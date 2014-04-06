@@ -1,0 +1,40 @@
+@node cosh
+@section @code{cosh}, @code{coshf}---hyperbolic cosine
+@strong{Synopsis}
+@example
+#include <math.h>
+double cosh(double @var{x});
+float coshf(float @var{x})
+
+@end example
+@strong{Description}@*
+
+@code{cosh} computes the hyperbolic cosine of the argument @var{x}.
+@code{cosh(@var{x})} is defined as 
+@ifnottex
+@smallexample
+ (exp(x) + exp(-x))/2
+@end smallexample
+@end ifnottex
+@tex
+$${(e^x + e^{-x})} \over 2$$
+@end tex
+
+Angles are specified in radians.  
+@code{coshf} is identical, save that it takes and returns @code{float}.
+
+@*
+@strong{Returns}@*
+The computed value is returned.  When the correct value would create
+an overflow,  @code{cosh} returns the value @code{HUGE_VAL} with the
+appropriate sign, and the global value @code{errno} is set to @code{ERANGE}.
+
+You can modify error handling for these functions using the
+function @code{matherr}.
+
+@*
+@strong{Portability}@*
+@code{cosh} is ANSI.  
+@code{coshf} is an extension.
+
+@*

@@ -1,0 +1,24 @@
+@node strpbrk
+@section @code{strpbrk}---find characters in string
+@findex strpbrk
+@strong{Synopsis}
+@example
+#include <string.h>
+char *strpbrk(const char *@var{s1}, const char *@var{s2});
+
+@end example
+@strong{Description}@*
+This function locates the first occurence in the string
+pointed to by @var{s1} of any character in string pointed to by
+@var{s2} (excluding the terminating null character).
+
+@*
+@strong{Returns}@*
+@code{strpbrk} returns a pointer to the character found in @var{s1}, or a
+null pointer if no character from @var{s2} occurs in @var{s1}.
+
+@*
+@strong{Portability}@*
+@code{strpbrk} requires no supporting OS subroutines.
+
+@*

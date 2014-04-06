@@ -1,0 +1,35 @@
+@node strncat
+@section @code{strncat}---concatenate strings
+@findex strncat
+@strong{Synopsis}
+@example
+#include <string.h>
+char *strncat(char *restrict @var{dst}, const char *restrict @var{src},
+    size_t @var{length});
+
+@end example
+@strong{Description}@*
+@code{strncat} appends not more than @var{length} characters from
+the string pointed to by @var{src} (including the	terminating
+null character) to the end of the string pointed to by
+@var{dst}.  The initial character of @var{src} overwrites the null
+character at the end of @var{dst}.  A terminating null character
+is always appended to the result
+
+@*
+@strong{Warnings}@*
+Note that a null is always appended, so that if the copy is
+limited by the @var{length} argument, the number of characters
+appended to @var{dst} is @code{n + 1}.
+
+@*
+@strong{Returns}@*
+This function returns the initial value of @var{dst}
+
+@*
+@strong{Portability}@*
+@code{strncat} is ANSI C.
+
+@code{strncat} requires no supporting OS subroutines.
+
+@*

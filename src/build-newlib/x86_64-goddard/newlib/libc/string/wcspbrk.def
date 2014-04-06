@@ -1,0 +1,26 @@
+@node wcspbrk
+@section @code{wcspbrk}----scan wide-character string for a wide-character code
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wchar_t *wcspbrk(const wchar_t *@var{s}, const wchar_t *@var{set});
+
+@end example
+@strong{Description}@*
+The @code{wcspbrk} function locates the first occurrence in the
+wide-character string pointed to by @var{s} of any wide-character code
+from the wide-character string pointed to by @var{set}. 
+
+@*
+@strong{Returns}@*
+Upon successful completion, @code{wcspbrk} returns a pointer to the
+wide-character code or a null pointer if no wide-character code from
+@var{set} occurs in @var{s}.
+
+@*
+@strong{Portability}@*
+@code{wcspbrk} is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+No supporting OS subroutines are required.
+
+@*

@@ -1,0 +1,36 @@
+@node exp2
+@section @code{exp2}, @code{exp2f}--exponential, base 2
+@findex exp2
+@findex exp2f
+@strong{Synopsis}
+@example
+#include <math.h>
+double exp2(double @var{x});
+float exp2f(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{exp2} and @code{exp2f} calculate 2 ^ @var{x}, that is, 
+@ifnottex
+2 raised to the power @var{x}.
+@end ifnottex
+@tex
+$2^x$
+@end tex
+
+You can use the (non-ANSI) function @code{matherr} to specify
+error handling for these functions.
+
+@*
+@strong{Returns}@*
+On success, @code{exp2} and @code{exp2f} return the calculated value.
+If the result underflows, the returned value is @code{0}.  If the
+result overflows, the returned value is @code{HUGE_VAL}.  In
+either case, @code{errno} is set to @code{ERANGE}.
+
+@*
+@strong{Portability}@*
+ANSI C, POSIX.
+
+
+@*

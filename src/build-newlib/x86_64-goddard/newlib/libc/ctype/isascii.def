@@ -1,0 +1,28 @@
+@node isascii
+@section @code{isascii}---ASCII character predicate
+@findex isascii
+@strong{Synopsis}
+@example
+#include <ctype.h>
+int isascii(int @var{c});
+
+@end example
+@strong{Description}@*
+@code{isascii} is a macro which returns non-zero when @var{c} is an ASCII
+character, and 0 otherwise.  It is defined for all integer values.
+
+You can use a compiled subroutine instead of the macro definition by
+undefining the macro using `@code{#undef isascii}'.
+
+@*
+@strong{Returns}@*
+@code{isascii} returns non-zero if the low order byte of @var{c} is in the range
+0 to 127 (@code{0x00}--@code{0x7F}).
+
+@*
+@strong{Portability}@*
+@code{isascii} is ANSI C.
+
+No supporting OS subroutines are required.
+
+@*

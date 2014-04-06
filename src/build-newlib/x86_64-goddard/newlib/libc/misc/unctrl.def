@@ -1,0 +1,31 @@
+@node unctrl
+@section @code{unctrl}---get printable representation of a character
+@findex unctrl
+@findex unctrllen
+@strong{Synopsis}
+@example
+#include <unctrl.h>
+char *unctrl(int @var{c});
+int unctrllen(int @var{c});
+
+@end example
+@strong{Description}@*
+@code{unctrl} is a macro which returns the printable representation of @var{c}
+as a string.
+@code{unctrllen} is a macro which returns the length of the printable
+representation of @var{c}.
+
+@*
+@strong{Returns}@*
+@code{unctrl} returns a string of the printable representation of @var{c}.
+
+@code{unctrllen} returns the length of the string which is the printable
+representation of @var{c}.
+
+@*
+@strong{Portability}@*
+@code{unctrl} and @code{unctrllen} are not ANSI C.
+
+No supporting OS subroutines are required.
+
+@*

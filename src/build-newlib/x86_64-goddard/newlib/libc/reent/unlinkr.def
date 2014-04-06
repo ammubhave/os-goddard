@@ -1,0 +1,15 @@
+@node _unlink_r
+@section @code{_unlink_r}---Reentrant version of unlink
+@findex _unlink_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _unlink_r(struct _reent *@var{ptr}, const char *@var{file});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{unlink}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

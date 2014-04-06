@@ -1,0 +1,35 @@
+@node wcsncpy
+@section @code{wcsncpy}---copy part of a wide-character string 
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wchar_t *wcsncpy(wchar_t *__restrict @var{s1},
+    const wchar_t *__restrict @var{s2}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+The @code{wcsncpy} function copies not more than @var{n} wide-character codes
+(wide-character codes that follow a null wide-character code are not
+copied) from the array pointed to by @var{s2} to the array pointed to
+by @var{s1}. If copying takes place between objects that overlap, the
+behaviour is undefined.  Note that if @var{s1} contains more than @var{n}
+wide characters before its terminating null, the result is not
+null-terminated.
+
+If the array pointed to by @var{s2} is a wide-character string that is
+shorter than @var{n} wide-character codes, null wide-character codes are
+appended to the copy in the array pointed to by @var{s1}, until @var{n}
+wide-character codes in all are written. 
+
+@*
+@strong{Returns}@*
+The @code{wcsncpy} function returns @var{s1}; no return value is reserved to
+indicate an error. 
+
+@*
+@strong{Portability}@*
+ISO/IEC 9899; POSIX.1.
+
+No supporting OS subroutines are required.
+
+@*

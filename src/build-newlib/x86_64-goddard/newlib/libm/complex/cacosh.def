@@ -1,0 +1,38 @@
+@node cacosh
+@section @code{cacosh}, @code{cacoshf}---complex arc hyperbolic cosine
+@findex cacosh
+@findex cacoshf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex cacosh(double complex @var{z});
+float complex cacoshf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute the complex arc hyperbolic cosine of @var{z},
+with a branch cut at values less than 1 along the real axis.
+
+@code{cacoshf} is identical to @code{cacosh}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+@ifnottex
+These functions return the complex arc hyperbolic cosine value, 
+in the range of a half-strip of non-negative values along the 
+real axis and in the interval [-i * pi, +i * pi] along the 
+imaginary axis.
+@end ifnottex
+@tex
+These functions return the complex arc hyperbolic cosine value, 
+in the range of a half-strip of non-negative values along the 
+real axis and in the interval [$-i\pi$, $+i\pi$] along the 
+imaginary axis.
+@end tex
+
+@*
+@strong{Portability}@*
+@code{cacosh} and @code{cacoshf} are ISO C99
+
+@*

@@ -1,0 +1,29 @@
+@node wcsdup
+@section @code{wcsdup}---wide character string duplicate
+@findex wcsdup
+@findex _wcsdup_r
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wchar_t *wcsdup(const wchar_t *@var{str});
+
+#include <wchar.h>
+wchar_t *_wcsdup_r(struct _reent *@var{ptr}, const wchar_t *@var{str});
+
+@end example
+@strong{Description}@*
+@code{wcsdup} allocates a new wide character string using @code{malloc},
+and copies the content of the argument @var{str} into the newly
+allocated string, thus making a copy of @var{str}.
+
+@*
+@strong{Returns}@*
+@code{wcsdup} returns a pointer to the copy of @var{str} if enough
+memory for the copy was available.  Otherwise it returns NULL
+and errno is set to ENOMEM.
+
+@*
+@strong{Portability}@*
+POSIX-1.2008
+
+@*

@@ -1,0 +1,28 @@
+@node memcpy
+@section @code{memcpy}---copy memory regions
+@strong{Synopsis}
+@example
+#include <string.h>
+void* memcpy(void *restrict @var{out}, const void *restrict @var{in},
+    size_t @var{n});
+
+@end example
+@strong{Description}@*
+This function copies @var{n} bytes from the memory region
+pointed to by @var{in} to the memory region pointed to by
+@var{out}.
+
+If the regions overlap, the behavior is undefined.
+
+@*
+@strong{Returns}@*
+@code{memcpy} returns a pointer to the first byte of the @var{out}
+region.
+
+@*
+@strong{Portability}@*
+@code{memcpy} is ANSI C.
+
+@code{memcpy} requires no supporting OS subroutines.
+
+@*

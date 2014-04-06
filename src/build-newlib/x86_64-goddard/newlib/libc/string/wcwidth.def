@@ -1,0 +1,29 @@
+@node wcwidth
+@section @code{wcwidth}---number of column positions of a wide-character code
+@findex wcwidth
+@strong{Synopsis}
+@example
+#include <wchar.h>
+int wcwidth(const wchar_t @var{wc});
+
+@end example
+@strong{Description}@*
+The @code{wcwidth} function shall determine the number of column
+positions required for the wide character @var{wc}. The application
+shall ensure that the value of @var{wc} is a character representable
+as a wchar_t, and is a wide-character code corresponding to a
+valid character in the current locale.
+
+@*
+@strong{Returns}@*
+The @code{wcwidth} function shall either return 0 (if @var{wc} is a null
+wide-character code), or return the number of column positions to
+be occupied by the wide-character code @var{wc}, or return -1 (if @var{wc}
+does not correspond to a printable wide-character code).
+
+@*
+@strong{Portability}@*
+@code{wcwidth} has been introduced in the Single UNIX Specification Volume 2.
+@code{wcwidth} has been marked as an extension in the Single UNIX Specification Volume 3.
+
+@*

@@ -1,0 +1,16 @@
+@node _write_r
+@section @code{_write_r}---Reentrant version of write
+@findex _write_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+_ssize_t _write_r(struct _reent *@var{ptr},
+    int @var{fd}, const void *@var{buf}, size_t @var{cnt});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{write}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

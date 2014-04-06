@@ -1,0 +1,35 @@
+@node wmemmove
+@section @code{wmemmove}---copy wide characters in memory with overlapping areas 
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wchar_t *wmemmove(wchar_t *@var{d}, const wchar_t *@var{s}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+The @code{wmemmove} function copies @var{n} wide characters from the object
+pointed to by @var{s} to the object pointed to by @var{d}. Copying takes
+place as if the @var{n} wide characters from the object pointed to by
+@var{s} are first copied into a temporary array of @var{n} wide characters
+that does not overlap the objects pointed to by @var{d} or @var{s}, and then
+the @var{n} wide characters from the temporary array are copied into the
+object pointed to by @var{d}.
+
+This function is not affected by locale and all wchar_t values are
+treated identically. The null wide character and wchar_t values not
+corresponding to valid characters are not treated specially.
+
+If @var{n} is zero, @var{d} and @var{s} must be a valid pointers, and the
+function copies zero wide characters. 
+
+@*
+@strong{Returns}@*
+The @code{wmemmove} function returns the value of @var{d}.
+
+@*
+@strong{Portability}@*
+@code{wmemmove} is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+No supporting OS subroutines are required.
+
+@*

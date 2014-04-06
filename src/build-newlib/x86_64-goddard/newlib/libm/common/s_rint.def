@@ -1,0 +1,36 @@
+@node rint
+@section @code{rint}, @code{rintf}--round to integer
+@findex rint
+@findex rintf
+@strong{Synopsis}
+@example
+#include <math.h>
+double rint(double @var{x});
+float rintf(float @var{x});
+
+@end example
+@strong{Description}@*
+The @code{rint} functions round their argument to an integer value in
+floating-point format, using the current rounding direction.  They
+raise the "inexact" floating-point exception if the result differs
+in value from the argument.  See the @code{nearbyint} functions for the
+same function with the "inexact" floating-point exception never being
+raised.  Newlib does not directly support floating-point exceptions.
+The @code{rint} functions are written so that the "inexact" exception is
+raised in hardware implementations that support it, even though Newlib
+does not provide access.
+
+@*
+@strong{Returns}@*
+@var{x} rounded to an integral value, using the current rounding direction.
+
+@*
+@strong{Portability}@*
+ANSI C, POSIX
+
+@*
+@strong{See Also}@*
+@code{nearbyint}, @code{round}
+
+
+@*

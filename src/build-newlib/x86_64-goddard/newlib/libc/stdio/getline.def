@@ -1,0 +1,32 @@
+@node getline
+@section @code{getline}---read a line from a file
+@findex getline
+@strong{Synopsis}
+@example
+#include <stdio.h>
+ssize_t getline(char **@var{bufptr}, size_t *@var{n}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+@code{getline} reads a file @var{fp} up to and possibly including the
+newline character.  The line is read into a buffer pointed to
+by @var{bufptr} and designated with size *@var{n}.  If the buffer is
+not large enough, it will be dynamically grown by @code{getdelim}.
+As the buffer is grown, the pointer to the size @var{n} will be
+updated.
+
+@code{getline} is equivalent to getdelim(bufptr, n, '\n', fp);
+
+@*
+@strong{Returns}@*
+@code{getline} returns @code{-1} if no characters were successfully read,
+otherwise, it returns the number of bytes successfully read.
+at end of file, the result is nonzero.
+
+@*
+@strong{Portability}@*
+@code{getline} is a glibc extension.
+
+No supporting OS subroutines are directly required.
+
+@*

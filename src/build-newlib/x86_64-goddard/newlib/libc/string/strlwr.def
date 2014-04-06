@@ -1,0 +1,24 @@
+@node strlwr
+@section @code{strlwr}---force string to lowercase
+@findex strlwr
+@strong{Synopsis}
+@example
+#include <string.h>
+char *strlwr(char *@var{a});
+
+@end example
+@strong{Description}@*
+@code{strlwr} converts each character in the string at @var{a} to
+lowercase.
+
+@*
+@strong{Returns}@*
+@code{strlwr} returns its argument, @var{a}.
+
+@*
+@strong{Portability}@*
+@code{strlwr} is not widely portable.
+
+@code{strlwr} requires no supporting OS subroutines.
+
+@*

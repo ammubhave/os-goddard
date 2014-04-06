@@ -1,0 +1,43 @@
+@node frexp
+@section @code{frexp}, @code{frexpf}---split floating-point number
+@findex frexp
+@findex frexpf
+@strong{Synopsis}
+@example
+#include <math.h>
+double frexp(double @var{val}, int *@var{exp});
+float frexpf(float @var{val}, int *@var{exp});
+
+@end example
+@strong{Description}@*
+All nonzero, normal numbers can be described as @var{m} * 2**@var{p}.
+@code{frexp} represents the double @var{val} as a mantissa @var{m}
+and a power of two @var{p}. The resulting mantissa will always
+be greater than or equal to @code{0.5}, and less than @code{1.0} (as
+long as @var{val} is nonzero). The power of two will be stored
+in @code{*}@var{exp}. 
+
+@ifnottex
+@var{m} and @var{p} are calculated so that
+@var{val} is @var{m} times @code{2} to the power @var{p}.
+@end ifnottex
+@tex
+@var{m} and @var{p} are calculated so that
+$ val = m \times 2^p $.
+@end tex
+
+@code{frexpf} is identical, other than taking and returning
+floats rather than doubles.
+
+@*
+@strong{Returns}@*
+@code{frexp} returns the mantissa @var{m}. If @var{val} is @code{0}, infinity,
+or Nan, @code{frexp} will set @code{*}@var{exp} to @code{0} and return @var{val}.
+
+@*
+@strong{Portability}@*
+@code{frexp} is ANSI.
+@code{frexpf} is an extension.
+
+
+@*

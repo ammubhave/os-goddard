@@ -1,0 +1,32 @@
+@node modf
+@section @code{modf}, @code{modff}---split fractional and integer parts
+@findex modf
+@findex modff
+@strong{Synopsis}
+@example
+#include <math.h>
+double modf(double @var{val}, double *@var{ipart});
+float modff(float @var{val}, float *@var{ipart});
+
+@end example
+@strong{Description}@*
+@code{modf} splits the double @var{val} apart into an integer part
+and a fractional part, returning the fractional part and
+storing the integer part in @code{*@var{ipart}}.  No rounding
+whatsoever is done; the sum of the integer and fractional
+parts is guaranteed to be exactly  equal to @var{val}.   That
+is, if @var{realpart} = modf(@var{val}, &@var{intpart}); then
+`@code{@var{realpart}+@var{intpart}}' is the same as @var{val}.
+@code{modff} is identical, save that it takes and returns
+@code{float} rather than @code{double} values. 
+
+@*
+@strong{Returns}@*
+The fractional part is returned.  Each result has the same
+sign as the supplied argument @var{val}.
+
+@*
+@strong{Portability}@*
+@code{modf} is ANSI C. @code{modff} is an extension.
+
+@*

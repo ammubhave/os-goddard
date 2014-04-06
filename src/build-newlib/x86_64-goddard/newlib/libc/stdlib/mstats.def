@@ -1,0 +1,62 @@
+@node mallinfo
+@section @code{mallinfo}, @code{malloc_stats}, @code{mallopt}---malloc support
+@findex mallinfo
+@findex malloc_stats
+@findex mallopt
+@findex _mallinfo_r
+@findex _malloc_stats_r
+@findex _mallopt_r
+@strong{Synopsis}
+@example
+#include <malloc.h>
+struct mallinfo mallinfo(void);
+void malloc_stats(void);
+int mallopt(int @var{parameter}, @var{value});
+
+struct mallinfo _mallinfo_r(void *@var{reent});
+void _malloc_stats_r(void *@var{reent});
+int _mallopt_r(void *@var{reent}, int @var{parameter}, @var{value});
+
+@end example
+@strong{Description}@*
+@code{mallinfo} returns a structure describing the current state of
+memory allocation.  The structure is defined in malloc.h.  The
+following fields are defined: @code{arena} is the total amount of space
+in the heap; @code{ordblks} is the number of chunks which are not in use;
+@code{uordblks} is the total amount of space allocated by @code{malloc};
+@code{fordblks} is the total amount of space not in use; @code{keepcost} is
+the size of the top most memory block.
+
+@code{malloc_stats} print some statistics about memory allocation on
+standard error.
+
+@code{mallopt} takes a parameter and a value.  The parameters are defined
+in malloc.h, and may be one of the following: @code{M_TRIM_THRESHOLD}
+sets the maximum amount of unused space in the top most block before
+releasing it back to the system in @code{free} (the space is released by
+calling @code{_sbrk_r} with a negative argument); @code{M_TOP_PAD} is the
+amount of padding to allocate whenever @code{_sbrk_r} is called to
+allocate more space.
+
+The alternate functions @code{_mallinfo_r}, @code{_malloc_stats_r}, and
+@code{_mallopt_r} are reentrant versions.  The extra argument @var{reent}
+is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+@code{mallinfo} returns a mallinfo structure.  The structure is defined
+in malloc.h.
+
+@code{malloc_stats} does not return a result.
+
+@code{mallopt} returns zero if the parameter could not be set, or
+non-zero if it could be set.
+
+@*
+@strong{Portability}@*
+@code{mallinfo} and @code{mallopt} are provided by SVR4, but @code{mallopt}
+takes different parameters on different systems.  @code{malloc_stats} is
+not portable.
+
+
+@*

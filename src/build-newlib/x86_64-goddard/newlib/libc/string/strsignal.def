@@ -1,0 +1,28 @@
+@node strsignal
+@section @code{strsignal}---convert signal number to string
+@findex strsignal
+@strong{Synopsis}
+@example
+#include <string.h>
+char *strsignal(int @var{signal});
+
+@end example
+@strong{Description}@*
+@code{strsignal} converts the signal number @var{signal} into a
+string.  If @var{signal} is not a known signal number, the result
+will be of the form "Unknown signal NN" where NN is the @var{signal}
+is a decimal number.
+
+@*
+@strong{Returns}@*
+This function returns a pointer to a string.  Your application must
+not modify that string.
+
+@*
+@strong{Portability}@*
+POSIX.1-2008 C requires @code{strsignal}, but does not specify the strings used
+for each signal number.
+
+@code{strsignal} requires no supporting OS subroutines.
+
+@*

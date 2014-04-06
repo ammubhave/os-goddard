@@ -1,0 +1,38 @@
+@node remove
+@section @code{remove}---delete a file's name
+@findex remove
+@findex _remove_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int remove(char *@var{filename});
+
+int _remove_r(struct _reent *@var{reent}, char *@var{filename});
+
+@end example
+@strong{Description}@*
+Use @code{remove} to dissolve the association between a particular
+filename (the string at @var{filename}) and the file it represents.
+After calling @code{remove} with a particular filename, you will no
+longer be able to open the file by that name.
+
+In this implementation, you may use @code{remove} on an open file without
+error; existing file descriptors for the file will continue to access
+the file's data until the program using them closes the file.
+
+The alternate function @code{_remove_r} is a reentrant version.  The
+extra argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+@code{remove} returns @code{0} if it succeeds, @code{-1} if it fails.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{remove}, but only specifies that the result on
+failure be nonzero.  The behavior of @code{remove} when you call it on an
+open file may vary among implementations.
+
+Supporting OS subroutine required: @code{unlink}.
+
+@*

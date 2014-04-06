@@ -1,0 +1,62 @@
+@node mbsrtowcs
+@section @code{mbsrtowcs}, @code{mbsnrtowcs}---convert a character string to a wide-character string
+@findex mbsrtowcs
+@findex _mbsrtowcs_r
+@findex mbsnrtowcs
+@findex _mbsnrtowcs_r
+@strong{Synopsis}
+@example
+#include <wchar.h>
+size_t mbsrtowcs(wchar_t *__restrict @var{dst},
+    const char **__restrict @var{src},
+    size_t @var{len},
+    mbstate_t *__restrict @var{ps});
+
+#include <wchar.h>
+size_t _mbsrtowcs_r(struct _reent *@var{ptr}, wchar_t *@var{dst},
+    const char **@var{src}, size_t @var{len},
+    mbstate_t *@var{ps});
+
+#include <wchar.h>
+size_t mbsnrtowcs(wchar_t *__ restrict @var{dst}, 
+    const char **__restrict @var{src}, size_t @var{nms},
+    size_t @var{len}, mbstate_t *__restrict @var{ps});
+
+#include <wchar.h>
+size_t _mbsnrtowcs_r(struct _reent *@var{ptr}, wchar_t *@var{dst},
+    const char **@var{src}, size_t @var{nms},
+    size_t @var{len}, mbstate_t *@var{ps});
+
+@end example
+@strong{Description}@*
+The @code{mbsrtowcs} function converts a sequence of multibyte characters
+pointed to indirectly by @var{src} into a sequence of corresponding wide
+characters and stores at most @var{len} of them in the wchar_t array pointed
+to by @var{dst}, until it encounters a terminating null character ('\0').
+
+If @var{dst} is NULL, no characters are stored.
+
+If @var{dst} is not NULL, the pointer pointed to by @var{src} is updated to point
+to the character after the one that conversion stopped at.  If conversion
+stops because a null character is encountered, *@var{src} is set to NULL.
+
+The mbstate_t argument, @var{ps}, is used to keep track of the shift state.  If
+it is NULL, @code{mbsrtowcs} uses an internal, static mbstate_t object, which
+is initialized to the initial conversion state at program startup.
+
+The @code{mbsnrtowcs} function behaves identically to @code{mbsrtowcs}, except that
+conversion stops after reading at most @var{nms} bytes from the buffer pointed
+to by @var{src}.
+
+@*
+@strong{Returns}@*
+The @code{mbsrtowcs} and @code{mbsnrtowcs} functions return the number of wide
+characters stored in the array pointed to by @var{dst} if successful, otherwise
+it returns (size_t)-1.
+
+@*
+@strong{Portability}@*
+@code{mbsrtowcs} is defined by the C99 standard.
+@code{mbsnrtowcs} is defined by the POSIX.1-2008 standard.
+
+@*

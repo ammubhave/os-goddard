@@ -1,0 +1,37 @@
+@node fmod
+@section @code{fmod}, @code{fmodf}---floating-point remainder (modulo)
+@findex fmod
+@findex fmodf
+@strong{Synopsis}
+@example
+#include <math.h>
+double fmod(double @var{x}, double @var{y})
+float fmodf(float @var{x}, float @var{y})
+
+@end example
+@strong{Description}@*
+The @code{fmod} and @code{fmodf} functions compute the floating-point
+remainder of @var{x}/@var{y} (@var{x} modulo @var{y}).
+
+@*
+@strong{Returns}@*
+The @code{fmod} function returns the value 
+@ifnottex
+@var{x}-@var{i}*@var{y}, 
+@end ifnottex
+@tex
+$x-i\times y$,
+@end tex
+for the largest integer @var{i} such that, if @var{y} is nonzero, the
+result has the same sign as @var{x} and magnitude less than the
+magnitude of @var{y}. 
+
+@code{fmod(@var{x},0)} returns NaN, and sets @code{errno} to @code{EDOM}.
+
+You can modify error treatment for these functions using @code{matherr}.
+
+@*
+@strong{Portability}@*
+@code{fmod} is ANSI C. @code{fmodf} is an extension.
+
+@*

@@ -1,0 +1,25 @@
+@node infinity
+@section @code{infinity}, @code{infinityf}--representation of infinity
+@findex infinity
+@findex infinityf
+@strong{Synopsis}
+@example
+#include <math.h>
+double infinity(void);
+float infinityf(void);
+
+@end example
+@strong{Description}@*
+@code{infinity} and @code{infinityf} return the special number IEEE
+infinity in double- and single-precision arithmetic
+respectively.
+
+@*
+@strong{Portability}@*
+@code{infinity} and @code{infinityf} are neither standard C nor POSIX.  C and
+POSIX require macros HUGE_VAL and HUGE_VALF to be defined in math.h, which
+Newlib defines to be infinities corresponding to these archaic infinity()
+and infinityf() functions in floating-point implementations which do have
+infinities.
+
+@*

@@ -1,0 +1,138 @@
+@node fpclassify
+@section @code{fpclassify}, @code{isfinite}, @code{isinf}, @code{isnan}, and @code{isnormal}--floating-point classification macros; @code{finite}, @code{finitef}, @code{isinf}, @code{isinff}, @code{isnan}, @code{isnanf}--test for exceptional numbers
+@findex fpclassify
+@findex isfinite
+@findex isinf
+@findex isnan
+@findex isnormal
+@findex isnan
+@findex isinf
+@findex finite
+@findex isnanf
+@findex isinff
+@findex finitef
+@strong{Synopsis}
+@example
+[C99 standard macros:]
+#include <math.h>
+int fpclassify(real-floating @var{x});
+int isfinite(real-floating @var{x});
+int isinf(real-floating @var{x});
+int isnan(real-floating @var{x});
+int isnormal(real-floating @var{x});
+
+[Archaic SUSv2 functions:]
+#include <ieeefp.h>
+int isnan(double @var{arg});
+int isinf(double @var{arg});
+int finite(double @var{arg});
+int isnanf(float @var{arg});
+int isinff(float @var{arg});
+int finitef(float @var{arg});
+
+@end example
+@strong{Description}@*
+@code{fpclassify}, @code{isfinite}, @code{isinf}, @code{isnan}, and @code{isnormal} are macros
+defined for use in classifying floating-point numbers.  This is a help because
+of special "values" like NaN and infinities.  In the synopses shown,
+"real-floating" indicates that the argument is an expression of real floating
+type.  These function-like macros are C99 and POSIX-compliant, and should be
+used instead of the now-archaic SUSv2 functions.
+
+The @code{fpclassify} macro classifies its argument value as NaN, infinite, normal,
+subnormal, zero, or into another implementation-defined category.  First, an
+argument represented in a format wider than its semantic type is converted to
+its semantic type.  Then classification is based on the type of the argument.
+The @code{fpclassify} macro returns the value of the number classification macro
+appropriate to the value of its argument:
+
+@table @code
+
+@item FP_INFINITE
+@var{x} is either plus or minus infinity;
+@item FP_NAN
+@var{x} is "Not A Number" (plus or minus);
+@item FP_NORMAL
+@var{x} is a "normal" number (i.e. is none of the other special forms);
+@item FP_SUBNORMAL
+@var{x} is too small be stored as a regular normalized number (i.e. loss of precision is likely); or
+@item FP_ZERO
+@var{x} is 0 (either plus or minus).
+@end table
+
+
+The "@code{is}" set of macros provide a useful set of shorthand ways for
+classifying floating-point numbers, providing the following equivalent
+relations:
+
+@table @code
+
+@item @code{isfinite}(@var{x})
+returns non-zero if @var{x} is finite.  (It is equivalent to
+(@code{fpclassify}(@var{x}) != FP_INFINITE  &&  @code{fpclassify}(@var{x}) != FP_NAN).)
+
+@item @code{isinf}(@var{x})
+returns non-zero if @var{x} is infinite.  (It is equivalent to
+(@code{fpclassify}(@var{x}) == FP_INFINITE).)
+
+@item @code{isnan}(@var{x})
+returns non-zero if @var{x} is NaN.  (It is equivalent to
+(@code{fpclassify}(@var{x}) == FP_NAN).)
+
+@item @code{isnormal}(@var{x})
+returns non-zero if @var{x} is normal.  (It is equivalent to
+(@code{fpclassify}(@var{x}) == FP_NORMAL).)
+@end table
+
+
+The archaic SUSv2 functions provide information on the floating-point
+argument supplied.
+
+There are five major number formats ("exponent" referring to the
+biased exponent in the binary-encoded number):
+@table @code
+
+@item zero
+A number which contains all zero bits, excluding the sign bit.
+@item subnormal
+A number with a zero exponent but a nonzero fraction.
+@item normal
+A number with an exponent and a fraction.
+@item infinity
+A number with an all 1's exponent and a zero fraction.
+@item NAN
+A number with an all 1's exponent and a nonzero fraction.
+
+@end table
+
+
+@code{isnan} returns 1 if the argument is a nan. @code{isinf}
+returns 1 if the argument is infinity.  @code{finite} returns 1 if the
+argument is zero, subnormal or normal.
+The @code{isnanf}, @code{isinff} and @code{finitef} functions perform the same
+operations as their @code{isnan}, @code{isinf} and @code{finite}
+counterparts, but on single-precision floating-point numbers.
+
+It should be noted that the C99 standard dictates that @code{isnan}
+and @code{isinf} are macros that operate on multiple types of
+floating-point.  The SUSv2 standard declares @code{isnan} as
+a function taking double.  Newlib has decided to declare
+them both as macros in math.h and as functions in ieeefp.h to
+maintain backward compatibility.
+
+@*
+@strong{Returns}@*
+@comment Formatting note:  "$@" forces a new line
+The fpclassify macro returns the value corresponding to the appropriate FP_ macro.@*
+The isfinite macro returns nonzero if @var{x} is finite, else 0.@*
+The isinf macro returns nonzero if @var{x} is infinite, else 0.@*
+The isnan macro returns nonzero if @var{x} is an NaN, else 0.@*
+The isnormal macro returns nonzero if @var{x} has a normal value, else 0.
+
+@*
+@strong{Portability}@*
+math.h macros are C99, POSIX.
+
+ieeefp.h funtions are outdated and should be avoided.
+
+@*

@@ -1,0 +1,35 @@
+@node cpow
+@section @code{cpow}, @code{cpowf}---complex power
+@findex cpow
+@findex cpowf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex cpow(double complex @var{x}, double complex @var{y});
+float complex cpowf(float complex @var{x}, float complex @var{y});
+
+@end example
+@strong{Description}@*
+@ifnottex
+The cpow functions compute the complex power function x^y 
+power, with a branch cut for the first parameter along the 
+negative real axis.
+@end ifnottex
+@tex
+The cpow functions compute the complex power function $x^y$ 
+power, with a branch cut for the first parameter along the 
+negative real axis.
+@end tex
+
+@code{cpowf} is identical to @code{cpow}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+The cpow functions return the complex power function value.
+
+@*
+@strong{Portability}@*
+@code{cpow} and @code{cpowf} are ISO C99
+
+@*

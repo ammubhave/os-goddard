@@ -1,0 +1,28 @@
+@node towctrans
+@section @code{towctrans}---extensible wide-character translation
+@findex towctrans
+@strong{Synopsis}
+@example
+#include <wctype.h>
+wint_t towctrans(wint_t @var{c}, wctrans_t @var{w});
+
+@end example
+@strong{Description}@*
+@code{towctrans} is a function which converts wide characters based on
+a specified translation type @var{w}.  If the translation type is
+invalid or cannot be applied to the current character, no change
+to the character is made.
+
+@*
+@strong{Returns}@*
+@code{towctrans} returns the translated equivalent of @var{c} when it is a
+valid for the given translation, otherwise, it returns the input character.
+When the translation type is invalid, @code{errno} is set @code{EINVAL}.
+
+@*
+@strong{Portability}@*
+@code{towctrans} is C99.
+
+No supporting OS subroutines are required.
+
+@*

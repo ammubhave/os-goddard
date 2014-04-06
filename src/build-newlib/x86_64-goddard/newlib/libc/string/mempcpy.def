@@ -1,0 +1,28 @@
+@node mempcpy
+@section @code{mempcpy}---copy memory regions and return end pointer
+@strong{Synopsis}
+@example
+#include <string.h>
+void* mempcpy(void *@var{out}, const void *@var{in}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+This function copies @var{n} bytes from the memory region
+pointed to by @var{in} to the memory region pointed to by
+@var{out}.
+
+If the regions overlap, the behavior is undefined.
+
+@*
+@strong{Returns}@*
+@code{mempcpy} returns a pointer to the byte following the
+last byte copied to the @var{out} region.
+
+@*
+@strong{Portability}@*
+@code{mempcpy} is a GNU extension.
+
+@code{mempcpy} requires no supporting OS subroutines.
+
+
+@*

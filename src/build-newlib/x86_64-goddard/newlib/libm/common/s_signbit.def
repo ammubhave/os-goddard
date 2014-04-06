@@ -1,0 +1,30 @@
+@node signbit
+@section @code{signbit}--Does floating-point number have negative sign?
+@findex signbit
+@strong{Synopsis}
+@example
+#include <math.h>
+int signbit(real-floating @var{x});
+
+@end example
+@strong{Description}@*
+The @code{signbit} macro determines whether the sign of its argument value is
+negative.  The macro reports the sign of all values, including infinities,
+zeros, and NaNs.  If zero is unsigned, it is treated as positive.  As shown in
+the synopsis, the argument is "real-floating," meaning that any of the real
+floating-point types (float, double, etc.) may be given to it.
+
+Note that because of the possibilities of signed 0 and NaNs, the expression
+"@var{x} < 0.0" does not give the same result as @code{signbit} in all cases.
+
+@*
+@strong{Returns}@*
+The @code{signbit} macro returns a nonzero value if and only if the sign of its
+argument value is negative.
+
+@*
+@strong{Portability}@*
+C99, POSIX.
+
+
+@*

@@ -1,0 +1,26 @@
+@node __tz_lock
+@section @code{__tz_lock}, @code{__tz_unlock}---lock time zone global variables
+@findex __tz_lock
+@findex __tz_unlock
+@strong{Synopsis}
+@example
+#include "local.h"
+void __tz_lock (void);
+void __tz_unlock (void);
+
+@end example
+@strong{Description}@*
+The @code{tzset} facility functions call these functions when they need to
+ensure the values of global variables.  The version of these routines
+supplied in the library use the lock API defined in sys/lock.h.  If multiple
+threads of execution can call the time functions and give up scheduling in
+the middle, then you you need to define your own versions of these functions
+in order to safely lock the time zone variables during a call.  If you do
+not, the results of @code{localtime}, @code{mktime}, @code{ctime}, and @code{strftime}
+are undefined.
+
+The lock @code{__tz_lock} may not be called recursively; that is,
+a call @code{__tz_lock} will always lock all subsequent @code{__tz_lock} calls
+until the corresponding @code{__tz_unlock} call on the same thread is made.
+
+@*

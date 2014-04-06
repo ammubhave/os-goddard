@@ -1,0 +1,35 @@
+@node isprint
+@section @code{isprint}, @code{isgraph}---printable character predicates
+@findex isprint
+@findex isgraph
+@strong{Synopsis}
+@example
+#include <ctype.h>
+int isprint(int @var{c});
+int isgraph(int @var{c});
+
+@end example
+@strong{Description}@*
+@code{isprint} is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for printable
+characters, and 0 for other character arguments. 
+It is defined only if @var{c} is representable as an unsigned char or if
+@var{c} is EOF.
+
+You can use a compiled subroutine instead of the macro definition by
+undefining either macro using `@code{#undef isprint}' or `@code{#undef isgraph}'.
+
+@*
+@strong{Returns}@*
+@code{isprint} returns non-zero if @var{c} is a printing character,
+(@code{0x20}--@code{0x7E}).
+@code{isgraph} behaves identically to @code{isprint}, except that the space
+character (@code{0x20}) is excluded.
+
+@*
+@strong{Portability}@*
+@code{isprint} and @code{isgraph} are ANSI C.
+
+No supporting OS subroutines are required.
+
+@*

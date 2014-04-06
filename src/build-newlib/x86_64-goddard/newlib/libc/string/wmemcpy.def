@@ -1,0 +1,30 @@
+@node wmemcpy
+@section @code{wmemcpy}---copy wide characters in memory 
+@strong{Synopsis}
+@example
+#include <wchar.h>
+wchar_t *wmemcpy(wchar_t *__restrict @var{d},
+    const wchar_t *__restrict @var{s}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+The @code{wmemcpy} function copies @var{n} wide characters from the object
+pointed to by @var{s} to the object pointed to be @var{d}. This function
+is not affected by locale and all wchar_t values are treated
+identically.  The null wide character and wchar_t values not
+corresponding to valid characters are not treated specially.
+
+If @var{n} is zero, @var{d} and @var{s} must be a valid pointers, and the
+function copies zero wide characters. 
+
+@*
+@strong{Returns}@*
+The @code{wmemcpy} function returns the value of @var{d}.
+
+@*
+@strong{Portability}@*
+@code{wmemcpy} is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+No supporting OS subroutines are required.
+
+@*

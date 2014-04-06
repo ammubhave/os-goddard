@@ -1,0 +1,24 @@
+@node iswlower
+@section @code{iswlower}---lowercase wide character test
+@findex iswlower
+@strong{Synopsis}
+@example
+#include <wctype.h>
+int iswlower(wint_t @var{c});
+
+@end example
+@strong{Description}@*
+@code{iswlower} is a function which classifies wide-character values that
+have uppercase translations.
+
+@*
+@strong{Returns}@*
+@code{iswlower} returns non-zero if @var{c} is a lowercase wide character.
+
+@*
+@strong{Portability}@*
+@code{iswlower} is C99.
+
+No supporting OS subroutines are required.
+
+@*

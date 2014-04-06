@@ -1,0 +1,27 @@
+@node wcslcpy
+@section @code{wcslcpy}---copy a wide-character string to specified length
+@strong{Synopsis}
+@example
+#include <wchar.h>
+size_t wcslcpy(wchar_t *@var{dst}, const wchar_t *@var{src}, size_t @var{siz});
+
+@end example
+@strong{Description}@*
+@code{wcslcpy} copies wide characters from @var{src} to @var{dst}
+such that up to @var{siz} - 1 characters are copied.  A
+terminating null is appended to the result, unless @var{siz}
+is zero.
+
+@*
+@strong{Returns}@*
+@code{wcslcpy} returns the number of wide characters in @var{src},
+not including the terminating null wide character.  If the
+return value is greater than or equal to @var{siz}, then
+not all wide characters were copied from @var{src} and truncation
+occurred.
+
+@*
+@strong{Portability}@*
+No supporting OS subroutines are required.
+
+@*

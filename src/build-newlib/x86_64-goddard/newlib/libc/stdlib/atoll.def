@@ -1,0 +1,31 @@
+@node atoll
+@section @code{atoll}---convert a string to a long long integer
+@findex atoll
+@findex _atoll_r
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+long long atoll(const char *@var{str});
+long long _atoll_r(struct _reent *@var{ptr}, const char *@var{str});
+
+@end example
+@strong{Description}@*
+The function @code{atoll} converts the initial portion of the string 
+pointed to by @code{*@var{str}} to a type @code{long long}.  A call to
+atoll(str) in this implementation is equivalent to 
+strtoll(str, (char **)NULL, 10) including behavior on error.
+
+The alternate function @code{_atoll_r} is a reentrant version.  The
+extra argument @var{reent} is a pointer to a reentrancy structure.
+
+@*
+@strong{Returns}@*
+The converted value.
+
+@*
+@strong{Portability}@*
+@code{atoll} is ISO 9899 (C99) and POSIX 1003.1-2001 compatable.
+
+No supporting OS subroutines are required.
+
+@*

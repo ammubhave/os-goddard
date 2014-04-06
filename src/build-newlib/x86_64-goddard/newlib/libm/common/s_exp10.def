@@ -1,0 +1,36 @@
+@node exp10
+@section @code{exp10}, @code{exp10f}---exponential
+@findex exp10
+@findex exp10f
+@strong{Synopsis}
+@example
+#include <math.h>
+double exp10(double @var{x});
+float exp10f(float @var{x});
+
+@end example
+@strong{Description}@*
+@code{exp10} and @code{exp10f} calculate 10 ^ @var{x}, that is, 
+@ifnottex
+10 raised to the power @var{x}.
+@end ifnottex
+@tex
+$10^x$
+@end tex
+
+You can use the (non-ANSI) function @code{matherr} to specify
+error handling for these functions.
+
+@*
+@strong{Returns}@*
+On success, @code{exp10} and @code{exp10f} return the calculated value.
+If the result underflows, the returned value is @code{0}.  If the
+result overflows, the returned value is @code{HUGE_VAL}.  In
+either case, @code{errno} is set to @code{ERANGE}.
+
+@*
+@strong{Portability}@*
+@code{exp10} and @code{exp10f} are GNU extensions.
+
+
+@*

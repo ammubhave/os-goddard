@@ -1,0 +1,24 @@
+@node difftime
+@section @code{difftime}---subtract two times
+@findex difftime
+@strong{Synopsis}
+@example
+#include <time.h>
+double difftime(time_t @var{tim1}, time_t @var{tim2});
+
+@end example
+@strong{Description}@*
+Subtracts the two times in the arguments: `@code{@var{tim1} - @var{tim2}}'.
+
+@*
+@strong{Returns}@*
+The difference (in seconds) between @var{tim2} and @var{tim1}, as a @code{double}.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{difftime}, and defines its result to be in seconds
+in all implementations.
+
+@code{difftime} requires no supporting OS subroutines.
+
+@*

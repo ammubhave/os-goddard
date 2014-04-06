@@ -1,0 +1,65 @@
+@node jN
+@section @code{jN}, @code{jNf}, @code{yN}, @code{yNf}---Bessel functions 
+@findex j0
+@findex j0f
+@findex j1
+@findex j1f
+@findex jn
+@findex jnf
+@findex y0
+@findex y0f
+@findex y1
+@findex y1f
+@findex yn
+@findex ynf
+@strong{Synopsis}
+@example
+#include <math.h>
+double j0(double @var{x});
+float j0f(float @var{x});
+double j1(double @var{x});
+float j1f(float @var{x});
+double jn(int @var{n}, double @var{x});
+float jnf(int @var{n}, float @var{x});
+double y0(double @var{x});
+float y0f(float @var{x});
+double y1(double @var{x});
+float y1f(float @var{x});
+double yn(int @var{n}, double @var{x});
+float ynf(int @var{n}, float @var{x});
+
+@end example
+@strong{Description}@*
+The Bessel functions are a family of functions that solve the
+differential equation 
+@ifnottex
+@smallexample
+  2               2    2
+ x  y'' + xy' + (x  - p )y  = 0
+@end smallexample
+@end ifnottex
+@tex
+$$x^2{d^2y\over dx^2} + x{dy\over dx} + (x^2-p^2)y = 0$$
+@end tex
+These functions have many applications in engineering and physics.
+
+@code{jn} calculates the Bessel function of the first kind of order
+@var{n}.  @code{j0} and @code{j1} are special cases for order 0 and order
+1 respectively.
+
+Similarly, @code{yn} calculates the Bessel function of the second kind of
+order @var{n}, and @code{y0} and @code{y1} are special cases for order 0 and
+1.
+
+@code{jnf}, @code{j0f}, @code{j1f}, @code{ynf}, @code{y0f}, and @code{y1f} perform the
+same calculations, but on @code{float} rather than @code{double} values.
+
+@*
+@strong{Returns}@*
+The value of each Bessel function at @var{x} is returned.
+
+@*
+@strong{Portability}@*
+None of the Bessel functions are in ANSI C.
+
+@*

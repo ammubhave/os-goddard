@@ -1,0 +1,31 @@
+@node wcslcat
+@section @code{wcslcat}---concatenate wide-character strings to specified length
+@strong{Synopsis}
+@example
+#include <wchar.h>
+size_t wcslcat(wchar_t *@var{dst}, const wchar_t *@var{src}, size_t @var{siz});
+
+@end example
+@strong{Description}@*
+The @code{wcslcat} function appends wide characters from @var{src} to
+end of the @var{dst} wide-character string so that the resultant
+wide-character string is not more than @var{siz} wide characters
+including the terminating null wide-character code.  A terminating
+null wide character is always added unless @var{siz} is 0.  Thus,
+the maximum number of wide characters that can be appended from
+@var{src} is @var{siz} - 1. If copying takes place between objects 
+that overlap, the behaviour is undefined.
+
+@*
+@strong{Returns}@*
+Wide-character string length of initial @var{dst} plus the
+wide-character string length of @var{src} (does not include
+terminating null wide-characters).  If the return value is
+greater than or equal to @var{siz}, then truncation occurred and
+not all wide characters from @var{src} were appended.
+
+@*
+@strong{Portability}@*
+No supporting OS subroutines are required.
+
+@*

@@ -1,0 +1,25 @@
+@node towlower
+@section @code{towlower}---translate wide characters to lowercase
+@findex towlower
+@strong{Synopsis}
+@example
+#include <wctype.h>
+wint_t towlower(wint_t @var{c});
+
+@end example
+@strong{Description}@*
+@code{towlower} is a function which converts uppercase wide characters to
+lowercase, leaving all other characters unchanged.
+
+@*
+@strong{Returns}@*
+@code{towlower} returns the lowercase equivalent of @var{c} when it is a
+uppercase wide character; otherwise, it returns the input character.
+
+@*
+@strong{Portability}@*
+@code{towlower} is C99.
+
+No supporting OS subroutines are required.
+
+@*

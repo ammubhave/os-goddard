@@ -1,0 +1,31 @@
+@node clearerr
+@section @code{clearerr}---clear file or stream error indicator
+@findex clearerr
+@strong{Synopsis}
+@example
+#include <stdio.h>
+void clearerr(FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+The @code{stdio} functions maintain an error indicator with each file
+pointer @var{fp}, to record whether any read or write errors have
+occurred on the associated file or stream.  Similarly, it maintains an
+end-of-file indicator to record whether there is no more data in the
+file.
+
+Use @code{clearerr} to reset both of these indicators.
+
+See @code{ferror} and @code{feof} to query the two indicators.
+
+@*
+@strong{Returns}@*
+@code{clearerr} does not return a result.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{clearerr}.
+
+No supporting OS subroutines are required.
+
+@*

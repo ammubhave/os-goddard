@@ -1,0 +1,31 @@
+@node rename
+@section @code{rename}---rename a file
+@findex rename
+@strong{Synopsis}
+@example
+#include <stdio.h>
+int rename(const char *@var{old}, const char *@var{new});
+
+@end example
+@strong{Description}@*
+Use @code{rename} to establish a new name (the string at @var{new}) for a
+file now known by the string at @var{old}.  After a successful
+@code{rename}, the file is no longer accessible by the string at @var{old}.
+
+If @code{rename} fails, the file named @code{*@var{old}} is unaffected.  The
+conditions for failure depend on the host operating system.
+
+@*
+@strong{Returns}@*
+The result is either @code{0} (when successful) or @code{-1} (when the file
+could not be renamed).
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{rename}, but only specifies that the result on
+failure be nonzero.  The effects of using the name of an existing file
+as @code{*@var{new}} may vary from one implementation to another.
+
+Supporting OS subroutines required: @code{link}, @code{unlink}, or @code{rename}.
+
+@*

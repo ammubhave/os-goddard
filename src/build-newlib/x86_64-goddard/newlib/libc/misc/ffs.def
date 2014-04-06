@@ -1,0 +1,24 @@
+@node ffs
+@section @code{ffs}---find first bit set in a word
+@findex ffs
+@strong{Synopsis}
+@example
+#include <strings.h>
+int ffs(int @var{word});
+
+@end example
+@strong{Description}@*
+
+@code{ffs} returns the first bit set in a word.
+
+@*
+@strong{Returns}@*
+@code{ffs} returns 0 if @var{c} is 0, 1 if @var{c} is odd, 2 if @var{c} is a multiple of
+2, etc.
+
+@*
+@strong{Portability}@*
+@code{ffs} is not ANSI C.
+
+No supporting OS subroutines are required.  
+@*

@@ -1,0 +1,31 @@
+@node abs
+@section @code{abs}---integer absolute value (magnitude)
+@findex abs
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+int abs(int @var{i});
+
+@end example
+@strong{Description}@*
+@code{abs} returns
+@tex
+$|x|$,
+@end tex
+the absolute value of @var{i} (also called the magnitude
+of @var{i}).  That is, if @var{i} is negative, the result is the opposite
+of @var{i}, but if @var{i} is nonnegative the result is @var{i}.
+
+The similar function @code{labs} uses and returns @code{long} rather than @code{int} values.
+
+@*
+@strong{Returns}@*
+The result is a nonnegative integer.
+
+@*
+@strong{Portability}@*
+@code{abs} is ANSI.
+
+No supporting OS subroutines are required.
+
+@*

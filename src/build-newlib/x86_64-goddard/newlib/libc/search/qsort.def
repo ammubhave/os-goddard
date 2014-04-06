@@ -1,0 +1,35 @@
+@node qsort
+@section @code{qsort}---sort an array
+@findex qsort
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+void qsort(void *@var{base}, size_t @var{nmemb}, size_t @var{size},
+    int (*@var{compar})(const void *, const void *) );
+
+@end example
+@strong{Description}@*
+@code{qsort} sorts an array (beginning at @var{base}) of @var{nmemb} objects.
+@var{size} describes the size of each element of the array.
+
+You must supply a pointer to a comparison function, using the argument
+shown as @var{compar}.  (This permits sorting objects of unknown
+properties.)  Define the comparison function to accept two arguments,
+each a pointer to an element of the array starting at @var{base}.  The
+result of @code{(*@var{compar})} must be negative if the first argument is
+less than the second, zero if the two arguments match, and positive if
+the first argument is greater than the second (where ``less than'' and
+``greater than'' refer to whatever arbitrary ordering is appropriate).
+
+The array is sorted in place; that is, when @code{qsort} returns, the
+array elements beginning at @var{base} have been reordered.
+
+@*
+@strong{Returns}@*
+@code{qsort} does not return a result.
+
+@*
+@strong{Portability}@*
+@code{qsort} is required by ANSI (without specifying the sorting algorithm).
+
+@*

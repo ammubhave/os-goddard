@@ -1,0 +1,16 @@
+@node _mkdir_r
+@section @code{_mkdir_r}---Reentrant version of mkdir
+@findex _mkdir_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _mkdir_r(struct _reent *@var{ptr},
+    const char *@var{path}, int @var{mode});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{mkdir}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

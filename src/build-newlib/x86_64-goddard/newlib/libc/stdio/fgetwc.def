@@ -1,0 +1,52 @@
+@node fgetwc
+@section @code{fgetwc}, @code{getwc}---get a wide character from a file or stream
+@findex fgetwc
+@findex _fgetwc_r
+@findex getwc
+@findex _getwc_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+#include <wchar.h>
+wint_t fgetwc(FILE *@var{fp});
+
+#include <stdio.h>
+#include <wchar.h>
+wint_t _fgetwc_r(struct _reent *@var{ptr}, FILE *@var{fp});
+
+#include <stdio.h>
+#include <wchar.h>
+wint_t getwc(FILE *@var{fp});
+
+#include <stdio.h>
+#include <wchar.h>
+wint_t _getwc_r(struct _reent *@var{ptr}, FILE *@var{fp});
+
+@end example
+@strong{Description}@*
+Use @code{fgetwc} to get the next wide character from the file or stream
+identified by @var{fp}.  As a side effect, @code{fgetwc} advances the file's
+current position indicator.
+
+The  @code{getwc}  function  or macro functions identically to @code{fgetwc}.  It
+may be implemented as a macro, and may evaluate its argument more  than
+once. There is no reason ever to use it.
+
+@code{_fgetwc_r} and @code{_getwc_r} are simply reentrant versions of
+@code{fgetwc} and @code{getwc} that are passed the additional reentrant
+structure pointer argument: @var{ptr}.
+
+@*
+@strong{Returns}@*
+The next wide character cast to @code{wint_t}), unless there is no more data,
+or the host system reports a read error; in either of these situations,
+@code{fgetwc} and @code{getwc} return @code{WEOF}.
+
+You can distinguish the two situations that cause an @code{EOF} result by
+using the @code{ferror} and @code{feof} functions.
+
+@*
+@strong{Portability}@*
+C99, POSIX.1-2001
+
+@*

@@ -1,0 +1,37 @@
+@node mblen
+@section @code{mblen}---minimal multibyte length function
+@findex mblen
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+int mblen(const char *@var{s}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+When _MB_CAPABLE is not defined, this is a minimal ANSI-conforming 
+implementation of @code{mblen}.  In this case, the
+only ``multi-byte character sequences'' recognized are single bytes,
+and thus @code{1} is returned unless @var{s} is the null pointer or
+has a length of 0 or is the empty string.
+
+When _MB_CAPABLE is defined, this routine calls @code{_mbtowc_r} to perform
+the conversion, passing a state variable to allow state dependent
+decoding.  The result is based on the locale setting which may
+be restricted to a defined set of locales.
+
+@*
+@strong{Returns}@*
+This implementation of @code{mblen} returns @code{0} if
+@var{s} is @code{NULL} or the empty string; it returns @code{1} if not _MB_CAPABLE or
+the character is a single-byte character; it returns @code{-1}
+if the multi-byte character is invalid; otherwise it returns
+the number of bytes in the multibyte character.
+
+@*
+@strong{Portability}@*
+@code{mblen} is required in the ANSI C standard.  However, the precise
+effects vary with the locale.
+
+@code{mblen} requires no supporting OS subroutines.
+
+@*

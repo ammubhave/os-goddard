@@ -1,0 +1,53 @@
+@node vfwprintf
+@section @code{vfwprintf}, @code{vwprintf}, @code{vswprintf}---wide character format argument list
+@findex vfwprintf
+@findex _vfwprintf_r
+@findex vwprintf
+@findex _vwprintf_r
+@findex vswprintf
+@findex _vswprintf_r
+@strong{Synopsis}
+@example
+#include <stdio.h>
+#include <stdarg.h>
+#include <wchar.h>
+int vwprintf(const wchar_t *__restrict @var{fmt}, va_list @var{list});
+int vfwprintf(FILE *__restrict @var{fp},
+    const wchar_t *__restrict @var{fmt}, va_list @var{list});
+int vswprintf(wchar_t * __restrict @var{str}, size_t @var{size},
+    const wchar_t *__ restrict @var{fmt}, va_list @var{list});
+
+int _vwprintf_r(struct _reent *@var{reent}, const wchar_t *@var{fmt},
+    va_list @var{list});
+int _vfwprintf_r(struct _reent *@var{reent}, FILE *@var{fp},
+    const wchar_t *@var{fmt}, va_list @var{list});
+int _vswprintf_r(struct _reent *@var{reent}, wchar_t *@var{str},
+    size_t @var{size}, const wchar_t *@var{fmt}, va_list @var{list});
+
+@end example
+@strong{Description}@*
+@code{vwprintf}, @code{vfwprintf} and @code{vswprintf} are (respectively) variants
+of @code{wprintf}, @code{fwprintf} and @code{swprintf}.  They differ only in allowing
+their caller to pass the variable argument list as a @code{va_list} object
+(initialized by @code{va_start}) rather than directly accepting a variable
+number of arguments.  The caller is responsible for calling @code{va_end}.
+
+@code{_vwprintf_r}, @code{_vfwprintf_r} and @code{_vswprintf_r} are reentrant
+versions of the above.
+
+@*
+@strong{Returns}@*
+The return values are consistent with the corresponding functions.
+
+@*
+@strong{Portability}@*
+POSIX-1.2008 with extensions; C99 (compliant except for POSIX extensions).
+
+Supporting OS subroutines required: @code{close}, @code{fstat}, @code{isatty},
+@code{lseek}, @code{read}, @code{sbrk}, @code{write}.
+
+@*
+@strong{See Also}@*
+@code{wprintf}, @code{fwprintf} and @code{swprintf}.
+
+@*

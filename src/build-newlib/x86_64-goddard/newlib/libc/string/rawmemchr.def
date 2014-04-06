@@ -1,0 +1,27 @@
+@node rawmemchr
+@section @code{rawmemchr}---find character in memory
+@findex rawmemchr
+@strong{Synopsis}
+@example
+#include <string.h>
+void *rawmemchr(const void *@var{src}, int @var{c});
+
+@end example
+@strong{Description}@*
+This function searches memory starting at @code{*@var{src}} for the
+character @var{c}.  The search only ends with the first occurrence
+of @var{c}; in particular, @code{NUL} does not terminate the search.
+No bounds checking is performed, so this function should only
+be used when it is certain that the character @var{c} will be found.
+
+@*
+@strong{Returns}@*
+A pointer to the first occurance of character @var{c}.
+
+@*
+@strong{Portability}@*
+@code{rawmemchr} is a GNU extension.
+
+@code{rawmemchr} requires no supporting OS subroutines.
+
+@*

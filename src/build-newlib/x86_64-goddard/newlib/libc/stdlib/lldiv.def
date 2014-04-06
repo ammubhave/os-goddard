@@ -1,0 +1,46 @@
+@node lldiv
+@section @code{lldiv}---divide two long long integers
+@findex lldiv
+@strong{Synopsis}
+@example
+#include <stdlib.h>
+lldiv_t lldiv(long long @var{n}, long long @var{d});
+
+@end example
+@strong{Description}@*
+Divide
+@tex
+$n/d$,
+@end tex
+@ifnottex
+@var{n}/@var{d},
+@end ifnottex
+returning quotient and remainder as two long long integers in a structure 
+@code{lldiv_t}.
+
+@*
+@strong{Returns}@*
+The result is represented with the structure
+
+@smallexample
+ typedef struct
+ @{
+  long long quot;
+  long long rem;
+ @} lldiv_t;
+@end smallexample
+
+where the @code{quot} field represents the quotient, and @code{rem} the
+remainder.  For nonzero @var{d}, if `@code{@var{r} = ldiv(@var{n},@var{d});}' then
+@var{n} equals `@code{@var{r}.rem + @var{d}*@var{r}.quot}'.
+
+To divide @code{long} rather than @code{long long} values, use the similar
+function @code{ldiv}.
+
+@*
+@strong{Portability}@*
+@code{lldiv} is ISO 9899 (C99) compatable.
+
+No supporting OS subroutines are required.
+
+@*

@@ -1,0 +1,21 @@
+@node _gettimeofday_r
+@section @code{_gettimeofday_r}---Reentrant version of gettimeofday
+@findex _gettimeofday_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+#include <time.h>
+int _gettimeofday_r(struct _reent *@var{ptr},
+    struct timeval *@var{ptimeval},
+    void *@var{ptimezone});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{gettimeofday}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+This function is only available for a few targets.
+Check libc.a to see if its available on yours.
+
+@*

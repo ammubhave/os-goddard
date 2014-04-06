@@ -1,0 +1,54 @@
+@node vfwscanf
+@section @code{vfwscanf}, @code{vwscanf}, @code{vswscanf}---scan and format argument list from wide character input
+@findex vfwscanf
+@findex _vfwscanf
+@findex vwscanf
+@findex _vwscanf
+@findex vswscanf
+@findex _vswscanf
+@strong{Synopsis}
+@example
+#include <stdio.h>
+#include <stdarg.h>
+int vwscanf(const wchar_t *__restrict @var{fmt}, va_list @var{list});
+int vfwscanf(FILE *__restrict @var{fp},
+    const wchar_t *__restrict @var{fmt}, va_list @var{list});
+int vswscanf(const wchar_t *__restrict @var{str},
+    const wchar_t *__restrict @var{fmt}, va_list @var{list});
+
+int _vwscanf(struct _reent *@var{reent}, const wchar_t *@var{fmt},
+    va_list @var{list});
+int _vfwscanf(struct _reent *@var{reent}, FILE *@var{fp},
+    const wchar_t *@var{fmt}, va_list @var{list});
+int _vswscanf(struct _reent *@var{reent}, const wchar_t *@var{str},
+    const wchar_t *@var{fmt}, va_list @var{list});
+
+@end example
+@strong{Description}@*
+@code{vwscanf}, @code{vfwscanf}, and @code{vswscanf} are (respectively) variants
+of @code{wscanf}, @code{fwscanf}, and @code{swscanf}.  They differ only in
+allowing their caller to pass the variable argument list as a
+@code{va_list} object (initialized by @code{va_start}) rather than
+directly accepting a variable number of arguments.
+
+@*
+@strong{Returns}@*
+The return values are consistent with the corresponding functions:
+@code{vwscanf} returns the number of input fields successfully scanned,
+converted, and stored; the return value does not include scanned
+fields which were not stored.
+
+If @code{vwscanf} attempts to read at end-of-file, the return value
+is @code{EOF}.
+
+If no fields were stored, the return value is @code{0}.
+
+The routines @code{_vwscanf}, @code{_vfwscanf}, and @code{_vswscanf} are
+reentrant versions which take an additional first parameter which points
+to the reentrancy structure.
+
+@*
+@strong{Portability}@*
+C99, POSIX-1.2008
+
+@*

@@ -1,0 +1,34 @@
+@node wcsxfrm
+@section @code{wcsxfrm}---locale-specific wide-character string transformation
+@findex wcsxfrm
+@strong{Synopsis}
+@example
+#include <wchar.h>
+int wcsxfrm(wchar_t *__restrict @var{stra},
+    const wchar_t *__restrict @var{strb}, size_t @var{n});
+
+@end example
+@strong{Description}@*
+@code{wcsxfrm} transforms the wide-character string pointed to by
+@var{strb} to the wide-character string pointed to by @var{stra},
+Comparing two transformed wide strings with @code{wcscmp} should return
+the same result as comparing the original strings with @code{wcscoll}.
+No more than @var{n} wide characters are transformed, including the
+trailing null character.
+
+If @var{n} is 0, @var{stra} may be a NULL pointer.
+
+The current implementation of @code{wcsxfrm} simply uses @code{wcslcpy}
+and does not support any language-specific transformations.
+
+@*
+@strong{Returns}@*
+@code{wcsxfrm} returns the length of the transformed wide character
+string.  if the return value is greater or equal to @var{n}, the
+content of @var{stra} is undefined.
+
+@*
+@strong{Portability}@*
+@code{wcsxfrm} is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+@*

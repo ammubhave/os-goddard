@@ -1,0 +1,1864 @@
+@node Stdlib
+@chapter Standard Utility Functions (@file{stdlib.h})
+
+This chapter groups utility functions useful in a variety of programs.
+The corresponding declarations are in the header file @file{stdlib.h}.
+
+@menu 
+* _Exit::       End program execution without cleaning up
+* a64l::        String to long long
+* abort::       Abnormal termination of a program
+* abs::         Integer absolute value (magnitude)
+* assert::      Macro for Debugging Diagnostics
+* atexit::      Request execution of functions at program exit
+* atof::        String to double or float
+* atoi::        String to integer
+* atoll::       String to long long
+* bsearch::	Binary search
+* calloc::      Allocate space for arrays
+* div::         Divide two integers
+* ecvtbuf::     Double or float to string of digits
+* ecvt::        Double or float to string of digits (malloc result)
+* __env_lock::		Lock environment list for getenv and setenv
+* gvcvt::       Format double or float as string
+* exit::        End program execution
+* getenv::      Look up environment variable
+* labs::        Long integer absolute value (magnitude)
+* ldiv::        Divide two long integers
+* llabs::       Long long integer absolute value (magnitude)
+* lldiv::       Divide two long long integers
+* malloc::      Allocate and manage memory (malloc, realloc, free)
+* mallinfo::	Get information about allocated memory
+* __malloc_lock::	Lock memory pool for malloc and free
+* mbsrtowcs::	Convert a character string to a wide-character string
+* mbstowcs::	Minimal multibyte string to wide string converter
+* mblen::	Minimal multibyte length
+* mbtowc::      Minimal multibyte to wide character converter
+* on_exit::     Request execution of functions at program exit
+* qsort::	Array sort
+* rand::        Pseudo-random numbers
+* rand48::      Uniformly distributed pseudo-random numbers
+* strtod::      String to double or float
+* strtol::      String to long
+* strtoll::     String to long long
+* strtoul::     String to unsigned long
+* strtoull::    String to unsigned long long
+* wcsrtombs::	Convert a wide-character string to a character string
+* wcstod::      Wide string to double or float
+* wcstol::      Wide string to long
+* wcstoll::     Wide string to long long
+* wcstoul::     Wide string to unsigned long
+* wcstoull::    Wide string to unsigned long long
+* system::      Execute command string
+* wcstombs::	Minimal wide string to multibyte string converter
+* wctomb::      Minimal wide character to multibyte converter
+@end menu
+
+@page
+@include stdlib/_Exit.def
+
+@page
+@include stdlib/a64l.def
+
+@page
+@include stdlib/abort.def
+
+@page
+@include stdlib/abs.def
+
+@page
+@include stdlib/assert.def
+
+@page
+@include stdlib/atexit.def
+
+@page
+@include stdlib/atof.def
+
+@page
+@include stdlib/atoi.def
+
+@page
+@include stdlib/atoll.def
+
+@page
+@include search/bsearch.def
+
+@page
+@include stdlib/calloc.def
+
+@page
+@include stdlib/div.def
+
+@page
+@include stdlib/efgcvt.def
+
+@page
+@include stdlib/ecvtbuf.def
+
+@page
+@include stdlib/envlock.def
+
+@page
+@include stdlib/exit.def
+
+@page
+@include stdlib/getenv.def
+
+@page
+@include stdlib/labs.def
+
+@page
+@include stdlib/ldiv.def
+
+@page
+@include stdlib/llabs.def
+
+@page
+@include stdlib/lldiv.def
+
+@page
+@include stdlib/malloc.def
+
+@page
+@include stdlib/mstats.def
+
+@page
+@include stdlib/mlock.def
+
+@page
+@include stdlib/mblen.def
+
+@page
+@include stdlib/mbsnrtowcs.def
+
+@page
+@include stdlib/mbstowcs.def
+
+@page
+@include stdlib/mbtowc.def
+
+@page
+@include stdlib/on_exit.def
+
+@page
+@include search/qsort.def
+
+@page
+@include stdlib/rand.def
+
+@page
+@include stdlib/rand48.def
+
+@page
+@include stdlib/strtod.def
+
+@page
+@include stdlib/strtol.def
+
+@page
+@include stdlib/strtoll.def
+
+@page
+@include stdlib/strtoul.def
+
+@page
+@include stdlib/strtoull.def
+
+@page
+@include stdlib/wcsnrtombs.def
+
+@page
+@include stdlib/wcstod.def
+
+@page
+@include stdlib/wcstol.def
+
+@page
+@include stdlib/wcstoll.def
+
+@page
+@include stdlib/wcstoul.def
+
+@page
+@include stdlib/wcstoull.def
+
+@page
+@include stdlib/system.def
+
+@page
+@include stdlib/wcstombs.def
+
+@page
+@include stdlib/wctomb.def
+
+@node Ctype
+@chapter Character Type Macros and Functions (@file{ctype.h})
+This chapter groups macros (which are also available as subroutines)
+to classify characters into several categories (alphabetic,
+numeric, control characters, whitespace, and so on), or to perform
+simple character mappings.
+
+The header file @file{ctype.h} defines the macros.
+@menu 
+* isalnum::   Alphanumeric character predicate
+* isalpha::   Alphabetic character predicate
+* isascii::   ASCII character predicate
+* iscntrl::   Control character predicate
+* isdigit::   Decimal digit predicate
+* islower::   Lowercase character predicate
+* isprint::   Printable character predicates (isprint, isgraph)
+* ispunct::   Punctuation character predicate
+* isspace::   Whitespace character predicate
+* isupper::   Uppercase character predicate
+* isxdigit::  Hexadecimal digit predicate
+* toascii::   Force integers to ASCII range
+* tolower::   Translate characters to lowercase
+* toupper::   Translate characters to uppercase
+* iswalnum::  Alphanumeric wide character predicate
+* iswalpha::  Alphabetic wide character predicate
+* iswblank::  Blank wide character predicate
+* iswcntrl::  Control wide character predicate
+* iswdigit::  Decimal digit wide character predicate
+* iswgraph::  Graphic wide character predicate
+* iswlower::  Lowercase wide character predicate
+* iswprint::  Printable wide character predicate
+* iswpunct::  Punctuation wide character predicate
+* iswspace::  Whitespace wide character predicate
+* iswupper::  Uppercase wide character predicate
+* iswxdigit:: Hexadecimal digit wide character predicate
+* iswctype::  Extensible wide-character test
+* wctype::    Compute wide-character test type
+* towlower::  Translate wide characters to lowercase
+* towupper::  Translate wide characters to uppercase
+* towctrans:: Extensible wide-character translation
+* wctrans::   Compute wide-character translation type
+@end menu
+
+@page
+@include ctype/isalnum.def
+
+@page
+@include ctype/isalpha.def
+
+@page
+@include ctype/isascii.def
+
+@page
+@include ctype/iscntrl.def
+
+@page
+@include ctype/isdigit.def
+
+@page
+@include ctype/islower.def
+
+@page
+@include ctype/isprint.def
+
+@page
+@include ctype/ispunct.def
+
+@page
+@include ctype/isspace.def
+
+@page
+@include ctype/isupper.def
+
+@page
+@include ctype/isxdigit.def
+
+@page
+@include ctype/toascii.def
+
+@page
+@include ctype/tolower.def
+
+@page
+@include ctype/toupper.def
+
+@page
+@include ctype/iswalnum.def
+
+@page
+@include ctype/iswalpha.def
+
+@page
+@include ctype/iswcntrl.def
+
+@page
+@include ctype/iswblank.def
+
+@page
+@include ctype/iswdigit.def
+
+@page
+@include ctype/iswgraph.def
+
+@page
+@include ctype/iswlower.def
+
+@page
+@include ctype/iswprint.def
+
+@page
+@include ctype/iswpunct.def
+
+@page
+@include ctype/iswspace.def
+
+@page
+@include ctype/iswupper.def
+
+@page
+@include ctype/iswxdigit.def
+
+@page
+@include ctype/iswctype.def
+
+@page
+@include ctype/wctype.def
+
+@page
+@include ctype/towlower.def
+
+@page
+@include ctype/towupper.def
+
+@page
+@include ctype/towctrans.def
+
+@page
+@include ctype/wctrans.def
+
+
+@node Stdio
+@chapter Input and Output (@file{stdio.h})
+
+This chapter comprises functions to manage files
+or other input/output streams. Among these functions are subroutines
+to generate or scan strings according to specifications from a format string.
+
+The underlying facilities for input and output depend on the host
+system, but these functions provide a uniform interface.
+
+The corresponding declarations are in @file{stdio.h}.
+
+The reentrant versions of these functions use macros
+
+@example
+_stdin_r(@var{reent})
+_stdout_r(@var{reent})
+_stderr_r(@var{reent})
+@end example
+
+@noindent
+instead of the globals @code{stdin}, @code{stdout}, and
+@code{stderr}.  The argument <[reent]> is a pointer to a reentrancy
+structure.
+
+@menu
+* clearerr::    Clear file or stream error indicator
+* diprintf::    Print to a file descriptor (integer only)
+* dprintf::     Print to a file descriptor
+* fclose::      Close a file
+* fcloseall::   Close all files
+* fdopen::      Turn an open file into a stream
+* feof::        Test for end of file
+* ferror::      Test whether read/write error has occurred
+* fflush::      Flush buffered file output
+* fgetc::       Get a character from a file or stream
+* fgetpos::     Record position in a stream or file
+* fgets::       Get character string from a file or stream
+* fgetwc::      Get a wide character from a file or stream
+* fgetws::      Get a wide character string from a file or stream
+* fileno::      Get file descriptor associated with stream
+* fmemopen::    Open a stream around a fixed-length buffer
+* fopen::       Open a file
+* fopencookie:: Open a stream with custom callbacks
+* fpurge::      Discard all pending I/O on a stream
+* fputc::       Write a character on a stream or file
+* fputs::       Write a character string in a file or stream
+* fputwc::      Write a wide character to a file or stream
+* fputws::      Write a wide character string to a file or stream
+* fread::       Read array elements from a file
+* freopen::     Open a file using an existing file descriptor
+* fseek::       Set file position
+* fsetpos::     Restore position of a stream or file
+* ftell::       Return position in a stream or file
+* funopen::     Open a stream with custom callbacks
+* fwide::	Set and determine the orientation of a FILE stream
+* fwrite::      Write array elements from memory to a file or stream
+* getc::        Get a character from a file or stream (macro)
+* getc_unlocked::	Get a character from a file or stream (macro)
+* getchar::     Get a character from standard input (macro)
+* getchar_unlocked::	Get a character from standard input (macro)
+* getdelim::    Get character string from a file or stream
+* getline::     Get character string from a file or stream
+* gets::        Get character string from standard input (obsolete)
+* getw::        Get a word (int) from a file or stream
+* getwchar::    Get a wide character from standard input
+* mktemp::      Generate unused file name
+* open_memstream::	Open a write stream around an arbitrary-length buffer
+* perror::      Print an error message on standard error
+* putc::        Write a character on a stream or file (macro)
+* putc_unlocked::	Write a character on a stream or file (macro)
+* putchar::     Write a character on standard output (macro)
+* putchar_unlocked::	Write a character on standard output (macro)
+* puts::        Write a character string on standard output
+* putw::        Write a word (int) to a file or stream
+* putwchar::    Write a wide character to standard output
+* remove::      Delete a file's name
+* rename::      Rename a file
+* rewind::      Reinitialize a file or stream
+* setbuf::      Specify full buffering for a file or stream
+* setbuffer::   Specify full buffering for a file or stream with size
+* setlinebuf::  Specify line buffering for a file or stream
+* setvbuf::     Specify buffering for a file or stream
+* siprintf::    Write formatted output (integer only)
+* siscanf::     Scan and format input (integer only)
+* sprintf::     Write formatted output
+* sscanf::      Scan and format input
+* swprintf::    Write formatted wide character output
+* swscanf::     Scan and format wide character input
+* tmpfile::     Create a temporary file
+* tmpnam::      Generate name for a temporary file
+* ungetc::      Push data back into a stream
+* ungetwc::     Push wide character data back into a stream
+* vfprintf::    Format variable argument list
+* vfscanf::     Scan variable argument list
+* vfwprintf::   Format variable wide character argument list
+* vfwscanf::    Scan and format argument list from wide character input
+* viprintf::    Format variable argument list (integer only)
+* viscanf::     Scan variable format list (integer only)
+@end menu
+
+@page
+@include stdio/clearerr.def
+
+@page
+@include stdio/diprintf.def
+
+@page
+@include stdio/dprintf.def
+
+@page
+@include stdio/fclose.def
+
+@page
+@include stdio/fcloseall.def
+
+@page
+@include stdio/fdopen.def
+
+@page
+@include stdio/feof.def
+
+@page
+@include stdio/ferror.def
+
+@page
+@include stdio/fflush.def
+
+@page
+@include stdio/fgetc.def
+
+@page
+@include stdio/fgetpos.def
+
+@page
+@include stdio/fgets.def
+
+@page
+@include stdio/fgetwc.def
+
+@page
+@include stdio/fgetws.def
+
+@page
+@include stdio/fileno.def
+
+@page
+@include stdio/fmemopen.def
+
+@page
+@include stdio/fopen.def
+
+@page
+@include stdio/fopencookie.def
+
+@page
+@include stdio/fpurge.def
+
+@page
+@include stdio/fputc.def
+
+@page
+@include stdio/fputs.def
+
+@page
+@include stdio/fputwc.def
+
+@page
+@include stdio/fputws.def
+
+@page
+@include stdio/fread.def
+
+@page
+@include stdio/freopen.def
+
+@page
+@include stdio/fseek.def
+
+@page
+@include stdio/fsetpos.def
+
+@page
+@include stdio/ftell.def
+
+@page
+@include stdio/funopen.def
+
+@page
+@include stdio/fwide.def
+
+@page
+@include stdio/fwrite.def
+
+@page
+@include stdio/getc.def
+
+@page
+@include stdio/getc_u.def
+
+@page
+@include stdio/getchar.def
+
+@page
+@include stdio/getchar_u.def
+
+@page
+@include stdio/getdelim.def
+
+@page
+@include stdio/getline.def
+
+@page
+@include stdio/gets.def
+
+@page
+@include stdio/getw.def
+
+@page
+@include stdio/getwchar.def
+
+@page
+@include stdio/mktemp.def
+
+@page
+@include stdio/open_memstream.def
+
+@page
+@include stdio/perror.def
+
+@page
+@include stdio/putc.def
+
+@page
+@include stdio/putc_u.def
+
+@page
+@include stdio/putchar.def
+
+@page
+@include stdio/putchar_u.def
+
+@page
+@include stdio/puts.def
+
+@page
+@include stdio/putw.def
+
+@page
+@include stdio/putwchar.def
+
+@page
+@include stdio/remove.def
+
+@page
+@include stdio/rename.def
+
+@page
+@include stdio/rewind.def
+
+@page
+@include stdio/setbuf.def
+
+@page
+@include stdio/setbuffer.def
+
+@page
+@include stdio/setlinebuf.def
+
+@page
+@include stdio/setvbuf.def
+
+@page
+@include stdio/siprintf.def
+
+@page
+@include stdio/siscanf.def
+
+@page
+@include stdio/sprintf.def
+
+@page
+@include stdio/sscanf.def
+
+@page
+@include stdio/swprintf.def
+
+@page
+@include stdio/swscanf.def
+
+@page
+@include stdio/tmpfile.def
+
+@page
+@include stdio/tmpnam.def
+
+@page
+@include stdio/ungetc.def
+
+@page
+@include stdio/ungetwc.def
+
+@page
+@include stdio/vfprintf.def
+
+@page
+@include stdio/vfscanf.def
+
+@page
+@include stdio/vfwprintf.def
+
+@page
+@include stdio/vfwscanf.def
+
+@page
+@include stdio/viprintf.def
+
+@page
+@include stdio/viscanf.def
+@node Strings
+@chapter Strings and Memory (@file{string.h})
+
+This chapter describes string-handling functions and functions for
+managing areas of memory.  The corresponding declarations are in
+@file{string.h}.
+
+@menu
+* bcmp::        Compare two memory areas
+* bcopy::       Copy memory regions
+* bzero::       Initialize memory to zero
+* index::       Search for character in string
+* memccpy::     Copy memory regions up to end-token
+* memchr::      Find character in memory
+* memcmp::      Compare two memory areas
+* memcpy::      Copy memory regions
+* memmem::      Find memory segment
+* memmove::     Move possibly overlapping memory
+* mempcpy::	Copy memory regions and locate end
+* memset::      Set an area of memory
+* rindex::      Reverse search for character in string
+* stpcpy::      Copy string returning a pointer to its end
+* stpncpy::     Counted copy string returning a pointer to its end
+* strcasecmp::	Compare strings ignoring case
+* strcasestr::	Find string segment ignoring case
+* strcat::      Concatenate strings
+* strchr::      Search for character in string
+* strcmp::      Character string compare
+* strcoll::     Locale-specific character string compare
+* strcpy::      Copy string
+* strcspn::     Count chars not in string
+* strerror::    Convert error number to string
+* strerror_r::  Convert error number to string
+* strlen::      Character string length
+* strlwr::	Convert string to lowercase
+* strncasecmp::	Compare strings ignoring case
+* strncat::     Concatenate strings
+* strncmp::     Character string compare
+* strncpy::     Counted copy string
+* strnlen::     Character string length
+* strpbrk::     Find chars in string
+* strrchr::     Reverse search for character in string
+* strsignal::	Return signal message string
+* strspn::      Find initial match
+* strstr::      Find string segment
+* strtok::      Get next token from a string
+* strupr::	Convert string to upper case
+* strxfrm::     Transform string
+* swab::        Swap adjacent bytes
+* wcscasecmp::  Compare wide character strings ignoring case
+* wcsdup::      Wide character string duplicate
+* wcsncasecmp:: Compare wide character strings ignoring case
+@end menu
+
+@page
+@include string/bcmp.def
+
+@page
+@include string/bcopy.def
+
+@page
+@include string/bzero.def
+
+@page
+@include string/index.def
+
+@page
+@include string/memccpy.def
+
+@page
+@include string/memchr.def
+
+@page
+@include string/memcmp.def
+
+@page
+@include string/memcpy.def
+
+@page
+@include string/memmem.def
+
+@page
+@include string/memmove.def
+
+@page
+@include string/mempcpy.def
+
+@page
+@include string/memset.def
+
+@page
+@include string/rindex.def
+
+@page
+@include string/stpcpy.def
+
+@page
+@include string/stpncpy.def
+
+@page
+@include string/strcasecmp.def
+
+@page
+@include string/strcasestr.def
+
+@page
+@include string/strcat.def
+
+@page
+@include string/strchr.def
+
+@page
+@include string/strcmp.def
+
+@page
+@include string/strcoll.def
+
+@page
+@include string/strcpy.def
+
+@page
+@include string/strcspn.def
+
+@page
+@include string/strerror.def
+
+@page
+@include string/strerror_r.def
+
+@page
+@include string/strlen.def
+
+@page
+@include string/strlwr.def
+
+@page
+@include string/strncasecmp.def
+
+@page
+@include string/strncat.def
+
+@page
+@include string/strncmp.def
+
+@page
+@include string/strncpy.def
+
+@page
+@include string/strnlen.def
+
+@page
+@include string/strpbrk.def
+
+@page
+@include string/strrchr.def
+
+@page
+@include string/strsignal.def
+
+@page
+@include string/strspn.def
+
+@page
+@include string/strstr.def
+
+@page
+@include string/strtok.def
+
+@page
+@include string/strupr.def
+
+@page
+@include string/strxfrm.def
+
+@page
+@include string/swab.def
+
+@page
+@include string/wcscasecmp.def
+
+@page
+@include string/wcsdup.def
+
+@page
+@include string/wcsncasecmp.def
+@node Wchar strings
+@chapter Wide Character Strings (@file{wchar.h})
+
+This chapter describes wide-character string-handling functions and
+managing areas of memory containing wide characters.  The corresponding 
+declarations are in @file{wchar.h}.
+
+@menu
+* wmemchr::     Find wide character in memory
+* wmemcmp::     Compare two wide-character memory areas
+* wmemcpy::     Copy wide-character memory regions
+* wmemmove::    Move possibly overlapping wide-character memory
+* wmemset::     Set an area of memory to a specified wide character
+* wcscat::      Concatenate wide-character strings
+* wcschr::      Search for wide character in string
+* wcscmp::      Wide-character string compare
+* wcscoll::     Locale-specific wide-character string compare
+* wcscpy::      Copy wide-character string
+* wcpcpy::      Copy a wide-character string returning a pointer to its end
+* wcscspn::     Count wide characters not in string
+* wcsftime::    Convert date and time to a formatted wide-character string
+* wcslcat::     Concatenate wide-character strings to specified length
+* wcslcpy::     Copy wide-character string to specified length
+* wcslen::      Wide-character string length
+* wcsncat::     Concatenate wide-character strings
+* wcsncmp::     Wide-character string compare
+* wcsncpy::     Counted copy wide-character string
+* wcpncpy::     Copy part of a wide-character string returning a pointer to its end
+* wcsnlen::     Wide-character string length with maximum limit
+* wcspbrk::     Find wide characters in string
+* wcsrchr::     Reverse search for wide character in string
+* wcsspn::      Find initial match in wide-character string
+* wcsstr::      Find wide-character string segment
+* wcstok::      Tokenize wide-character string
+* wcswidth::    Number of column positions of a wide-character string
+* wcsxfrm::     Locale-specific wide-character string transformation
+* wcwidth::     Number of column positions of a wide-character code
+@end menu
+
+@page
+@include string/wmemchr.def
+
+@page
+@include string/wmemcmp.def
+
+@page
+@include string/wmemcpy.def
+
+@page
+@include string/wmemmove.def
+
+@page
+@include string/wmemset.def
+
+@page
+@include string/wcscat.def
+
+@page
+@include string/wcschr.def
+
+@page
+@include string/wcscmp.def
+
+@page
+@include string/wcscoll.def
+
+@page
+@include string/wcscpy.def
+
+@page
+@include string/wcpcpy.def
+
+@page
+@include string/wcscspn.def
+
+@page
+@include time/wcsftime.def
+
+@page
+@include string/wcslcat.def
+
+@page
+@include string/wcslcpy.def
+
+@page
+@include string/wcslen.def
+
+@page
+@include string/wcsncat.def
+
+@page
+@include string/wcsncmp.def
+
+@page
+@include string/wcsncpy.def
+
+@page
+@include string/wcpncpy.def
+
+@page
+@include string/wcsnlen.def
+
+@page
+@include string/wcspbrk.def
+
+@page
+@include string/wcsrchr.def
+
+@page
+@include string/wcsspn.def
+
+@page
+@include string/wcsstr.def
+
+@page
+@include string/wcstok.def
+
+@page
+@include string/wcswidth.def
+
+@page
+@include string/wcsxfrm.def
+
+@page
+@include string/wcwidth.def
+
+@node Signals
+@chapter Signal Handling (@file{signal.h})
+
+A @dfn{signal} is an event that interrupts the normal flow of control
+in your program.  Your operating environment normally defines the full
+set of signals available (see @file{sys/signal.h}), as well as the
+default means of dealing with them---typically, either printing an
+error message and aborting your program, or ignoring the signal.
+
+All systems support at least the following signals:
+@table @code
+@item SIGABRT
+Abnormal termination of a program; raised by the <<abort>> function.
+
+@item SIGFPE
+A domain error in arithmetic, such as overflow, or division by zero.
+
+@item SIGILL
+Attempt to execute as a function data that is not executable.
+
+@item SIGINT
+Interrupt; an interactive attention signal.
+
+@item SIGSEGV
+An attempt to access a memory location that is not available.
+
+@item SIGTERM
+A request that your program end execution.
+@end table
+
+Two functions are available for dealing with asynchronous
+signals---one to allow your program to send signals to itself (this is
+called @dfn{raising} a signal), and one to specify subroutines (called
+@dfn{handlers} to handle particular signals that you anticipate may
+occur---whether raised by your own program or the operating environment.
+
+To support these functions, @file{signal.h} defines three macros:
+
+@table @code
+@item SIG_DFL
+Used with the @code{signal} function in place of a pointer to a
+handler subroutine, to select the operating environment's default
+handling of a signal.
+
+@item SIG_IGN
+Used with the @code{signal} function in place of a pointer to a
+handler, to ignore a particular signal.
+
+@item SIG_ERR
+Returned by the @code{signal} function in place of a pointer to a
+handler, to indicate that your request to set up a handler could not
+be honored for some reason.
+@end table
+
+@file{signal.h} also defines an integral type, @code{sig_atomic_t}.
+This type is not used in any function declarations; it exists only to
+allow your signal handlers to declare a static storage location where
+they may store a signal value.  (Static storage is not otherwise
+reliable from signal handlers.)
+
+@menu
+* psignal:: Print a signal message to standard error
+* raise::   Send a signal
+* signal::  Specify handler subroutine for a signal
+@end menu
+
+@page
+@include signal/psignal.def
+
+@page
+@include signal/raise.def
+
+@page
+@include signal/signal.def
+@node Timefns
+@chapter Time Functions (@file{time.h})
+
+This chapter groups functions used either for reporting on time
+(elapsed, current, or compute time) or to perform calculations based
+on time.
+
+The header file @file{time.h} defines three types.  @code{clock_t} and
+@code{time_t} are both used for representations of time particularly
+suitable for arithmetic.  (In this implementation, quantities of type
+@code{clock_t} have the highest resolution possible on your machine,
+and quantities of type @code{time_t} resolve to seconds.)  @code{size_t}
+is also defined if necessary for quantities representing sizes. 
+
+@file{time.h} also defines the structure @code{tm} for the traditional
+representation of Gregorian calendar time as a series of numbers, with
+the following fields: 
+
+@table @code
+@item tm_sec
+Seconds, between 0 and 60 inclusive (60 allows for leap seconds).
+
+@item tm_min
+Minutes, between 0 and 59 inclusive.
+
+@item tm_hour
+Hours, between 0 and 23 inclusive.
+
+@item tm_mday
+Day of the month, between 1 and 31 inclusive.
+
+@item tm_mon
+Month, between 0 (January) and 11 (December).
+
+@item tm_year
+Year (since 1900), can be negative for earlier years.
+
+@item tm_wday
+Day of week, between 0 (Sunday) and 6 (Saturday).
+
+@item tm_yday
+Number of days elapsed since last January 1, between 0 and 365 inclusive.
+
+@item tm_isdst
+Daylight Savings Time flag: positive means DST in effect, zero means DST
+not in effect, negative means no information about DST is available.
+Although for mktime(), negative means that it should decide if DST is in
+effect or not.
+@end table
+
+@menu
+* asctime::     Format time as string
+* clock::       Cumulative processor time
+* ctime::       Convert time to local and format as string
+* difftime::    Subtract two times
+* gmtime::      Convert time to UTC (GMT) traditional representation
+* localtime::   Convert time to local representation
+* mktime::      Convert time to arithmetic representation
+* strftime::    Convert date and time to a user-formatted string
+* time::        Get current calendar time (as single number)
+* __tz_lock::   Lock time zone global variables
+* tzset::       Set timezone info
+@end menu
+
+@page
+@include time/asctime.def
+
+@page
+@include time/clock.def
+
+@page
+@include time/ctime.def
+
+@page
+@include time/difftime.def
+
+@page
+@include time/gmtime.def
+
+@page
+@include time/lcltime.def
+
+@page
+@include time/mktime.def
+
+@page
+@include time/strftime.def
+
+@page
+@include time/time.def
+
+@page
+@include time/tzlock.def
+
+@page
+@include time/tzset.def
+@node Locale
+@chapter Locale (@file{locale.h})
+
+A @dfn{locale} is the name for a collection of parameters (affecting
+collating sequences and formatting conventions) that may be different
+depending on location or culture.  The @code{"C"} locale is the only
+one defined in the ANSI C standard.
+
+This is a minimal implementation, supporting only the required @code{"C"}
+value for locale; strings representing other locales are not
+honored.  (@code{""} is also accepted; it represents the default locale
+for an implementation, here equivalent to @code{"C"}.
+
+
+@file{locale.h} defines the structure @code{lconv} to collect the
+information on a locale, with the following fields:
+
+@table @code
+@item char *decimal_point
+The decimal point character used to format ``ordinary'' numbers (all
+numbers except those referring to amounts of money).  @code{"."} in the
+C locale. 
+
+@item char *thousands_sep
+The character (if any) used to separate groups of digits, when
+formatting ordinary numbers.
+@code{""} in the C locale.
+
+@item char *grouping
+Specifications for how many digits to group (if any grouping is done at
+all) when formatting ordinary numbers.  The @emph{numeric value} of each
+character in the string represents the number of digits for the next
+group, and a value of @code{0} (that is, the string's trailing
+@code{NULL}) means to continue grouping digits using the last value
+specified.  Use @code{CHAR_MAX} to indicate that no further grouping is
+desired.  @code{""} in the C locale. 
+
+@item char *int_curr_symbol
+The international currency symbol (first three characters), if any, and
+the character used to separate it from numbers.
+@code{""} in the C locale.
+
+@item char *currency_symbol
+The local currency symbol, if any.
+@code{""} in the C locale.
+
+@item char *mon_decimal_point
+The symbol used to delimit fractions in amounts of money.
+@code{""} in the C locale.
+
+@item char *mon_thousands_sep
+Similar to @code{thousands_sep}, but used for amounts of money.
+@code{""} in the C locale.
+
+@item char *mon_grouping
+Similar to @code{grouping}, but used for amounts of money.
+@code{""} in the C locale.
+
+@item char *positive_sign
+A string to flag positive amounts of money when formatting.
+@code{""} in the C locale.
+
+@item char *negative_sign
+A string to flag negative amounts of money when formatting.
+@code{""} in the C locale.
+
+@item char int_frac_digits
+The number of digits to display when formatting amounts of money to
+international conventions.
+@code{CHAR_MAX} (the largest number representable as a @code{char}) in
+the C locale. 
+
+@item char frac_digits
+The number of digits to display when formatting amounts of money to
+local conventions.
+@code{CHAR_MAX} in the C locale. 
+
+@item char p_cs_precedes
+@code{1} indicates the local currency symbol is used before a
+@emph{positive or zero} formatted amount of money; @code{0} indicates
+the currency symbol is placed after the formatted number.
+@code{CHAR_MAX} in the C locale. 
+
+@item char p_sep_by_space
+@code{1} indicates the local currency symbol must be separated from
+@emph{positive or zero} numbers by a space; @code{0} indicates that it
+is immediately adjacent to numbers.
+@code{CHAR_MAX} in the C locale. 
+
+@item char n_cs_precedes
+@code{1} indicates the local currency symbol is used before a
+@emph{negative} formatted amount of money; @code{0} indicates
+the currency symbol is placed after the formatted number.
+@code{CHAR_MAX} in the C locale. 
+
+@item char n_sep_by_space
+@code{1} indicates the local currency symbol must be separated from
+@emph{negative} numbers by a space; @code{0} indicates that it
+is immediately adjacent to numbers.
+@code{CHAR_MAX} in the C locale. 
+
+@item char p_sign_posn
+Controls the position of the @emph{positive} sign for
+numbers representing money.  @code{0} means parentheses surround the
+number; @code{1} means the sign is placed before both the number and the
+currency symbol; @code{2} means the sign is placed after both the number
+and the currency symbol; @code{3} means the sign is placed just before
+the currency symbol; and @code{4} means the sign is placed just after
+the currency symbol.
+@code{CHAR_MAX} in the C locale. 
+
+@item char n_sign_posn
+Controls the position of the @emph{negative} sign for numbers
+representing money, using the same rules as @code{p_sign_posn}.
+@code{CHAR_MAX} in the C locale. 
+@end table
+
+@menu
+* setlocale::  Select or query locale
+@end menu
+
+@page
+@include locale/locale.def
+@node Reentrancy
+@chapter Reentrancy
+
+@cindex reentrancy
+Reentrancy is a characteristic of library functions which allows multiple
+processes to use the same address space with assurance that the values stored
+in those spaces will remain constant between calls. The Red Hat
+newlib implementation of the library functions ensures that 
+whenever possible, these library functions are reentrant.  However,
+there are some functions that can not be trivially made reentrant.
+Hooks have been provided to allow you to use these functions in a fully
+reentrant fashion.
+
+@findex _reent
+@findex reent.h
+@cindex reentrancy structure
+These hooks use the structure @code{_reent} defined in @file{reent.h}.
+A variable defined as @samp{struct _reent} is called a @dfn{reentrancy
+structure}.  All functions which must manipulate global information are
+available in two versions.  The first version has the usual name, and
+uses a single global instance of the reentrancy structure.  The second
+has a different name, normally formed by prepending @samp{_} and
+appending @samp{_r}, and takes a pointer to the particular reentrancy
+structure to use.
+
+For example, the function @code{fopen} takes two arguments, @var{file}
+and @var{mode}, and uses the global reentrancy structure.  The function
+@code{_fopen_r} takes the arguments, @var{struct_reent}, which is a
+pointer to an instance of the reentrancy structure, @var{file}
+and @var{mode}.	
+
+There are two versions of @samp{struct _reent}, a normal one and one
+for small memory systems, controlled by the @code{_REENT_SMALL}
+definition from the (automatically included) @file{<sys/config.h>}.
+
+@cindex global reentrancy structure
+@findex _impure_ptr
+Each function which uses the global reentrancy structure uses the global
+variable @code{_impure_ptr}, which points to a reentrancy structure.
+
+This means that you have two ways to achieve reentrancy.  Both require
+that each thread of execution control initialize a unique global
+variable of type @samp{struct _reent}:
+
+@enumerate
+@item
+@cindex extra argument, reentrant fns
+Use the reentrant versions of the library functions, after initializing
+a global reentrancy structure for each process.  Use the pointer to this
+structure as the extra argument for all library functions.
+
+@item
+Ensure that each thread of execution control has a pointer to its own
+unique reentrancy structure in the global variable @code{_impure_ptr},
+and call the standard library subroutines.
+@end enumerate
+
+@cindex list of reentrant functions
+@cindex reentrant function list
+The following functions are provided in both reentrant
+and non-reentrant versions.
+
+@example
+@exdent @emph{Equivalent for errno variable:}
+_errno_r
+
+@exdent @emph{Locale functions:}
+_localeconv_r  _setlocale_r
+
+@exdent @emph{Equivalents for stdio variables:}
+_stdin_r        _stdout_r       _stderr_r
+
+@page  
+@exdent @emph{Stdio functions:}
+_fdopen_r       _perror_r       _tempnam_r
+_fopen_r        _putchar_r      _tmpnam_r
+_getchar_r      _puts_r         _tmpfile_r
+_gets_r         _remove_r       _vfprintf_r
+_iprintf_r      _rename_r       _vsnprintf_r
+_mkstemp_r      _snprintf_r     _vsprintf_r
+_mktemp_t       _sprintf_r
+
+@exdent @emph{Signal functions:}
+_init_signal_r  _signal_r
+_kill_r         __sigtramp_r
+_raise_r
+
+@exdent @emph{Stdlib functions:}
+_calloc_r       _mblen_r        _setenv_r
+_dtoa_r         _mbstowcs_r     _srand_r
+_free_r         _mbtowc_r       _strtod_r
+_getenv_r       _memalign_r     _strtol_r
+_mallinfo_r     _mstats_r       _strtoul_r
+_malloc_r       _putenv_r       _system_r
+_malloc_r       _rand_r         _wcstombs_r
+_malloc_stats_r _realloc_r      _wctomb_r
+
+@exdent @emph{String functions:}
+_strdup_r       _strtok_r
+
+@exdent @emph{System functions:}
+_close_r        _link_r         _unlink_r
+_execve_r       _lseek_r        _wait_r
+_fcntl_r        _open_r         _write_r 
+_fork_r         _read_r
+_fstat_r        _sbrk_r
+_gettimeofday_r _stat_r
+_getpid_r       _times_r
+
+@ifset STDIO64
+@exdent @emph{Additional 64-bit I/O System functions:}
+_fstat64_r	_lseek64_r	_open64_r
+@end ifset
+
+@exdent @emph{Time function:}
+_asctime_r
+@end example
+@node Misc
+@chapter Miscellaneous Macros and Functions
+This chapter describes miscellaneous routines not covered elsewhere.
+
+@menu 
+* ffs::      Return first bit set in a word
+* unctrl::   Return printable representation of a character
+@end menu
+
+@page
+@include misc/ffs.def
+
+@page
+@include misc/unctrl.def
+@c                                           -*- Texinfo -*-
+@node Syscalls
+@chapter System Calls
+
+@cindex linking the C library
+The C subroutine library depends on a handful of subroutine calls for
+operating system services.  If you use the C library on a system that
+complies with the POSIX.1 standard (also known as IEEE 1003.1), most of
+these subroutines are supplied with your operating system.
+
+If some of these subroutines are not provided with your system---in
+the extreme case, if you are developing software for a ``bare board''
+system, without an OS---you will at least need to provide do-nothing
+stubs (or subroutines with minimal functionality) to allow your
+programs to link with the subroutines in @code{libc.a}.
+
+@menu
+* Stubs::		Definitions for OS interface
+* Reentrant Syscalls::	Reentrant covers for OS subroutines
+@end menu
+
+@node Stubs
+@section Definitions for OS interface
+@cindex stubs
+
+@cindex subroutines for OS interface
+@cindex OS interface subroutines
+This is the complete set of system definitions (primarily subroutines)
+required; the examples shown implement the minimal functionality
+required to allow @code{libc} to link, and fail gracefully where OS
+services are not available.  
+
+Graceful failure is permitted by returning an error code.  A minor
+complication arises here: the C library must be compatible with
+development environments that supply fully functional versions of these
+subroutines.  Such environments usually return error codes in a global
+@code{errno}.  However, the Red Hat newlib C library provides a @emph{macro}
+definition for @code{errno} in the header file @file{errno.h}, as part
+of its support for reentrant routines (@pxref{Reentrancy,,Reentrancy}).
+
+@cindex @code{errno} global vs macro
+The bridge between these two interpretations of @code{errno} is
+straightforward: the C library routines with OS interface calls
+capture the @code{errno} values returned globally, and record them in
+the appropriate field of the reentrancy structure (so that you can query
+them using the @code{errno} macro from @file{errno.h}).
+
+This mechanism becomes visible when you write stub routines for OS
+interfaces.   You must include @file{errno.h}, then disable the macro,
+like this:
+
+@example
+#include <errno.h>
+#undef errno
+extern int errno;
+@end example
+
+@noindent
+The examples in this chapter include this treatment of @code{errno}.
+
+@ftable @code
+@item _exit
+Exit a program without cleaning up files.  If your system doesn't
+provide this, it is best to avoid linking with subroutines that require
+it (@code{exit}, @code{system}).
+
+@item close
+Close a file.  Minimal implementation:
+
+@example
+int close(int file) @{
+  return -1;
+@}
+@end example
+
+@item environ
+A pointer to a list of environment variables and their values.  For a
+minimal environment, this empty list is adequate:
+
+@example
+char *__env[1] = @{ 0 @};
+char **environ = __env;
+@end example
+
+@item execve
+Transfer control to a new process.  Minimal implementation (for a system
+without processes):
+
+@example
+#include <errno.h>
+#undef errno
+extern int errno;
+int execve(char *name, char **argv, char **env) @{
+  errno = ENOMEM;
+  return -1;
+@}
+@end example
+
+@item fork
+Create a new process.  Minimal implementation (for a system without processes):
+
+@example
+#include <errno.h>
+#undef errno
+extern int errno;
+int fork(void) @{
+  errno = EAGAIN;
+  return -1;
+@}
+@end example
+
+@item fstat
+Status of an open file.  For consistency with other minimal
+implementations in these examples, all files are regarded as character
+special devices.  The @file{sys/stat.h} header file required is
+distributed in the @file{include} subdirectory for this C library.
+
+@example
+#include <sys/stat.h>
+int fstat(int file, struct stat *st) @{
+  st->st_mode = S_IFCHR;
+  return 0;
+@}
+@end example
+
+@item getpid
+Process-ID; this is sometimes used to generate strings unlikely to
+conflict with other processes.  Minimal implementation, for a system
+without processes:
+
+@example
+int getpid(void) @{
+  return 1;
+@}
+@end example
+
+@item isatty
+Query whether output stream is a terminal.   For consistency with the
+other minimal implementations, which only support output to
+@code{stdout}, this minimal implementation is suggested:
+
+@example
+int isatty(int file) @{
+  return 1;
+@}
+@end example
+
+@item kill
+Send a signal.  Minimal implementation:
+
+@example
+#include <errno.h>
+#undef errno
+extern int errno;
+int kill(int pid, int sig) @{
+  errno = EINVAL;
+  return -1;
+@}
+@end example
+
+@item link
+Establish a new name for an existing file.  Minimal implementation:
+
+@example
+#include <errno.h>
+#undef errno
+extern int errno;
+int link(char *old, char *new) @{
+  errno = EMLINK;
+  return -1;
+@}
+@end example
+
+@item lseek
+Set position in a file.  Minimal implementation:
+
+@example
+int lseek(int file, int ptr, int dir) @{
+  return 0;
+@}
+@end example
+
+@item open
+Open a file.  Minimal implementation:
+
+@example
+int open(const char *name, int flags, int mode) @{
+  return -1;
+@}
+@end example
+
+@item read
+Read from a file.  Minimal implementation:
+
+@example
+int read(int file, char *ptr, int len) @{
+  return 0;
+@}
+@end example
+
+@item sbrk
+Increase program data space.  As @code{malloc} and related functions
+depend on this, it is useful to have a working implementation.  The
+following suffices for a standalone system; it exploits the symbol
+@code{_end} automatically defined by the GNU linker.
+
+@example
+@group
+caddr_t sbrk(int incr) @{
+  extern char _end;		/* @r{Defined by the linker} */
+  static char *heap_end;
+  char *prev_heap_end;
+ 
+  if (heap_end == 0) @{
+    heap_end = &_end;
+  @}
+  prev_heap_end = heap_end;
+  if (heap_end + incr > stack_ptr) @{
+    write (1, "Heap and stack collision\n", 25);
+    abort ();
+  @}
+
+  heap_end += incr;
+  return (caddr_t) prev_heap_end;
+@}
+@end group
+@end example
+
+@item stat
+Status of a file (by name).  Minimal implementation:
+
+@example
+int stat(char *file, struct stat *st) @{
+  st->st_mode = S_IFCHR;
+  return 0;
+@}
+@end example
+
+@item times
+Timing information for current process.  Minimal implementation:
+
+@example
+int times(struct tms *buf) @{
+  return -1;
+@}
+@end example
+
+@item unlink
+Remove a file's directory entry.  Minimal implementation:
+
+@example
+#include <errno.h>
+#undef errno
+extern int errno;
+int unlink(char *name) @{
+  errno = ENOENT;
+  return -1; 
+@}
+@end example
+
+@item wait
+Wait for a child process.  Minimal implementation:
+@example
+#include <errno.h>
+#undef errno
+extern int errno;
+int wait(int *status) @{
+  errno = ECHILD;
+  return -1;
+@}
+@end example
+
+@item write
+Write to a file.  @file{libc} subroutines will use this
+system routine for output to all files, @emph{including}
+@code{stdout}---so if you need to generate any output, for example to a
+serial port for debugging, you should make your minimal @code{write}
+capable of doing this.  The following minimal implementation is an
+incomplete example; it relies on a @code{outbyte} subroutine (not
+shown; typically, you must write this in assembler from examples
+provided by your hardware manufacturer) to actually perform the output.
+
+@example
+@group
+int write(int file, char *ptr, int len) @{
+  int todo;
+
+  for (todo = 0; todo < len; todo++) @{
+    outbyte (*ptr++);
+  @}
+  return len;
+@}
+@end group
+@end example
+
+@end ftable
+
+@page
+@node Reentrant Syscalls
+@section Reentrant covers for OS subroutines
+
+Since the system subroutines are used by other library routines that
+require reentrancy, @file{libc.a} provides cover routines (for example,
+the reentrant version of @code{fork} is @code{_fork_r}).  These cover
+routines are consistent with the other reentrant subroutines in this
+library, and achieve reentrancy by using a reserved global data block
+(@pxref{Reentrancy,,Reentrancy}).
+
+@c FIXME!!! The following ignored text specifies how this section ought
+@c to work;  however, both standalone info and Emacs info mode fail when
+@c confronted with nodes beginning `_' as of 24may93.  Restore when Info
+@c readers fixed!
+@ignore
+@menu
+* _open_r::	Reentrant version of open
+* _close_r::	Reentrant version of close
+* _lseek_r::	Reentrant version of lseek
+* _read_r::	Reentrant version of read
+* _write_r::	Reentrant version of write
+* _link_r::     Reentrant version of link
+* _unlink_r::   Reentrant version of unlink
+* _stat_r::     Reentrant version of stat
+* _fstat_r::    Reentrant version of fstat
+* _sbrk_r::     Reentrant version of sbrk
+* _fork_r::	Reentrant version of fork
+* _wait_r::	Reentrant version of wait
+@end menu
+
+@down
+@include reent/filer.def
+@include reent/execr.def
+@include reent/statr.def
+@include reent/fstatr.def
+@include reent/linkr.def
+@include reent/unlinkr.def
+@include reent/sbrkr.def
+@up
+@end ignore
+
+@ftable @code
+@item _open_r
+A reentrant version of @code{open}.  It takes a pointer
+to the global data block, which holds @code{errno}.
+
+@example
+int _open_r(void *@var{reent},
+    const char *@var{file}, int @var{flags}, int @var{mode});
+@end example
+
+@ifset STDIO64
+@item _open64_r
+A reentrant version of @code{open64}.  It takes a pointer
+to the global data block, which holds @code{errno}.
+
+@example
+int _open64_r(void *@var{reent},
+    const char *@var{file}, int @var{flags}, int @var{mode});
+@end example
+@end ifset
+
+@item _close_r
+A reentrant version of @code{close}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+int _close_r(void *@var{reent}, int @var{fd});
+@end example
+
+@item _lseek_r
+A reentrant version of @code{lseek}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+off_t _lseek_r(void *@var{reent},
+    int @var{fd}, off_t @var{pos}, int @var{whence});
+@end example
+
+@ifset STDIO64
+@item _lseek64_r
+A reentrant version of @code{lseek64}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+off_t _lseek64_r(void *@var{reent},
+    int @var{fd}, off_t @var{pos}, int @var{whence});
+@end example
+@end ifset
+
+@item _read_r
+A reentrant version of @code{read}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+long _read_r(void *@var{reent},
+    int @var{fd}, void *@var{buf}, size_t @var{cnt});
+@end example
+
+@item _write_r
+A reentrant version of @code{write}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+long _write_r(void *@var{reent},
+    int @var{fd}, const void *@var{buf}, size_t @var{cnt});
+@end example
+
+@item _fork_r
+A reentrant version of @code{fork}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+int _fork_r(void *@var{reent});
+@end example
+
+@item _wait_r
+A reentrant version of @code{wait}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+int _wait_r(void *@var{reent}, int *@var{status});
+@end example
+
+@item _stat_r
+A reentrant version of @code{stat}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+int _stat_r(void *@var{reent},
+    const char *@var{file}, struct stat *@var{pstat});
+@end example
+
+@item _fstat_r
+A reentrant version of @code{fstat}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+int _fstat_r(void *@var{reent},
+    int @var{fd}, struct stat *@var{pstat});
+@end example
+
+@ifset STDIO64
+@item _fstat64_r
+A reentrant version of @code{fstat64}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+int _fstat64_r(void *@var{reent},
+    int @var{fd}, struct stat *@var{pstat});
+@end example
+@end ifset
+
+@item _link_r
+A reentrant version of @code{link}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+int _link_r(void *@var{reent},
+    const char *@var{old}, const char *@var{new});
+@end example
+
+@item _unlink_r
+A reentrant version of @code{unlink}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+int _unlink_r(void *@var{reent}, const char *@var{file});
+@end example
+
+@item _sbrk_r
+A reentrant version of @code{sbrk}.  It takes a pointer to the global
+data block, which holds @code{errno}.
+
+@example
+char *_sbrk_r(void *@var{reent}, size_t @var{incr});
+@end example
+@end ftable

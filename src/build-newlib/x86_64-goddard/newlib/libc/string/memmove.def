@@ -1,0 +1,26 @@
+@node memmove
+@section @code{memmove}---move possibly overlapping memory
+@findex memmove
+@strong{Synopsis}
+@example
+#include <string.h>
+void *memmove(void *@var{dst}, const void *@var{src}, size_t @var{length});
+
+@end example
+@strong{Description}@*
+This function moves @var{length} characters from the block of
+memory starting at @code{*@var{src}} to the memory starting at
+@code{*@var{dst}}. @code{memmove} reproduces the characters correctly
+at @code{*@var{dst}} even if the two areas overlap.
+
+@*
+@strong{Returns}@*
+The function returns @var{dst} as passed.
+
+@*
+@strong{Portability}@*
+@code{memmove} is ANSI C.
+
+@code{memmove} requires no supporting OS subroutines.
+
+@*

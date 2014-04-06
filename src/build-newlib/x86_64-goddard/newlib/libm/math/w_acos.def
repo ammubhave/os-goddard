@@ -1,0 +1,35 @@
+@node acos
+@section @code{acos}, @code{acosf}---arc cosine
+@findex acos
+@findex acosf
+@strong{Synopsis}
+@example
+#include <math.h>
+double acos(double @var{x});
+float acosf(float @var{x});
+
+@end example
+@strong{Description}@*
+
+@code{acos} computes the inverse cosine (arc cosine) of the input value.
+Arguments to @code{acos} must be in the range @minus{}1 to 1. 
+
+@code{acosf} is identical to @code{acos}, except that it performs
+its calculations on @code{floats}.
+
+@*
+@strong{Returns}@*
+@ifnottex
+@code{acos} and @code{acosf} return values in radians, in the range of 0 to pi.
+@end ifnottex
+@tex
+@code{acos} and @code{acosf} return values in radians, in the range of @code{0} to $\pi$.
+@end tex
+
+If @var{x} is not between @minus{}1 and 1, the returned value is NaN
+(not a number) the global variable @code{errno} is set to @code{EDOM}, and a
+@code{DOMAIN error} message is sent as standard error output.
+
+You can modify error handling for these functions using @code{matherr}.
+
+@*

@@ -1,0 +1,29 @@
+@node mktime
+@section @code{mktime}---convert time to arithmetic representation
+@findex mktime
+@strong{Synopsis}
+@example
+#include <time.h>
+time_t mktime(struct tm *@var{timp});
+
+@end example
+@strong{Description}@*
+@code{mktime} assumes the time at @var{timp} is a local time, and converts
+its representation from the traditional representation defined by
+@code{struct tm} into a representation suitable for arithmetic.
+
+@code{localtime} is the inverse of @code{mktime}.
+
+@*
+@strong{Returns}@*
+If the contents of the structure at @var{timp} do not form a valid
+calendar time representation, the result is @code{-1}.  Otherwise, the
+result is the time, converted to a @code{time_t} value.
+
+@*
+@strong{Portability}@*
+ANSI C requires @code{mktime}.
+
+@code{mktime} requires no supporting OS subroutines.
+
+@*

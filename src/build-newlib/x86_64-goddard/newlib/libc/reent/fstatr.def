@@ -1,0 +1,16 @@
+@node _fstat_r
+@section @code{_fstat_r}---Reentrant version of fstat
+@findex _fstat_r
+@strong{Synopsis}
+@example
+#include <reent.h>
+int _fstat_r(struct _reent *@var{ptr},
+    int @var{fd}, struct stat *@var{pstat});
+
+@end example
+@strong{Description}@*
+This is a reentrant version of @code{fstat}.  It
+takes a pointer to the global data block, which holds
+@code{errno}.
+
+@*

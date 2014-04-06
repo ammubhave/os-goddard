@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-void * memset ( void * ptr, int value, u32int num );
+void * memset ( void * ptr, int value, uint32_t num );
 
 #endif

@@ -1,0 +1,26 @@
+@node cexp
+@section @code{cexp}, @code{cexpf}---complex base-e exponential
+@findex cexp
+@findex cexpf
+@strong{Synopsis}
+@example
+#include <complex.h>
+double complex cexp(double complex @var{z});
+float complex cexpf(float complex @var{z});
+
+@end example
+@strong{Description}@*
+These functions compute  the complex base-@var{e} exponential of @var{z}.
+
+@code{cexpf} is identical to @code{cexp}, except that it performs
+its calculations on @code{floats complex}.
+
+@*
+@strong{Returns}@*
+The cexp functions return the complex base-@var{e} exponential value.
+
+@*
+@strong{Portability}@*
+@code{cexp} and @code{cexpf} are ISO C99
+
+@*

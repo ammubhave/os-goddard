@@ -18,7 +18,7 @@ KConsoleOut& KConsoleOut::operator<<(char c)
     return *this;
 }
 
-KConsoleOut& KConsoleOut::operator<<(char* s)
+KConsoleOut& KConsoleOut::operator<<(const char* s)
 {
     while(*s)
         *this << *(s++);

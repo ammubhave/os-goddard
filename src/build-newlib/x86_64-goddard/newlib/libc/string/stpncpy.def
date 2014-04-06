@@ -1,0 +1,32 @@
+@node stpncpy
+@section @code{stpncpy}---counted copy string returning a pointer to its end
+@findex stpncpy
+@strong{Synopsis}
+@example
+#include <string.h>
+char *stpncpy(char *restrict @var{dst}, const char *restrict @var{src},
+    size_t @var{length});
+
+@end example
+@strong{Description}@*
+@code{stpncpy} copies not more than @var{length} characters from the
+the string pointed to by @var{src} (including the terminating
+null character) to the array pointed to by @var{dst}.  If the
+string pointed to by @var{src} is shorter than @var{length}
+characters, null characters are appended to the destination
+array until a total of @var{length} characters have been
+written.
+
+@*
+@strong{Returns}@*
+This function returns a pointer to the end of the destination string,
+thus pointing to the trailing '\0', or, if the destination string is
+not null-terminated, pointing to dst + n.
+
+@*
+@strong{Portability}@*
+@code{stpncpy} is a GNU extension, candidate for inclusion into POSIX/SUSv4.
+
+@code{stpncpy} requires no supporting OS subroutines.
+
+@*
