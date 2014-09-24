@@ -1,1 +1,0 @@
-../../../gcc-4.8.2/gmp/mpn/generic/addmul_1.c

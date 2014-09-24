@@ -1,1 +1,0 @@
-../../../gcc-4.8.2/gmp/mpn/generic/add_n_sub_n.c

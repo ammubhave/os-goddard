@@ -1,1 +1,0 @@
-../../../gcc-4.8.2/libgcc/enable-execute-stack-empty.c
